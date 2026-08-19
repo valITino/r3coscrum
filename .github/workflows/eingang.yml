@@ -1,0 +1,136 @@
+# Eingang Methodik
+#
+# Läuft bei jeder Änderung unter methodik/ oder sprints/ auf main und
+# eröffnet im Produkt-Repository valITino/r3cosint einen Pull Request, der
+# docs/EINGANG_METHODIK.md fortschreibt: was sich geändert hat, warum, und
+# ein Permalink zurück auf den Commit hier. Nie ein direkter Commit.
+#
+# Voraussetzung: das Repository-Secret R3COSINT_TOKEN — ein Token mit
+# Schreibrecht auf Inhalte und Pull Requests in valITino/r3cosint. Hier
+# steht nur der Name des Secrets, nie das Geheimnis selbst.
+
+name: Eingang Methodik
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "methodik/**"
+      - "sprints/**"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: eingang-methodik
+  cancel-in-progress: false
+
+jobs:
+  eingang:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Methodik-Repository auschecken
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Änderungen ermitteln
+        env:
+          VORHER: ${{ github.event.before }}
+          NACHRICHT: ${{ github.event.head_commit.message }}
+        run: |
+          set -euo pipefail
+
+          # Vergleichspunkt ist der Stand vor dem Push. Bei unbrauchbarem
+          # Zeiger (erster Push, Force-Push) Rückfall auf den Elterncommit,
+          # notfalls auf den leeren Baum.
+          if [ -z "$VORHER" ] || ! git cat-file -e "$VORHER^{commit}" 2>/dev/null; then
+            VORHER="$(git rev-parse --verify --quiet "$GITHUB_SHA^" || git hash-object -t tree /dev/null)"
+          fi
+
+          git diff --name-status "$VORHER" "$GITHUB_SHA" -- methodik/ sprints/ \
+            | while IFS=$'\t' read -r art pfad pfad_neu; do
+                case "$art" in
+                  A*) echo "- Neu: \`$pfad\`" ;;
+                  M*) echo "- Geändert: \`$pfad\`" ;;
+                  D*) echo "- Entfernt: \`$pfad\`" ;;
+                  R*) echo "- Umbenannt: \`$pfad\` nach \`$pfad_neu\`" ;;
+                  *)  echo "- \`$pfad\`" ;;
+                esac
+              done > "$RUNNER_TEMP/was.md"
+
+          if [ ! -s "$RUNNER_TEMP/was.md" ]; then
+            echo "- Liste nicht ermittelbar, siehe Nachweis" > "$RUNNER_TEMP/was.md"
+          fi
+
+          {
+            echo "## $(date -u +%F) — Änderung an der Methodik"
+            echo
+            echo "**Was sich geändert hat:**"
+            echo
+            cat "$RUNNER_TEMP/was.md"
+            echo
+            echo "**Warum:**"
+            echo
+            printf '%s\n' "$NACHRICHT" | sed 's/^/> /'
+            echo
+            echo "**Nachweis:** $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
+          } > "$RUNNER_TEMP/eintrag.md"
+
+      - name: Produkt-Repository auschecken
+        uses: actions/checkout@v4
+        with:
+          repository: valITino/r3cosint
+          token: ${{ secrets.R3COSINT_TOKEN }}
+          path: produkt
+          fetch-depth: 0
+
+      - name: Eintrag fortschreiben und Pull Request eröffnen
+        working-directory: produkt
+        env:
+          GH_TOKEN: ${{ secrets.R3COSINT_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          ZWEIG="eingang/methodik"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Besteht der Sammelzweig schon, wird er fortgeschrieben; sonst
+          # entsteht er frisch ab dem Standardzweig. So landen mehrere
+          # Änderungen im selben offenen Pull Request statt in vielen.
+          if git rev-parse --verify --quiet "origin/$ZWEIG" >/dev/null; then
+            git checkout -B "$ZWEIG" "origin/$ZWEIG"
+          else
+            git checkout -b "$ZWEIG"
+          fi
+
+          DATEI="docs/EINGANG_METHODIK.md"
+          mkdir -p docs
+          if [ ! -f "$DATEI" ]; then
+            {
+              echo "# Eingang Methodik"
+              echo
+              echo "Fortgeschriebenes Protokoll der Änderungen an Methodik und"
+              echo "Sprints aus $GITHUB_SERVER_URL/$GITHUB_REPOSITORY."
+              echo "Wird automatisch per Pull Request ergänzt."
+            } > "$DATEI"
+          fi
+
+          {
+            echo
+            cat "$RUNNER_TEMP/eintrag.md"
+          } >> "$DATEI"
+
+          git add "$DATEI"
+          git commit -m "docs: Eingang Methodik, Stand $GITHUB_SHA"
+          git push -u origin "$ZWEIG"
+
+          # Pull Request nur eröffnen, wenn für den Zweig noch keiner
+          # offen ist — sonst wächst der bestehende einfach mit.
+          if [ -z "$(gh pr list --head "$ZWEIG" --state open --json number --jq '.[].number')" ]; then
+            gh pr create \
+              --head "$ZWEIG" \
+              --title "Eingang Methodik" \
+              --body-file "$RUNNER_TEMP/eintrag.md"
+          fi
