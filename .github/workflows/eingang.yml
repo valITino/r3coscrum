@@ -1,0 +1,240 @@
+# Eingang Methodik
+#
+# Läuft bei jeder Änderung unter methodik/ oder sprints/ auf main und
+# eröffnet im Produkt-Repository valITino/r3cosint einen Pull Request, der
+# docs/EINGANG_METHODIK.md fortschreibt: was sich geändert hat, warum, und
+# ein Permalink zurück auf den Commit hier. Nie ein direkter Commit.
+#
+# Voraussetzung: das Repository-Secret R3COSINT_TOKEN — ein Token mit
+# Schreibrecht auf Inhalte und Pull Requests in valITino/r3cosint. Hier
+# steht nur der Name des Secrets, nie das Geheimnis selbst.
+
+name: Eingang Methodik
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "methodik/**"
+      - "sprints/**"
+
+permissions:
+  contents: read
+
+# Läufe nacheinander, nie parallel. Verwirft GitHub bei schnellen
+# Push-Folgen einen wartenden Lauf, entsteht trotzdem keine Lücke: der
+# nächste Lauf setzt am zuletzt protokollierten Nachweis an, nicht am
+# Anfang seines eigenen Pushs.
+concurrency:
+  group: eingang-methodik
+  cancel-in-progress: false
+
+jobs:
+  eingang:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Methodik-Repository auschecken
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Produkt-Repository auschecken
+        uses: actions/checkout@v4
+        with:
+          repository: valITino/r3cosint
+          token: ${{ secrets.R3COSINT_TOKEN }}
+          path: produkt
+          fetch-depth: 0
+
+      - name: Änderungen ermitteln
+        env:
+          EREIGNIS_VORHER: ${{ github.event.before }}
+        run: |
+          set -euo pipefail
+
+          # Startpunkt des Vergleichs ist bevorzugt der zuletzt in
+          # docs/EINGANG_METHODIK.md protokollierte Nachweis-Commit — so
+          # bleibt das Protokoll auch dann lückenlos, wenn ein wartender
+          # Lauf verworfen wurde. Rückfälle: der Stand vor dem Push, dann
+          # der Elterncommit, zuletzt der leere Baum (erster Push).
+          QUELLE="HEAD"
+          if git -C produkt rev-parse --verify --quiet origin/eingang/methodik >/dev/null; then
+            QUELLE="origin/eingang/methodik"
+          fi
+          LETZTER="$( (git -C produkt show "$QUELLE:docs/EINGANG_METHODIK.md" 2>/dev/null || true) \
+            | sed -n 's|^\*\*Nachweis:\*\* .*/commit/\([0-9a-f]\{40\}\)$|\1|p' | tail -n 1)"
+
+          if [ -n "$LETZTER" ] && git cat-file -e "$LETZTER^{commit}" 2>/dev/null \
+              && git merge-base --is-ancestor "$LETZTER" "$GITHUB_SHA"; then
+            VORHER="$LETZTER"
+          elif [ -n "$EREIGNIS_VORHER" ] && git cat-file -e "$EREIGNIS_VORHER^{commit}" 2>/dev/null; then
+            VORHER="$EREIGNIS_VORHER"
+          else
+            VORHER="$(git rev-parse --verify --quiet "$GITHUB_SHA^" || git hash-object -t tree /dev/null)"
+          fi
+
+          # core.quotepath=false, damit Dateinamen mit Umlauten lesbar
+          # bleiben statt oktal-escaped zu erscheinen.
+          ROH="$RUNNER_TEMP/rohdiff.txt"
+          git -c core.quotepath=false diff --name-status "$VORHER" "$GITHUB_SHA" \
+            -- methodik/ sprints/ > "$ROH"
+
+          # Netto keine Änderung (schon protokolliert, oder Änderung und
+          # Rücknahme im selben Bereich): kein Eintrag. Ein allenfalls
+          # nachzuholender Pull Request wird im nächsten Schritt trotzdem
+          # sichergestellt.
+          if [ ! -s "$ROH" ]; then
+            echo "Keine Netto-Änderung seit dem letzten Nachweis — kein Eintrag."
+            exit 0
+          fi
+
+          while IFS=$'\t' read -r art pfad pfad_neu; do
+            case "$art" in
+              A*) echo "- Neu: \`$pfad\`" ;;
+              M*) echo "- Geändert: \`$pfad\`" ;;
+              D*) echo "- Entfernt: \`$pfad\`" ;;
+              R*) echo "- Umbenannt: \`$pfad\` in \`$pfad_neu\`" ;;
+              *)  echo "- \`$pfad\`" ;;
+            esac
+          done < "$ROH" > "$RUNNER_TEMP/was.md"
+
+          # Überschrift nach dem, was tatsächlich betroffen ist.
+          TAB="$(printf '\t')"
+          GEGENSTAND="der Methodik"
+          if grep -q "${TAB}sprints/" "$ROH"; then
+            if grep -q "${TAB}methodik/" "$ROH"; then
+              GEGENSTAND="Methodik und Sprints"
+            else
+              GEGENSTAND="den Sprints"
+            fi
+          fi
+
+          # Warum: die Nachrichten aller Commits im Bereich, die methodik/
+          # oder sprints/ berühren — nicht nur die des letzten Commits.
+          if git cat-file -e "$VORHER^{commit}" 2>/dev/null; then
+            BEREICH="$VORHER..$GITHUB_SHA"
+          else
+            BEREICH="$GITHUB_SHA"
+          fi
+          git log --reverse --format='%h — %s%n%b' "$BEREICH" -- methodik/ sprints/ \
+            | sed -e 's/^/> /' -e 's/[[:space:]]*$//' > "$RUNNER_TEMP/warum.md"
+          if [ ! -s "$RUNNER_TEMP/warum.md" ]; then
+            echo "> Keine Commit-Nachricht ermittelbar." > "$RUNNER_TEMP/warum.md"
+          fi
+
+          {
+            echo "## $(date -u +%F) — Änderung an $GEGENSTAND"
+            echo
+            echo "**Was sich geändert hat:**"
+            echo
+            cat "$RUNNER_TEMP/was.md"
+            echo
+            echo "**Warum:**"
+            echo
+            cat "$RUNNER_TEMP/warum.md"
+            echo
+            echo "**Nachweis:** $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
+          } > "$RUNNER_TEMP/eintrag.md"
+
+      - name: Eintrag fortschreiben und Pull Request eröffnen
+        working-directory: produkt
+        env:
+          GH_TOKEN: ${{ secrets.R3COSINT_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          ZWEIG="eingang/methodik"
+          DATEI="docs/EINGANG_METHODIK.md"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          BASIS="$(gh repo view --json defaultBranchRef --jq .defaultBranchRef.name)"
+
+          # Der Sammelzweig ist veraltet, wenn sein letzter Nachweis schon
+          # im Standardzweig protokolliert ist: dann wurde der Pull Request
+          # gemerged (auch per Squash oder Rebase), ohne dass der Zweig
+          # gelöscht wurde. So ein Zweig wird nicht fortgeschrieben,
+          # sondern frisch ab dem Standardzweig neu aufgesetzt.
+          VERALTET=0
+          if git rev-parse --verify --quiet "origin/$ZWEIG" >/dev/null; then
+            ZWEIG_LETZTER="$( (git show "origin/$ZWEIG:$DATEI" 2>/dev/null || true) \
+              | sed -n 's|^\*\*Nachweis:\*\* .*/commit/\([0-9a-f]\{40\}\)$|\1|p' | tail -n 1)"
+            if [ -n "$ZWEIG_LETZTER" ] \
+                && (git show "origin/$BASIS:$DATEI" 2>/dev/null || true) \
+                  | sed -n 's|^\*\*Nachweis:\*\* .*/commit/\([0-9a-f]\{40\}\)$|\1|p' \
+                  | grep -qFx "$ZWEIG_LETZTER"; then
+              VERALTET=1
+            fi
+          fi
+
+          ANGEHAENGT=0
+          if [ -s "$RUNNER_TEMP/eintrag.md" ]; then
+            # Besteht ein brauchbarer Sammelzweig, wird er fortgeschrieben,
+            # damit mehrere Änderungen im selben offenen Pull Request
+            # landen; sonst beginnt er frisch ab dem Standardzweig.
+            if [ "$VERALTET" = 0 ] && git rev-parse --verify --quiet "origin/$ZWEIG" >/dev/null; then
+              git checkout -B "$ZWEIG" "origin/$ZWEIG"
+            else
+              git checkout -B "$ZWEIG" "origin/$BASIS"
+            fi
+
+            mkdir -p docs
+            # Wiederholte Läufe zum selben Commit hängen nichts doppelt an:
+            # der Nachweis-Permalink ist pro Commit eindeutig.
+            if [ -f "$DATEI" ] && grep -qF "commit/$GITHUB_SHA" "$DATEI"; then
+              echo "Commit $GITHUB_SHA ist bereits protokolliert, nichts anzuhängen."
+            else
+              if [ ! -f "$DATEI" ]; then
+                {
+                  echo "# Eingang Methodik"
+                  echo
+                  echo "Fortgeschriebenes Protokoll der Änderungen an Methodik und"
+                  echo "Sprints aus $GITHUB_SERVER_URL/$GITHUB_REPOSITORY."
+                  echo "Wird automatisch per Pull Request ergänzt."
+                } > "$DATEI"
+              fi
+              {
+                echo
+                cat "$RUNNER_TEMP/eintrag.md"
+              } >> "$DATEI"
+              git add "$DATEI"
+              git commit -m "docs: Eingang Methodik, Stand $GITHUB_SHA"
+              # force-with-lease greift nur, wenn ein veralteter Zweig neu
+              # aufgesetzt wurde; sonst ist der Push ein gewöhnlicher
+              # Vorlauf. Der Zweig gehört allein dieser Automatik.
+              git push --force-with-lease -u origin "$ZWEIG"
+              ANGEHAENGT=1
+              VERALTET=0
+            fi
+          fi
+
+          # Pull Request sicherstellen: nur wenn der Zweig auf origin
+          # liegt, nicht veraltet ist und dem Standardzweig voraus ist —
+          # sonst lehnte GitHub die Anlage ab oder es entstünde ein
+          # Pull Request mit bereits gemergten Einträgen. Schlägt eine
+          # Abfrage fehl, bricht der Lauf laut ab, statt blind einen
+          # doppelten Pull Request zu versuchen.
+          if git rev-parse --verify --quiet "origin/$ZWEIG" >/dev/null \
+              && [ "$VERALTET" = 0 ] \
+              && [ "$(git rev-list --count "origin/$BASIS..origin/$ZWEIG")" -gt 0 ]; then
+            OFFEN="$(gh pr list --head "$ZWEIG" --state open --json number --jq '.[].number')"
+            if [ -z "$OFFEN" ]; then
+              RUMPF="$RUNNER_TEMP/eintrag.md"
+              if [ "$ANGEHAENGT" = 0 ] || [ ! -s "$RUMPF" ]; then
+                # Nachholer ohne frischen Eintrag (voriger Lauf scheiterte
+                # nach dem Push): generischer Rumpf, die Einzelheiten
+                # stehen im Diff von docs/EINGANG_METHODIK.md.
+                RUMPF="$RUNNER_TEMP/rumpf.md"
+                {
+                  echo "Fortschreibung von \`docs/EINGANG_METHODIK.md\` aus"
+                  echo "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY."
+                  echo
+                  echo "Die Einzelheiten stehen im Diff dieser Datei."
+                } > "$RUMPF"
+              fi
+              gh pr create \
+                --head "$ZWEIG" \
+                --title "Eingang Methodik" \
+                --body-file "$RUMPF"
+            fi
+          fi
