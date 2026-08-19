@@ -21,6 +21,10 @@ on:
 permissions:
   contents: read
 
+# Läufe nacheinander, nie parallel. Verwirft GitHub bei schnellen
+# Push-Folgen einen wartenden Lauf, entsteht trotzdem keine Lücke: der
+# nächste Lauf setzt am zuletzt protokollierten Nachweis an, nicht am
+# Anfang seines eigenen Pushs.
 concurrency:
   group: eingang-methodik
   cancel-in-progress: false
@@ -34,49 +38,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Änderungen ermitteln
-        env:
-          VORHER: ${{ github.event.before }}
-          NACHRICHT: ${{ github.event.head_commit.message }}
-        run: |
-          set -euo pipefail
-
-          # Vergleichspunkt ist der Stand vor dem Push. Bei unbrauchbarem
-          # Zeiger (erster Push, Force-Push) Rückfall auf den Elterncommit,
-          # notfalls auf den leeren Baum.
-          if [ -z "$VORHER" ] || ! git cat-file -e "$VORHER^{commit}" 2>/dev/null; then
-            VORHER="$(git rev-parse --verify --quiet "$GITHUB_SHA^" || git hash-object -t tree /dev/null)"
-          fi
-
-          git diff --name-status "$VORHER" "$GITHUB_SHA" -- methodik/ sprints/ \
-            | while IFS=$'\t' read -r art pfad pfad_neu; do
-                case "$art" in
-                  A*) echo "- Neu: \`$pfad\`" ;;
-                  M*) echo "- Geändert: \`$pfad\`" ;;
-                  D*) echo "- Entfernt: \`$pfad\`" ;;
-                  R*) echo "- Umbenannt: \`$pfad\` nach \`$pfad_neu\`" ;;
-                  *)  echo "- \`$pfad\`" ;;
-                esac
-              done > "$RUNNER_TEMP/was.md"
-
-          if [ ! -s "$RUNNER_TEMP/was.md" ]; then
-            echo "- Liste nicht ermittelbar, siehe Nachweis" > "$RUNNER_TEMP/was.md"
-          fi
-
-          {
-            echo "## $(date -u +%F) — Änderung an der Methodik"
-            echo
-            echo "**Was sich geändert hat:**"
-            echo
-            cat "$RUNNER_TEMP/was.md"
-            echo
-            echo "**Warum:**"
-            echo
-            printf '%s\n' "$NACHRICHT" | sed 's/^/> /'
-            echo
-            echo "**Nachweis:** $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
-          } > "$RUNNER_TEMP/eintrag.md"
-
       - name: Produkt-Repository auschecken
         uses: actions/checkout@v4
         with:
@@ -84,6 +45,91 @@ jobs:
           token: ${{ secrets.R3COSINT_TOKEN }}
           path: produkt
           fetch-depth: 0
+
+      - name: Änderungen ermitteln
+        env:
+          EREIGNIS_VORHER: ${{ github.event.before }}
+        run: |
+          set -euo pipefail
+
+          # Startpunkt des Vergleichs ist bevorzugt der zuletzt in
+          # docs/EINGANG_METHODIK.md protokollierte Nachweis-Commit — so
+          # bleibt das Protokoll auch dann lückenlos, wenn ein wartender
+          # Lauf verworfen wurde. Rückfälle: der Stand vor dem Push, dann
+          # der Elterncommit, zuletzt der leere Baum (erster Push).
+          QUELLE="HEAD"
+          if git -C produkt rev-parse --verify --quiet origin/eingang/methodik >/dev/null; then
+            QUELLE="origin/eingang/methodik"
+          fi
+          LETZTER="$( (git -C produkt show "$QUELLE:docs/EINGANG_METHODIK.md" 2>/dev/null || true) \
+            | sed -n 's|^\*\*Nachweis:\*\* .*/commit/\([0-9a-f]\{40\}\)$|\1|p' | tail -n 1)"
+
+          if [ -n "$LETZTER" ] && git cat-file -e "$LETZTER^{commit}" 2>/dev/null \
+              && git merge-base --is-ancestor "$LETZTER" "$GITHUB_SHA"; then
+            VORHER="$LETZTER"
+          elif [ -n "$EREIGNIS_VORHER" ] && git cat-file -e "$EREIGNIS_VORHER^{commit}" 2>/dev/null; then
+            VORHER="$EREIGNIS_VORHER"
+          else
+            VORHER="$(git rev-parse --verify --quiet "$GITHUB_SHA^" || git hash-object -t tree /dev/null)"
+          fi
+
+          # core.quotepath=false, damit Dateinamen mit Umlauten lesbar
+          # bleiben statt oktal-escaped zu erscheinen.
+          ROH="$RUNNER_TEMP/rohdiff.txt"
+          git -c core.quotepath=false diff --name-status "$VORHER" "$GITHUB_SHA" \
+            -- methodik/ sprints/ > "$ROH"
+
+          while IFS=$'\t' read -r art pfad pfad_neu; do
+            case "$art" in
+              A*) echo "- Neu: \`$pfad\`" ;;
+              M*) echo "- Geändert: \`$pfad\`" ;;
+              D*) echo "- Entfernt: \`$pfad\`" ;;
+              R*) echo "- Umbenannt: \`$pfad\` in \`$pfad_neu\`" ;;
+              *)  echo "- \`$pfad\`" ;;
+            esac
+          done < "$ROH" > "$RUNNER_TEMP/was.md"
+
+          if [ ! -s "$RUNNER_TEMP/was.md" ]; then
+            echo "- Liste nicht ermittelbar, siehe Nachweis" > "$RUNNER_TEMP/was.md"
+          fi
+
+          # Überschrift nach dem, was tatsächlich betroffen ist.
+          TAB="$(printf '\t')"
+          GEGENSTAND="der Methodik"
+          if grep -q "${TAB}sprints/" "$ROH"; then
+            if grep -q "${TAB}methodik/" "$ROH"; then
+              GEGENSTAND="Methodik und Sprints"
+            else
+              GEGENSTAND="den Sprints"
+            fi
+          fi
+
+          # Warum: die Nachrichten aller Commits im Bereich, die methodik/
+          # oder sprints/ berühren — nicht nur die des letzten Commits.
+          if git cat-file -e "$VORHER^{commit}" 2>/dev/null; then
+            BEREICH="$VORHER..$GITHUB_SHA"
+          else
+            BEREICH="$GITHUB_SHA"
+          fi
+          git log --reverse --format='%h — %s%n%b' "$BEREICH" -- methodik/ sprints/ \
+            | sed -e 's/^/> /' -e 's/[[:space:]]*$//' > "$RUNNER_TEMP/warum.md"
+          if [ ! -s "$RUNNER_TEMP/warum.md" ]; then
+            echo "> Keine Commit-Nachricht ermittelbar." > "$RUNNER_TEMP/warum.md"
+          fi
+
+          {
+            echo "## $(date -u +%F) — Änderung an $GEGENSTAND"
+            echo
+            echo "**Was sich geändert hat:**"
+            echo
+            cat "$RUNNER_TEMP/was.md"
+            echo
+            echo "**Warum:**"
+            echo
+            cat "$RUNNER_TEMP/warum.md"
+            echo
+            echo "**Nachweis:** $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
+          } > "$RUNNER_TEMP/eintrag.md"
 
       - name: Eintrag fortschreiben und Pull Request eröffnen
         working-directory: produkt
@@ -107,30 +153,40 @@ jobs:
 
           DATEI="docs/EINGANG_METHODIK.md"
           mkdir -p docs
-          if [ ! -f "$DATEI" ]; then
+
+          # Wiederholte Läufe zum selben Commit hängen nichts doppelt an:
+          # der Nachweis-Permalink ist pro Commit eindeutig.
+          if [ -f "$DATEI" ] && grep -qF "commit/$GITHUB_SHA" "$DATEI"; then
+            echo "Commit $GITHUB_SHA ist bereits protokolliert, nichts anzuhängen."
+          else
+            if [ ! -f "$DATEI" ]; then
+              {
+                echo "# Eingang Methodik"
+                echo
+                echo "Fortgeschriebenes Protokoll der Änderungen an Methodik und"
+                echo "Sprints aus $GITHUB_SERVER_URL/$GITHUB_REPOSITORY."
+                echo "Wird automatisch per Pull Request ergänzt."
+              } > "$DATEI"
+            fi
             {
-              echo "# Eingang Methodik"
               echo
-              echo "Fortgeschriebenes Protokoll der Änderungen an Methodik und"
-              echo "Sprints aus $GITHUB_SERVER_URL/$GITHUB_REPOSITORY."
-              echo "Wird automatisch per Pull Request ergänzt."
-            } > "$DATEI"
+              cat "$RUNNER_TEMP/eintrag.md"
+            } >> "$DATEI"
+            git add "$DATEI"
+            git commit -m "docs: Eingang Methodik, Stand $GITHUB_SHA"
+            git push -u origin "$ZWEIG"
           fi
 
-          {
-            echo
-            cat "$RUNNER_TEMP/eintrag.md"
-          } >> "$DATEI"
-
-          git add "$DATEI"
-          git commit -m "docs: Eingang Methodik, Stand $GITHUB_SHA"
-          git push -u origin "$ZWEIG"
-
-          # Pull Request nur eröffnen, wenn für den Zweig noch keiner
-          # offen ist — sonst wächst der bestehende einfach mit.
-          if [ -z "$(gh pr list --head "$ZWEIG" --state open --json number --jq '.[].number')" ]; then
-            gh pr create \
-              --head "$ZWEIG" \
-              --title "Eingang Methodik" \
-              --body-file "$RUNNER_TEMP/eintrag.md"
+          # Pull Request nur eröffnen, wenn der Zweig auf origin liegt und
+          # noch keiner offen ist — sonst wächst der bestehende einfach mit.
+          # Schlägt die Abfrage fehl, bricht der Lauf laut ab, statt blind
+          # einen doppelten Pull Request zu versuchen.
+          if git rev-parse --verify --quiet "origin/$ZWEIG" >/dev/null; then
+            OFFEN="$(gh pr list --head "$ZWEIG" --state open --json number --jq '.[].number')"
+            if [ -z "$OFFEN" ]; then
+              gh pr create \
+                --head "$ZWEIG" \
+                --title "Eingang Methodik" \
+                --body-file "$RUNNER_TEMP/eintrag.md"
+            fi
           fi
