@@ -79,6 +79,15 @@ jobs:
           git -c core.quotepath=false diff --name-status "$VORHER" "$GITHUB_SHA" \
             -- methodik/ sprints/ > "$ROH"
 
+          # Netto keine Änderung (schon protokolliert, oder Änderung und
+          # Rücknahme im selben Bereich): kein Eintrag. Ein allenfalls
+          # nachzuholender Pull Request wird im nächsten Schritt trotzdem
+          # sichergestellt.
+          if [ ! -s "$ROH" ]; then
+            echo "Keine Netto-Änderung seit dem letzten Nachweis — kein Eintrag."
+            exit 0
+          fi
+
           while IFS=$'\t' read -r art pfad pfad_neu; do
             case "$art" in
               A*) echo "- Neu: \`$pfad\`" ;;
@@ -88,10 +97,6 @@ jobs:
               *)  echo "- \`$pfad\`" ;;
             esac
           done < "$ROH" > "$RUNNER_TEMP/was.md"
-
-          if [ ! -s "$RUNNER_TEMP/was.md" ]; then
-            echo "- Liste nicht ermittelbar, siehe Nachweis" > "$RUNNER_TEMP/was.md"
-          fi
 
           # Überschrift nach dem, was tatsächlich betroffen ist.
           TAB="$(printf '\t')"
@@ -139,54 +144,97 @@ jobs:
           set -euo pipefail
 
           ZWEIG="eingang/methodik"
+          DATEI="docs/EINGANG_METHODIK.md"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # Besteht der Sammelzweig schon, wird er fortgeschrieben; sonst
-          # entsteht er frisch ab dem Standardzweig. So landen mehrere
-          # Änderungen im selben offenen Pull Request statt in vielen.
+          BASIS="$(gh repo view --json defaultBranchRef --jq .defaultBranchRef.name)"
+
+          # Der Sammelzweig ist veraltet, wenn sein letzter Nachweis schon
+          # im Standardzweig protokolliert ist: dann wurde der Pull Request
+          # gemerged (auch per Squash oder Rebase), ohne dass der Zweig
+          # gelöscht wurde. So ein Zweig wird nicht fortgeschrieben,
+          # sondern frisch ab dem Standardzweig neu aufgesetzt.
+          VERALTET=0
           if git rev-parse --verify --quiet "origin/$ZWEIG" >/dev/null; then
-            git checkout -B "$ZWEIG" "origin/$ZWEIG"
-          else
-            git checkout -b "$ZWEIG"
-          fi
-
-          DATEI="docs/EINGANG_METHODIK.md"
-          mkdir -p docs
-
-          # Wiederholte Läufe zum selben Commit hängen nichts doppelt an:
-          # der Nachweis-Permalink ist pro Commit eindeutig.
-          if [ -f "$DATEI" ] && grep -qF "commit/$GITHUB_SHA" "$DATEI"; then
-            echo "Commit $GITHUB_SHA ist bereits protokolliert, nichts anzuhängen."
-          else
-            if [ ! -f "$DATEI" ]; then
-              {
-                echo "# Eingang Methodik"
-                echo
-                echo "Fortgeschriebenes Protokoll der Änderungen an Methodik und"
-                echo "Sprints aus $GITHUB_SERVER_URL/$GITHUB_REPOSITORY."
-                echo "Wird automatisch per Pull Request ergänzt."
-              } > "$DATEI"
+            ZWEIG_LETZTER="$( (git show "origin/$ZWEIG:$DATEI" 2>/dev/null || true) \
+              | sed -n 's|^\*\*Nachweis:\*\* .*/commit/\([0-9a-f]\{40\}\)$|\1|p' | tail -n 1)"
+            if [ -n "$ZWEIG_LETZTER" ] \
+                && (git show "origin/$BASIS:$DATEI" 2>/dev/null || true) \
+                  | sed -n 's|^\*\*Nachweis:\*\* .*/commit/\([0-9a-f]\{40\}\)$|\1|p' \
+                  | grep -qFx "$ZWEIG_LETZTER"; then
+              VERALTET=1
             fi
-            {
-              echo
-              cat "$RUNNER_TEMP/eintrag.md"
-            } >> "$DATEI"
-            git add "$DATEI"
-            git commit -m "docs: Eingang Methodik, Stand $GITHUB_SHA"
-            git push -u origin "$ZWEIG"
           fi
 
-          # Pull Request nur eröffnen, wenn der Zweig auf origin liegt und
-          # noch keiner offen ist — sonst wächst der bestehende einfach mit.
-          # Schlägt die Abfrage fehl, bricht der Lauf laut ab, statt blind
-          # einen doppelten Pull Request zu versuchen.
-          if git rev-parse --verify --quiet "origin/$ZWEIG" >/dev/null; then
+          ANGEHAENGT=0
+          if [ -s "$RUNNER_TEMP/eintrag.md" ]; then
+            # Besteht ein brauchbarer Sammelzweig, wird er fortgeschrieben,
+            # damit mehrere Änderungen im selben offenen Pull Request
+            # landen; sonst beginnt er frisch ab dem Standardzweig.
+            if [ "$VERALTET" = 0 ] && git rev-parse --verify --quiet "origin/$ZWEIG" >/dev/null; then
+              git checkout -B "$ZWEIG" "origin/$ZWEIG"
+            else
+              git checkout -B "$ZWEIG" "origin/$BASIS"
+            fi
+
+            mkdir -p docs
+            # Wiederholte Läufe zum selben Commit hängen nichts doppelt an:
+            # der Nachweis-Permalink ist pro Commit eindeutig.
+            if [ -f "$DATEI" ] && grep -qF "commit/$GITHUB_SHA" "$DATEI"; then
+              echo "Commit $GITHUB_SHA ist bereits protokolliert, nichts anzuhängen."
+            else
+              if [ ! -f "$DATEI" ]; then
+                {
+                  echo "# Eingang Methodik"
+                  echo
+                  echo "Fortgeschriebenes Protokoll der Änderungen an Methodik und"
+                  echo "Sprints aus $GITHUB_SERVER_URL/$GITHUB_REPOSITORY."
+                  echo "Wird automatisch per Pull Request ergänzt."
+                } > "$DATEI"
+              fi
+              {
+                echo
+                cat "$RUNNER_TEMP/eintrag.md"
+              } >> "$DATEI"
+              git add "$DATEI"
+              git commit -m "docs: Eingang Methodik, Stand $GITHUB_SHA"
+              # force-with-lease greift nur, wenn ein veralteter Zweig neu
+              # aufgesetzt wurde; sonst ist der Push ein gewöhnlicher
+              # Vorlauf. Der Zweig gehört allein dieser Automatik.
+              git push --force-with-lease -u origin "$ZWEIG"
+              ANGEHAENGT=1
+              VERALTET=0
+            fi
+          fi
+
+          # Pull Request sicherstellen: nur wenn der Zweig auf origin
+          # liegt, nicht veraltet ist und dem Standardzweig voraus ist —
+          # sonst lehnte GitHub die Anlage ab oder es entstünde ein
+          # Pull Request mit bereits gemergten Einträgen. Schlägt eine
+          # Abfrage fehl, bricht der Lauf laut ab, statt blind einen
+          # doppelten Pull Request zu versuchen.
+          if git rev-parse --verify --quiet "origin/$ZWEIG" >/dev/null \
+              && [ "$VERALTET" = 0 ] \
+              && [ "$(git rev-list --count "origin/$BASIS..origin/$ZWEIG")" -gt 0 ]; then
             OFFEN="$(gh pr list --head "$ZWEIG" --state open --json number --jq '.[].number')"
             if [ -z "$OFFEN" ]; then
+              RUMPF="$RUNNER_TEMP/eintrag.md"
+              if [ "$ANGEHAENGT" = 0 ] || [ ! -s "$RUMPF" ]; then
+                # Nachholer ohne frischen Eintrag (voriger Lauf scheiterte
+                # nach dem Push): generischer Rumpf, die Einzelheiten
+                # stehen im Diff von docs/EINGANG_METHODIK.md.
+                RUMPF="$RUNNER_TEMP/rumpf.md"
+                {
+                  echo "Fortschreibung von \`docs/EINGANG_METHODIK.md\` aus"
+                  echo "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY."
+                  echo
+                  echo "Die Einzelheiten stehen im Diff dieser Datei."
+                } > "$RUMPF"
+              fi
               gh pr create \
                 --head "$ZWEIG" \
                 --title "Eingang Methodik" \
-                --body-file "$RUNNER_TEMP/eintrag.md"
+                --body-file "$RUMPF"
             fi
           fi
