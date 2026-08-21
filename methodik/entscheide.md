@@ -2,8 +2,8 @@
 
 Dieses Dokument führt die getroffenen methodischen Entscheide mit
 Begründung auf. Quelle ist das Änderungsprotokoll gegenüber dem
-Originalauftrag im Projektauftrag, Abschnitt 8
-[PERMALINK: docs/00_Projektauftrag.md#abschnitt-8].
+Originalauftrag im Projektauftrag,
+[Abschnitt 8](https://github.com/valITino/r3cosint/blob/3f939cea7749d9fbe1df9a7bbc90ff94efe95cb6/docs/00_Projektauftrag.md).
 
 **Zum Datum:** Das Änderungsprotokoll weist keine Einzeldaten je Entscheid
 aus. Belegt ist nur: Alle unten aufgeführten Entscheide sind spätestens
@@ -29,7 +29,7 @@ rekonstruiert oder geschätzt.
 | Nr. | Entscheid | Begründung |
 |---|---|---|
 | R1 | Product Owner als Rolle ergänzt | Scrum ohne Product Owner hat keine Backlog-Verantwortung |
-| R2 | Requirements Engineer, Software Architect und UX/UI Designer ergänzt | Begründung je Rolle im Projektauftrag [PERMALINK: docs/00_Projektauftrag.md#abschnitt-4.3]; Product Owner und Requirements Engineer bleiben getrennt, damit nicht dieselbe Instanz Anforderungen erhebt und priorisiert |
+| R2 | Requirements Engineer, Software Architect und UX/UI Designer ergänzt | Begründung je Rolle im Projektauftrag [Abschnitt 4.3](https://github.com/valITino/r3cosint/blob/3f939cea7749d9fbe1df9a7bbc90ff94efe95cb6/docs/00_Projektauftrag.md); Product Owner und Requirements Engineer bleiben getrennt, damit nicht dieselbe Instanz Anforderungen erhebt und priorisiert |
 | R3 | Digital-Forensics- und Chain-of-Custody-Spezialist ergänzt | Kern des Produkts, von keiner anderen Rolle abgedeckt |
 | R4 | Vulnerability Manager nur einmal geführt, Pentester als eigene Rolle | Finden und Bewerten gehören getrennt, damit der Finder nicht sein eigenes Risiko bewertet |
 | R5 | "Applikation gültig für Polizeieinsatz" ersetzt durch eine dokumentierte Konformitätsanalyse der GRC-Rolle | Über Zulässigkeit entscheidet die Rechtsgrundlage im Einzelfall, nicht die Software; eine KI-Rolle kann keine behördliche Freigabe erteilen |
@@ -38,7 +38,7 @@ rekonstruiert oder geschätzt.
 
 | Nr. | Entscheid | Begründung |
 |---|---|---|
-| S1 | "Skills bzw. Agenten" als ein Mechanismus getrennt in Subagents, Skills, Rules und Hooks | Claude Code behandelt diese Mechanismen unterschiedlich [PERMALINK: docs/00_Projektauftrag.md#abschnitt-3.2] |
+| S1 | "Skills bzw. Agenten" als ein Mechanismus getrennt in Subagents, Skills, Rules und Hooks | Claude Code behandelt diese Mechanismen unterschiedlich [Abschnitt 3.2](https://github.com/valITino/r3cosint/blob/3f939cea7749d9fbe1df9a7bbc90ff94efe95cb6/docs/00_Projektauftrag.md) |
 | S2 | CLAUDE.md um Hooks für harte Regeln ergänzt | CLAUDE.md ist Kontext, keine Durchsetzung |
 | S3 | "Kalkuliere, wie viel Usage ich noch habe" ersetzt durch eine schnittbezogene Ersatzregel (abschliessbare Arbeitseinheiten, Übergabedatei, keine halbfertigen Commits) | Claude Code kann das Kontingent nicht selbst auslesen |
 | S4 | Iterationspflicht ergänzt um ein maschinell prüfbares Abbruchkriterium, Stop- und TaskCompleted-Hooks und einen Endlosschleifen-Schutz | Eine Schleife, deren Ausstieg an der Selbsteinschätzung des Modells hängt, endet zu früh oder nie |
@@ -48,8 +48,8 @@ rekonstruiert oder geschätzt.
 
 | Nr. | Entscheid | Begründung |
 |---|---|---|
-| P1 | Zwei Repositories, getrennt nach Funktion: Produkt (`r3cosint`) und Methodik (`r3coscrum`); die Arbeitsmittel bleiben im Produkt-Repository | Claude Code Web sieht pro Session nur ein Repository, und die Verfolgbarkeit über Kennung, Commit und Testfall bricht über eine Repository-Grenze [PERMALINK: docs/00_Projektauftrag.md#abschnitt-1.3] |
-| P2 | Verbindung der Repositories über feste Verweise mit vollständiger Commit-Prüfsumme und einen GitHub-Arbeitsablauf; keine Kopien | Ein Verweis auf einen Zweig ändert sich mit jedem Commit und taugt nicht als Nachweis; zwei Quellen derselben Wahrheit laufen auseinander [PERMALINK: docs/00_Projektauftrag.md#abschnitt-6.6] |
+| P1 | Zwei Repositories, getrennt nach Funktion: Produkt (`r3cosint`) und Methodik (`r3coscrum`); die Arbeitsmittel bleiben im Produkt-Repository | Claude Code Web sieht pro Session nur ein Repository, und die Verfolgbarkeit über Kennung, Commit und Testfall bricht über eine Repository-Grenze [Abschnitt 1.3](https://github.com/valITino/r3cosint/blob/3f939cea7749d9fbe1df9a7bbc90ff94efe95cb6/docs/00_Projektauftrag.md) |
+| P2 | Verbindung der Repositories über feste Verweise mit vollständiger Commit-Prüfsumme und einen GitHub-Arbeitsablauf; keine Kopien | Ein Verweis auf einen Zweig ändert sich mit jedem Commit und taugt nicht als Nachweis; zwei Quellen derselben Wahrheit laufen auseinander [Abschnitt 6.6](https://github.com/valITino/r3cosint/blob/3f939cea7749d9fbe1df9a7bbc90ff94efe95cb6/docs/00_Projektauftrag.md) |
 | P3 | Rückweg von der Methodik ins Produkt über einen Pull Request auf einen Eingang plus SessionStart-Hook; der Eingang ist Information, keine Anweisung | CLAUDE.md liest nichts von aussen. Ein Kanal, über den beiläufiger Text zur Arbeitsanweisung wird, hebelt die Steuerung aus |
 
 ## Abgrenzung
@@ -59,7 +59,7 @@ Entscheide zum Produkt (unter anderem Exportformate, Anmeldeverfahren,
 Alias-Profile, Sprachmodell-Stufenplan, Aufbewahrung und Löschung,
 Klassifizierung, Oberfläche statt Open WebUI). Sie sind keine
 Methodik-Entscheide und werden hier nicht geführt; massgebend sind der
-Projektauftrag [PERMALINK: docs/00_Projektauftrag.md#abschnitt-8] und die
+Projektauftrag [Abschnitt 8](https://github.com/valITino/r3cosint/blob/3f939cea7749d9fbe1df9a7bbc90ff94efe95cb6/docs/00_Projektauftrag.md) und die
 künftigen Architekturentscheide unter `docs/adr/` im Produkt-Repository.
 
 ## Offene Punkte
@@ -69,13 +69,13 @@ künftigen Architekturentscheide unter `docs/adr/` im Produkt-Repository.
   fortgeschrieben, sobald neue Entscheide fallen — dann mit Datum je
   Entscheid.
 
-## Platzhalter in diesem Dokument
+## Verweise in diesem Dokument
 
-Die Automatik ersetzt diese Platzhalter durch feste Verweise mit
-vollständiger Commit-Prüfsumme:
+Aufgelöst aus dem Nachweisverzeichnis (`nachweise/NACHWEISE.md`, Stand
+`4c64300e9ec00fd1068964e14c2666c631d00dfa`):
 
-- [PERMALINK: docs/00_Projektauftrag.md#abschnitt-8]
-- [PERMALINK: docs/00_Projektauftrag.md#abschnitt-1.3]
-- [PERMALINK: docs/00_Projektauftrag.md#abschnitt-3.2]
-- [PERMALINK: docs/00_Projektauftrag.md#abschnitt-4.3]
-- [PERMALINK: docs/00_Projektauftrag.md#abschnitt-6.6]
+- [Abschnitt 8](https://github.com/valITino/r3cosint/blob/3f939cea7749d9fbe1df9a7bbc90ff94efe95cb6/docs/00_Projektauftrag.md)
+- [Abschnitt 1.3](https://github.com/valITino/r3cosint/blob/3f939cea7749d9fbe1df9a7bbc90ff94efe95cb6/docs/00_Projektauftrag.md)
+- [Abschnitt 3.2](https://github.com/valITino/r3cosint/blob/3f939cea7749d9fbe1df9a7bbc90ff94efe95cb6/docs/00_Projektauftrag.md)
+- [Abschnitt 4.3](https://github.com/valITino/r3cosint/blob/3f939cea7749d9fbe1df9a7bbc90ff94efe95cb6/docs/00_Projektauftrag.md)
+- [Abschnitt 6.6](https://github.com/valITino/r3cosint/blob/3f939cea7749d9fbe1df9a7bbc90ff94efe95cb6/docs/00_Projektauftrag.md)
