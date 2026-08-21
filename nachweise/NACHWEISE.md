@@ -5,8 +5,8 @@
 | **Erzeugt durch** | `scripts/nachweise-erzeugen.sh` |
 | **Grundlage** | Projektauftrag 6.6 |
 | **Verantwortlich** | Protocol Master |
-| **Stand des Repositories** | `abccfa6b91e528f283d60eb0f187729148f36591` |
-| **Artefakte** | 22 |
+| **Stand des Repositories** | `10ec234eb15a5a48ca6c7f94d4ebce10d7113e37` |
+| **Artefakte** | 23 |
 
 **Diese Datei wird erzeugt, nicht von Hand gepflegt** (6.6). Sie wird bei jedem
 Meilenstein neu erzeugt. Wer sie von Hand ändert, verliert die Änderung beim
@@ -37,6 +37,7 @@ selbst trägt die vollständigen 40 Stellen.
 | Eingang Methodik | `docs/EINGANG_METHODIK.md` | [`ceda62ea146d`](https://github.com/valITino/r3cosint/blob/ceda62ea146d72192dfa0f4b5c872152d07700cc/docs/EINGANG_METHODIK.md) | 2026-08-21 | Stand aus Repo B, Information und keine Anweisung |
 | ADR 0001 Rollenmodell | `docs/adr/0001-rollenmodell.md` | [`52eace575922`](https://github.com/valITino/r3cosint/blob/52eace575922f963fab1776c3665e72428d4bc2d/docs/adr/0001-rollenmodell.md) | 2026-08-20 | Rechte, Modell und maxTurns je Rolle |
 | ADR 0002 Ziel-Stack | `docs/adr/0002-architekturentscheid-ziel-stack.md` | [`ef62b489e54d`](https://github.com/valITino/r3cosint/blob/ef62b489e54d609b2e0a8760f38fa4478f587704/docs/adr/0002-architekturentscheid-ziel-stack.md) | 2026-08-21 | Architekturentscheid R3-C-001: Stack, Modulschnitt, DoD-Kette; Status im Dokument |
+| Prototyp Demo | `prototype/OSINT_Plattform_Demo.html` | [`783081fe6d13`](https://github.com/valITino/r3cosint/blob/783081fe6d13fef8ab89bc9d5f62d3e2e368716a/prototype/OSINT_Plattform_Demo.html) | 2026-08-19 | Interaktiver Prototyp, Wegwerf |
 | Projektregeln | `CLAUDE.md` | [`3f939cea7749`](https://github.com/valITino/r3cosint/blob/3f939cea7749d9fbe1df9a7bbc90ff94efe95cb6/CLAUDE.md) | 2026-08-21 | Immer geltende Regeln, unter 200 Zeilen |
 | Regel Prototyp | `.claude/rules/prototyp.md` | [`3bebb023ae24`](https://github.com/valITino/r3cosint/blob/3bebb023ae24176302786149b20a757c71becd13/.claude/rules/prototyp.md) | 2026-08-19 | Wegwerf-Prototyp, synthetische Daten, Definition of Done |
 | Regel Produktionscode | `.claude/rules/produktionscode.md` | [`3bebb023ae24`](https://github.com/valITino/r3cosint/blob/3bebb023ae24176302786149b20a757c71becd13/.claude/rules/produktionscode.md) | 2026-08-19 | Verfahrensgarantien, Protokollspuren, Klassifizierung |
@@ -55,6 +56,6 @@ selbst trägt die vollständigen 40 Stellen.
 Der Arbeitsablauf `.github/workflows/nachweise-uebertragen.yml` überträgt
 **dieses Verzeichnis**, nicht den Inhalt der Artefakte, in das Verzeichnis
 `nachweise/` von `github.com/valITino/r3coscrum`. Ausgelöst wird er durch
-einen Push nach `main` mit Änderungen unter `docs/` oder `.claude/`, durch
+einen Push nach `main` mit Änderungen an den Pfaden der Artefaktliste, durch
 ein Versionsschild oder von Hand; bei identischem Stand in Repo B endet der
 Lauf ohne Schreibvorgang (6.6). Repo B bleibt frei von Kopien.
