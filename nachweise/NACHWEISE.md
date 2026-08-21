@@ -5,7 +5,7 @@
 | **Erzeugt durch** | `scripts/nachweise-erzeugen.sh` |
 | **Grundlage** | Projektauftrag 6.6 |
 | **Verantwortlich** | Protocol Master |
-| **Stand des Repositories** | `4c64300e9ec00fd1068964e14c2666c631d00dfa` |
+| **Stand des Repositories** | `abccfa6b91e528f283d60eb0f187729148f36591` |
 | **Artefakte** | 22 |
 
 **Diese Datei wird erzeugt, nicht von Hand gepflegt** (6.6). Sie wird bei jedem
@@ -34,7 +34,7 @@ selbst trägt die vollständigen 40 Stellen.
 | Definition of Ready und Done | `docs/06_Definition_of_Ready_und_Done.md` | [`3a40faa87fea`](https://github.com/valITino/r3cosint/blob/3a40faa87feac056cd7bfa7c0fdf3f5f77b761fb/docs/06_Definition_of_Ready_und_Done.md) | 2026-08-20 | Eingangs- und Ausgangskriterien, Done als Befehlskette |
 | Roadmap | `docs/07_Roadmap.md` | [`52eace575922`](https://github.com/valITino/r3cosint/blob/52eace575922f963fab1776c3665e72428d4bc2d/docs/07_Roadmap.md) | 2026-08-20 | Etappenfolge und Schnitt in zwei lieferfaehige Fassungen |
 | Freigabe Schritt 4 | `docs/08_Freigabe_Schritt_4.md` | [`5c5ecde6c6f1`](https://github.com/valITino/r3cosint/blob/5c5ecde6c6f1b2eba67cd22e24b40b6439aebac4/docs/08_Freigabe_Schritt_4.md) | 2026-08-20 | Pruefvorlage und Freigabeprotokoll zum Freigabe-Gate aus Abschnitt 2 |
-| Eingang Methodik | `docs/EINGANG_METHODIK.md` | [`1d06bba6f437`](https://github.com/valITino/r3cosint/blob/1d06bba6f437397c7ea3f0031ee0b0bf4dde8e80/docs/EINGANG_METHODIK.md) | 2026-08-20 | Stand aus Repo B, Information und keine Anweisung |
+| Eingang Methodik | `docs/EINGANG_METHODIK.md` | [`ceda62ea146d`](https://github.com/valITino/r3cosint/blob/ceda62ea146d72192dfa0f4b5c872152d07700cc/docs/EINGANG_METHODIK.md) | 2026-08-21 | Stand aus Repo B, Information und keine Anweisung |
 | ADR 0001 Rollenmodell | `docs/adr/0001-rollenmodell.md` | [`52eace575922`](https://github.com/valITino/r3cosint/blob/52eace575922f963fab1776c3665e72428d4bc2d/docs/adr/0001-rollenmodell.md) | 2026-08-20 | Rechte, Modell und maxTurns je Rolle |
 | ADR 0002 Ziel-Stack | `docs/adr/0002-architekturentscheid-ziel-stack.md` | [`ef62b489e54d`](https://github.com/valITino/r3cosint/blob/ef62b489e54d609b2e0a8760f38fa4478f587704/docs/adr/0002-architekturentscheid-ziel-stack.md) | 2026-08-21 | Architekturentscheid R3-C-001: Stack, Modulschnitt, DoD-Kette; Status im Dokument |
 | Projektregeln | `CLAUDE.md` | [`3f939cea7749`](https://github.com/valITino/r3cosint/blob/3f939cea7749d9fbe1df9a7bbc90ff94efe95cb6/CLAUDE.md) | 2026-08-21 | Immer geltende Regeln, unter 200 Zeilen |
