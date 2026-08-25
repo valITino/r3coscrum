@@ -1,3 +1,17 @@
+# Zugangsdaten — niemals einchecken
+# Dieses Repository ist oeffentlich (CONTRIBUTING.md). Der Block ist
+# derselbe wie in valITino/r3cosint; er soll in beiden Repositories
+# gleich sein, damit eine Datei nicht im einen geschuetzt ist und im
+# anderen nicht.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+secrets/
+
+# Werkzeuge und Betriebssystem
 .DS_Store
 Thumbs.db
 *.swp
