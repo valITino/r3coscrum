@@ -75,13 +75,23 @@ jobs:
           #   1. Steuerzeichen entfernen (Tabulator und Zeilenumbruch bleiben).
           #      Text, der Bildschirmsteuerung mitbringt, gibt sich als etwas
           #      anderes aus, als er ist.
-          #   2. Folgen von drei oder mehr Gleichheitszeichen aufbrechen. Der
-          #      Hook in Repo A fasst den fremden Teil in Marker dieser Form;
-          #      eine nachgebildete Markerzeile koennte vortaeuschen, der
-          #      fremde Teil sei zu Ende. Der Hook entschaerft ein zweites Mal;
-          #      hier geschieht es, damit schon die Datei in Repo A -- die auch
-          #      ein Mensch im Pull Request liest -- keinen falschen Marker
-          #      traegt.
+          #   2. Folgen von drei oder mehr Gleichheitszeichen aufbrechen, damit
+          #      schon die Datei in Repo A -- die ein Mensch im Pull Request
+          #      liest -- keine Zeile traegt, die wie ein Marker aussieht.
+          #
+          #      WICHTIG, damit das spaeter nicht falsch gelesen wird: Dies ist
+          #      Hygiene fuer den menschlichen Leser, NICHT die Zusicherung
+          #      gegen nachgebildete Marker. Eine Ersetzung einzelner Zeichen
+          #      ist eine Sperrliste, und Sperrlisten sind hier untauglich: die
+          #      statische Pruefung vom 2026-08-25 hat eine frueher gleich
+          #      gebaute Zusicherung im Hook mit Unicode-Homoglyphen umgangen
+          #      (U+FF1D, U+2550, U+3013). Die Zusicherung traegt seither der
+          #      Hook in Repo A strukturell: er stellt jeder Zeile des fremden
+          #      Teils "| " voran, sodass keine Zeile aus diesem Repository die
+          #      Form eines Markers annehmen kann -- unabhaengig davon, welche
+          #      Zeichen sie verwendet. Diese Zeile hier durch weitere Zeichen
+          #      zu ergaenzen, verbessert nichts und wiegt in falscher
+          #      Sicherheit.
           #   3. Zeilenzahl und Zeilenlaenge begrenzen. Beides ist sonst
           #      unbegrenzt: eine einzige sehr lange Zeile genuegt, um den
           #      Kontext zu fluten.

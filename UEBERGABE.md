@@ -87,6 +87,24 @@ lokales Fernarchiv, `gh` als Attrappe.
 | Zeile mit 900 Zeichen | auf 500 gekürzt, Kürzung vermerkt |
 | 90 Zeilen Commit-Rumpf | auf 60 gekürzt, Kürzung vermerkt |
 
+### Nachtrag aus der unabhängigen Prüfung
+
+Der Static Software Tester hat die Entschärfung im Hook von Repo A als
+Sperrliste beanstandet: sie fasste nur das ASCII-Gleichheitszeichen, eine
+Markerzeile aus Unicode-Homoglyphen ging durch. Die Zusicherung gegen
+nachgebildete Marker trägt seither **strukturell der Hook** — er stellt jeder
+Zeile des fremden Teils `| ` voran, sodass keine Zeile aus diesem Repository
+die Form eines Markers annehmen kann, gleichgültig welche Zeichen sie
+verwendet.
+
+Für diesen Arbeitsablauf ändert sich dadurch nichts an der Wirkung, wohl aber
+an der Lesart: Die Ersetzung von Gleichheitszeichen hier ist **Hygiene für den
+menschlichen Leser des Pull Requests, nicht die Zusicherung**. Der Kommentar an
+der Stelle sagt das jetzt ausdrücklich, samt Begründung, warum es keinen Sinn
+hat, die Liste um weitere Zeichen zu ergänzen. Ohne diesen Vermerk hätte eine
+spätere Arbeitseinheit die Ersetzung für die Absicherung halten und sich darauf
+verlassen können.
+
 ### Was hier offen bleibt
 
 - `actions/checkout@v4` bleibt an beiden Stellen auf ein bewegliches
