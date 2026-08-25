@@ -228,10 +228,19 @@ jobs:
           if git rev-parse --verify --quiet "origin/$ZWEIG" >/dev/null; then
             ZWEIG_LETZTER="$( (git show "origin/$ZWEIG:$DATEI" 2>/dev/null || true) \
               | sed -n 's|^\*\*Nachweis:\*\* .*/commit/\([0-9a-f]\{40\}\)$|\1|p' | tail -n 1)"
+            # Die Nachweisliste geht in eine Datei; grep prueft gegen die Datei,
+            # nicht gegen eine Pipe. grep -q schliesst die Pipe beim ersten
+            # Treffer, und unter pipefail koennte der Rueckgabewert des
+            # abgebrochenen sed den Treffer ueberschreiben — die Erkennung
+            # meldete dann faelschlich "nicht veraltet", und ein bereits
+            # gemergter Sammelzweig wuerde fortgeschrieben. Dieselbe Falle ist
+            # in nachweise-uebertragen.yml und meilenstein-tag.yml im
+            # Produkt-Repository bereits behoben und kommentiert.
+            (git show "origin/$BASIS:$DATEI" 2>/dev/null || true) \
+              | sed -n 's|^\*\*Nachweis:\*\* .*/commit/\([0-9a-f]\{40\}\)$|\1|p' \
+              > "$RUNNER_TEMP/basis-nachweise.txt"
             if [ -n "$ZWEIG_LETZTER" ] \
-                && (git show "origin/$BASIS:$DATEI" 2>/dev/null || true) \
-                  | sed -n 's|^\*\*Nachweis:\*\* .*/commit/\([0-9a-f]\{40\}\)$|\1|p' \
-                  | grep -qFx "$ZWEIG_LETZTER"; then
+                && grep -qFx "$ZWEIG_LETZTER" "$RUNNER_TEMP/basis-nachweise.txt"; then
               VERALTET=1
             fi
           fi
