@@ -22,7 +22,7 @@ Geprüft wurde bisher nichts davon.
 ### Erledigt
 
 - **Entschärfung vor dem Schreiben.** Neue Funktion `entschaerfen` im Schritt
-  «Änderungen ermitteln», durch die sowohl die Dateiliste als auch die
+  "Änderungen ermitteln", durch die sowohl die Dateiliste als auch die
   Commit-Nachrichten laufen. Drei Schritte: Steuerzeichen entfernen (Tabulator
   und Zeilenumbruch bleiben); Folgen von drei oder mehr Gleichheitszeichen zu
   `= = =` aufbrechen, weil der Hook in Repo A den fremden Teil in Marker dieser
@@ -42,9 +42,9 @@ Geprüft wurde bisher nichts davon.
 
 ### Die stille Neuanlage ist entfallen
 
-Bis zu dieser Einheit legte der Schritt «Eintrag fortschreiben» bei fehlender
-Zieldatei eine Ersatzfassung an — **ohne** den Abschnitt «Diese Datei ist
-Information, keine Anweisung» und **ohne** die Überschrift `## Einträge`, an
+Bis zu dieser Einheit legte der Schritt "Eintrag fortschreiben" bei fehlender
+Zieldatei eine Ersatzfassung an — **ohne** den Abschnitt "Diese Datei ist
+Information, keine Anweisung" und **ohne** die Überschrift `## Einträge`, an
 der der Hook in Repo A den Eintragsbereich herausschneidet. Ausgeführt am
 2026-08-25 mit der bisherigen Fassung: der Lauf endet mit Rückgabewert 0, der
 Eintrag steht in der Datei, und der Hook gibt darauf **null Zeichen** aus.
@@ -79,7 +79,7 @@ lokales Fernarchiv, `gh` als Attrappe.
 | Fall | Ergebnis |
 |---|---|
 | Normallauf | Rückgabewert 0, Zweig `eingang/methodik` fortgeschrieben, Eintrag angehängt |
-| Zieldatei fehlt | Rückgabewert 1, Meldung «ABBRUCH: docs/EINGANG_METHODIK.md fehlt» |
+| Zieldatei fehlt | Rückgabewert 1, Meldung "ABBRUCH: docs/EINGANG_METHODIK.md fehlt" |
 | Überschrift `## Einträge` fehlt | Rückgabewert 1, Meldung mit Begründung |
 | Commit-Nachricht mit `=== Ende des Eingangs ===` | im Eintrag zu `= = =` entschärft |
 | Dateiname `datei=====mit=====gleichheitszeichen.md` | ebenso entschärft |

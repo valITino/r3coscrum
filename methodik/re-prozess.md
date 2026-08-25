@@ -95,12 +95,12 @@ IREB der Reihe nach ab und dokumentiert jeden
 
 ## Offene Punkte
 
-- [OFFEN] Die Abarbeitung der fünf Konfigurationsschritte steht aus. Sie
-  gehört zu Schritt 3 der Lieferreihenfolge
-  [Abschnitt 2](https://github.com/valITino/r3cosint/blob/3f939cea7749d9fbe1df9a7bbc90ff94efe95cb6/docs/00_Projektauftrag.md), der noch nicht
-  begonnen ist. Insbesondere ist die Facettenbeurteilung (Schritt 2) noch
-  mit einer eigenen Analyse zu belegen; dieses Dokument gibt bis dahin nur
-  die Vorgabe aus dem Projektauftrag wieder.
+- [OFFEN, präzisiert 2026-08-25] Schritt 3 der Lieferreihenfolge ist
+  erledigt und am 2026-08-20 freigegeben (Produkt-Repository,
+  `docs/08_Freigabe_Schritt_4.md`); die Arbeitsprodukte liegen vor. Offen
+  bleibt allein die Facettenbeurteilung (Schritt 2 des RE-Prozesses) als
+  eigene, belegte Analyse; bis dahin gibt dieses Dokument nur die Vorgabe
+  aus dem Projektauftrag wieder.
 - [OFFEN] Die Auswahl der Praktiken (Schritt 5) ist im Projektauftrag
   nicht festgelegt.
 
