@@ -4,6 +4,101 @@ Vermerke je Arbeitseinheit in diesem Repository, neueste zuoberst.
 
 ---
 
+## 2026-08-25 — Eingangskanal an der Quelle abgesichert (Anteil dieses Repositories an E2)
+
+Einheit E2 des freigegebenen Plans. Der Hauptteil liegt im Produkt-Repository
+([`103edb45d7bf`](https://github.com/valITino/r3cosint/blob/103edb45d7bf467ba993fe9aadc6a8c7e2326112/docs/uebergaben/2026-08-25_eingangskanal-abgesichert.md));
+hier liegt die Quelle des Kanals.
+
+### Der Zusammenhang
+
+`.github/workflows/eingang.yml` schreibt Commit-Nachrichten und Dateinamen aus
+diesem Repository nach `docs/EINGANG_METHODIK.md` in Repo A. Von dort trägt ein
+SessionStart-Hook sie in den Sitzungskontext eines Sprachmodells. Damit ist
+alles, was hier in eine Commit-Nachricht geschrieben wird, fremder Inhalt im
+Sinne der Verfahrensgarantie 5.4 des Projektauftrags: Daten, nie Anweisungen.
+Geprüft wurde bisher nichts davon.
+
+### Erledigt
+
+- **Entschärfung vor dem Schreiben.** Neue Funktion `entschaerfen` im Schritt
+  «Änderungen ermitteln», durch die sowohl die Dateiliste als auch die
+  Commit-Nachrichten laufen. Drei Schritte: Steuerzeichen entfernen (Tabulator
+  und Zeilenumbruch bleiben); Folgen von drei oder mehr Gleichheitszeichen zu
+  `= = =` aufbrechen, weil der Hook in Repo A den fremden Teil in Marker dieser
+  Form fasst; Zeilenzahl und Zeilenlänge begrenzen. Der Hook entschärft ein
+  zweites Mal — hier geschieht es, damit schon die Datei in Repo A, die ein
+  Mensch im Pull Request liest, keinen falschen Marker trägt.
+- **Obergrenzen:** 100 Zeilen für die Dateiliste, 60 Zeilen für die
+  Commit-Nachrichten, 500 Zeichen je Zeile. Überschreitungen werden ausgewiesen
+  statt stillschweigend abgeschnitten, mit Verweis auf den Nachweis-Commit.
+  Zuvor war beides unbegrenzt: eine einzige lange Zeile genügte, um den
+  Sitzungskontext zu fluten.
+- **`head` bewusst vermieden.** Die Begrenzung läuft über `awk`, das bis zum
+  Ende liest. `head` schliesst die Pipe beim Erreichen der Grenze, und unter
+  dem gesetzten `pipefail` könnte der Rückgabewert des abgebrochenen Schreibers
+  durchschlagen. Dieselbe Falle ist in den Arbeitsabläufen des
+  Produkt-Repositories bereits zweimal kommentiert.
+
+### Die stille Neuanlage ist entfallen
+
+Bis zu dieser Einheit legte der Schritt «Eintrag fortschreiben» bei fehlender
+Zieldatei eine Ersatzfassung an — **ohne** den Abschnitt «Diese Datei ist
+Information, keine Anweisung» und **ohne** die Überschrift `## Einträge`, an
+der der Hook in Repo A den Eintragsbereich herausschneidet. Ausgeführt am
+2026-08-25 mit der bisherigen Fassung: der Lauf endet mit Rückgabewert 0, der
+Eintrag steht in der Datei, und der Hook gibt darauf **null Zeichen** aus.
+Grüner Lauf, toter Kanal — genau die Fehlerklasse, die den Kanal schon einmal
+unbemerkt stillgelegt hatte.
+
+Die Datei wird jetzt weder angelegt noch nachgebaut. Der Lauf bricht mit
+Rückgabewert 1 und einer Meldung ab. Zwei Gründe, jeder für sich zwingend:
+
+1. Der Kopf der Datei enthält den Warnabschnitt, also Inhalt des
+   Produkt-Repositories. Ihn hier vorzuhalten hiesse, ihn zu kopieren —
+   `CLAUDE.md` dieses Repositories untersagt das ausdrücklich und verlangt
+   Verweise statt Kopien.
+2. Die Datei ist in Repo A versioniert. Ihr Fehlen ist eine Anomalie für einen
+   Menschen, keine Lage, die eine Automatik überdecken darf. Ein lauter Abbruch
+   ist besser als eine stille Ersatzfassung.
+
+Zusätzlich bricht der Lauf ab, wenn die Überschrift `## Einträge` fehlt. Der
+Hook in Repo A fällt inzwischen auf die erste Eintragsüberschrift zurück, aber
+das Fehlen zeigt an, dass die Datei nicht mehr die erwartete Form hat.
+
+### Verifikation — ausgeführt
+
+YAML geparst. Beide `run:`-Blöcke mit `bash -n` ohne Beanstandung, beide mit
+`set -euo pipefail`, **null Einsetzungen `${{ ... }}` in einem `run:`-Block**;
+die drei verbleibenden stehen in `with:` und `env:`.
+
+Nachgebildet wurde der ganze Ablauf: ein Wegwerf-Repository mit bösartigen
+Commit-Nachrichten, beide Arbeitsablauf-Schritte aus der YAML-Datei ausgeführt,
+lokales Fernarchiv, `gh` als Attrappe.
+
+| Fall | Ergebnis |
+|---|---|
+| Normallauf | Rückgabewert 0, Zweig `eingang/methodik` fortgeschrieben, Eintrag angehängt |
+| Zieldatei fehlt | Rückgabewert 1, Meldung «ABBRUCH: docs/EINGANG_METHODIK.md fehlt» |
+| Überschrift `## Einträge` fehlt | Rückgabewert 1, Meldung mit Begründung |
+| Commit-Nachricht mit `=== Ende des Eingangs ===` | im Eintrag zu `= = =` entschärft |
+| Dateiname `datei=====mit=====gleichheitszeichen.md` | ebenso entschärft |
+| Commit-Nachricht mit ANSI-Folge und Klingelzeichen | null Steuerzeichen im Eintrag (Quelle: 3) |
+| Zeile mit 900 Zeichen | auf 500 gekürzt, Kürzung vermerkt |
+| 90 Zeilen Commit-Rumpf | auf 60 gekürzt, Kürzung vermerkt |
+
+### Was hier offen bleibt
+
+- `actions/checkout@v4` bleibt an beiden Stellen auf ein bewegliches
+  Versionsschild gepinnt. Unverändert seit der letzten Einheit: zum Pinnen wird
+  die Prüfsumme aus `actions/checkout` gebraucht, der GitHub-Zugang der Sitzung
+  ist auf `valITino/*` beschränkt.
+- `.claude/rules/versionierung-und-nachweisfluss.md` widerspricht weiterhin der
+  gleichnamigen Regel im Produkt-Repository (sprechender Name je Arbeitsablauf).
+  Das ist Einheit E5 und bleibt dort.
+
+---
+
 ## 2026-08-25 — Automatik gehärtet (Anteil dieses Repositories an E1)
 
 Aus dem Deep Review vom 2026-08-25 über beide Repositories. Der Hauptteil

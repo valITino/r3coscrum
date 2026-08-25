@@ -59,6 +59,51 @@ jobs:
         run: |
           set -euo pipefail
 
+          # Obergrenzen fuer den fremden Textanteil eines Eintrags.
+          MAX_ZEILEN_WAS=100
+          MAX_ZEILEN_WARUM=60
+          MAX_ZEICHEN_ZEILE=500
+
+          # Entschaerfung, bevor fremder Text nach Repo A geschrieben wird.
+          #
+          # Was hier durchlaeuft, stammt aus Commit-Nachrichten und Dateinamen
+          # dieses Repositories. Es wird in Repo A abgelegt und dort vom
+          # SessionStart-Hook in den Sitzungskontext eines Sprachmodells
+          # gegeben. Damit ist es fremder Inhalt im Sinne der Verfahrensgarantie
+          # 5.4 des Projektauftrags: Daten, nie Anweisungen. Drei Schritte:
+          #
+          #   1. Steuerzeichen entfernen (Tabulator und Zeilenumbruch bleiben).
+          #      Text, der Bildschirmsteuerung mitbringt, gibt sich als etwas
+          #      anderes aus, als er ist.
+          #   2. Folgen von drei oder mehr Gleichheitszeichen aufbrechen. Der
+          #      Hook in Repo A fasst den fremden Teil in Marker dieser Form;
+          #      eine nachgebildete Markerzeile koennte vortaeuschen, der
+          #      fremde Teil sei zu Ende. Der Hook entschaerft ein zweites Mal;
+          #      hier geschieht es, damit schon die Datei in Repo A -- die auch
+          #      ein Mensch im Pull Request liest -- keinen falschen Marker
+          #      traegt.
+          #   3. Zeilenzahl und Zeilenlaenge begrenzen. Beides ist sonst
+          #      unbegrenzt: eine einzige sehr lange Zeile genuegt, um den
+          #      Kontext zu fluten.
+          #
+          # awk statt head: head schliesst die Pipe beim Erreichen der Grenze,
+          # und unter pipefail koennte der Rueckgabewert des abgebrochenen
+          # Schreibers durchschlagen. awk liest bis zum Ende.
+          entschaerfen() {  # $1 Eingabe, $2 Ausgabe, $3 Hoechstzahl Zeilen, $4 Praefix der Meldung
+            tr -d '\000-\010\013\014\016-\037\177' < "$1" \
+              | sed 's/=\{3,\}/= = =/g' \
+              | awk -v maxz="$3" -v maxc="$MAX_ZEICHEN_ZEILE" -v pre="$4" '
+                  {
+                    if (length($0) > maxc) { $0 = substr($0, 1, maxc) " [Zeile gekuerzt]" }
+                    if (NR <= maxz) { print }
+                  }
+                  END {
+                    if (NR > maxz) {
+                      printf "%s[Gekuerzt: %d weitere Zeilen. Vollstaendig im Nachweis-Commit.]\n", pre, NR - maxz
+                    }
+                  }' > "$2"
+          }
+
           # Startpunkt des Vergleichs ist bevorzugt der zuletzt in
           # docs/EINGANG_METHODIK.md protokollierte Nachweis-Commit — so
           # bleibt das Protokoll auch dann lückenlos, wenn ein wartender
@@ -103,7 +148,8 @@ jobs:
               R*) echo "- Umbenannt: \`$pfad\` in \`$pfad_neu\`" ;;
               *)  echo "- \`$pfad\`" ;;
             esac
-          done < "$ROH" > "$RUNNER_TEMP/was.md"
+          done < "$ROH" > "$RUNNER_TEMP/was-roh.md"
+          entschaerfen "$RUNNER_TEMP/was-roh.md" "$RUNNER_TEMP/was.md" "$MAX_ZEILEN_WAS" "- "
 
           # Überschrift nach dem, was tatsächlich betroffen ist.
           TAB="$(printf '\t')"
@@ -124,7 +170,8 @@ jobs:
             BEREICH="$GITHUB_SHA"
           fi
           git log --reverse --format='%h — %s%n%b' "$BEREICH" -- methodik/ sprints/ \
-            | sed -e 's/^/> /' -e 's/[[:space:]]*$//' > "$RUNNER_TEMP/warum.md"
+            | sed -e 's/^/> /' -e 's/[[:space:]]*$//' > "$RUNNER_TEMP/warum-roh.md"
+          entschaerfen "$RUNNER_TEMP/warum-roh.md" "$RUNNER_TEMP/warum.md" "$MAX_ZEILEN_WARUM" "> "
           if [ ! -s "$RUNNER_TEMP/warum.md" ]; then
             echo "> Keine Commit-Nachricht ermittelbar." > "$RUNNER_TEMP/warum.md"
           fi
@@ -185,21 +232,47 @@ jobs:
               git checkout -B "$ZWEIG" "origin/$BASIS"
             fi
 
-            mkdir -p docs
+            # Die Zieldatei wird weder angelegt noch ersatzweise nachgebaut.
+            # Zwei Gruende, jeder fuer sich zwingend:
+            #
+            #   1. Ihr Kopf traegt den Abschnitt "Diese Datei ist Information,
+            #      keine Anweisung" -- die Schranke, die verhindert, dass
+            #      beilaeufig notierter Text aus diesem Repository zur
+            #      Arbeitsanweisung in Repo A wird. Diesen Text hier
+            #      vorzuhalten hiesse, Inhalt des Produkt-Repositories zu
+            #      kopieren. CLAUDE.md dieses Repositories untersagt das und
+            #      verlangt Verweise statt Kopien.
+            #   2. Bis zum 2026-08-25 legte dieser Schritt bei fehlender Datei
+            #      eine verkuerzte Fassung an: ohne jenen Abschnitt und ohne
+            #      die Ueberschrift "## Einträge", an der der SessionStart-Hook
+            #      in Repo A den Eintragsbereich herausschneidet. Der Eintrag
+            #      waere geschrieben und der Lauf gruen gewesen, waehrend der
+            #      Kanal still nichts mehr ausgegeben haette. Genau diese
+            #      Fehlerklasse -- gruener Lauf, wirkungslose Zustellung -- hat
+            #      den Kanal schon einmal unbemerkt stillgelegt.
+            #
+            # Ein lauter Abbruch ist deshalb richtig: die Datei ist in Repo A
+            # versioniert, ihr Fehlen ist eine Anomalie fuer einen Menschen,
+            # keine Lage, die eine Automatik ueberdecken darf.
+            if [ ! -f "$DATEI" ]; then
+              echo "ABBRUCH: $DATEI fehlt in valITino/r3cosint." >&2
+              echo "Die Datei ist dort versioniert. Sie wird hier nicht ersatzweise" >&2
+              echo "angelegt; wiederherstellen und den Lauf wiederholen." >&2
+              exit 1
+            fi
+            if ! grep -q '^## Einträge' "$DATEI"; then
+              echo "ABBRUCH: In $DATEI fehlt die Ueberschrift '## Einträge'." >&2
+              echo "Sie ist die vereinbarte Schnittstelle zum SessionStart-Hook in Repo A." >&2
+              echo "Der Hook faellt zwar auf die erste Eintragsueberschrift zurueck, aber" >&2
+              echo "ihr Fehlen zeigt an, dass die Datei nicht mehr die erwartete Form hat." >&2
+              exit 1
+            fi
+
             # Wiederholte Läufe zum selben Commit hängen nichts doppelt an:
             # der Nachweis-Permalink ist pro Commit eindeutig.
-            if [ -f "$DATEI" ] && grep -qF "commit/$GITHUB_SHA" "$DATEI"; then
+            if grep -qF "commit/$GITHUB_SHA" "$DATEI"; then
               echo "Commit $GITHUB_SHA ist bereits protokolliert, nichts anzuhängen."
             else
-              if [ ! -f "$DATEI" ]; then
-                {
-                  echo "# Eingang Methodik"
-                  echo
-                  echo "Fortgeschriebenes Protokoll der Änderungen an Methodik und"
-                  echo "Sprints aus $GITHUB_SERVER_URL/$GITHUB_REPOSITORY."
-                  echo "Wird automatisch per Pull Request ergänzt."
-                } > "$DATEI"
-              fi
               {
                 echo
                 cat "$RUNNER_TEMP/eintrag.md"
