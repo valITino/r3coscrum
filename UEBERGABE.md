@@ -105,6 +105,13 @@ hat, die Liste um weitere Zeichen zu ergänzen. Ohne diesen Vermerk hätte eine
 spätere Arbeitseinheit die Ersetzung für die Absicherung halten und sich darauf
 verlassen können.
 
+Im zweiten Durchgang kam ein Befund hinzu, der auch diesen Arbeitsablauf
+betrifft: Die Maske zum Entfernen von Steuerzeichen liess den Wagenrücklauf
+(Byte 13) stehen, weil der Bereich aufgeteilt geschrieben war
+(`\013\014\016-\037` statt `\013-\037`), während der Kommentar daneben
+behauptete, nur Tabulator und Zeilenumbruch blieben. Gegen alle 256 Bytewerte
+nachgeprüft und behoben; es bleiben jetzt genau Tabulator und Zeilenumbruch.
+
 ### Was hier offen bleibt
 
 - `actions/checkout@v4` bleibt an beiden Stellen auf ein bewegliches

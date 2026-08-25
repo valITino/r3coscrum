@@ -72,9 +72,14 @@ jobs:
           # gegeben. Damit ist es fremder Inhalt im Sinne der Verfahrensgarantie
           # 5.4 des Projektauftrags: Daten, nie Anweisungen. Drei Schritte:
           #
-          #   1. Steuerzeichen entfernen (Tabulator und Zeilenumbruch bleiben).
-          #      Text, der Bildschirmsteuerung mitbringt, gibt sich als etwas
-          #      anderes aus, als er ist.
+          #   1. Steuerzeichen entfernen; Tabulator (9) und Zeilenumbruch (10)
+          #      bleiben. Text, der Bildschirmsteuerung mitbringt, gibt sich als
+          #      etwas anderes aus, als er ist. Der Bereich ist bewusst
+          #      zusammenhaengend geschrieben (\013-\037 statt
+          #      \013\014\016-\037): die aufgeteilte Fassung liess den
+          #      Wagenruecklauf (13) stehen, waehrend der Kommentar daneben das
+          #      Gegenteil behauptete. Befund F3 der statischen Pruefung vom
+          #      2026-08-25.
           #   2. Folgen von drei oder mehr Gleichheitszeichen aufbrechen, damit
           #      schon die Datei in Repo A -- die ein Mensch im Pull Request
           #      liest -- keine Zeile traegt, die wie ein Marker aussieht.
@@ -100,7 +105,7 @@ jobs:
           # und unter pipefail koennte der Rueckgabewert des abgebrochenen
           # Schreibers durchschlagen. awk liest bis zum Ende.
           entschaerfen() {  # $1 Eingabe, $2 Ausgabe, $3 Hoechstzahl Zeilen, $4 Praefix der Meldung
-            tr -d '\000-\010\013\014\016-\037\177' < "$1" \
+            tr -d '\000-\010\013-\037\177' < "$1" \
               | sed 's/=\{3,\}/= = =/g' \
               | awk -v maxz="$3" -v maxc="$MAX_ZEICHEN_ZEILE" -v pre="$4" '
                   {
