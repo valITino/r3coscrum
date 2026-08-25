@@ -4,6 +4,78 @@ Vermerke je Arbeitseinheit in diesem Repository, neueste zuoberst.
 
 ---
 
+## 2026-08-25 — Full-Review: Anteil dieses Repositories (zieht E5 vor)
+
+Aus dem Full-Review über beide Repositories auf Weisung des Auftraggebers vom
+2026-08-25. Der Hauptteil liegt im Produkt-Repository
+(`docs/uebergaben/2026-08-25_full-review-konfiguration.md`); hier die sechs
+Punkte dieses Repositories.
+
+### Erledigt
+
+- **E5 vorgezogen:** `.claude/rules/versionierung-und-nachweisfluss.md` an die
+  gleichnamige Regel des Produkt-Repositories angeglichen. Massgeblich ist
+  allein die E-Mail-Adresse
+  `41898282+github-actions[bot]@users.noreply.github.com`; der `user.name`
+  darf der sprechende Name des Arbeitsablaufs sein. Zwei gleichnamige Regeln
+  sagten Verschiedenes; sachlich trug die Fassung des Produkt-Repositories.
+  Im Bestand der zweite Commit mit falscher Identität nachgetragen
+  (`5783d0930b63…`, entstanden nach Erlass der Regel, weil der erzeugende
+  Arbeitsablauf im Produkt-Repository erst am 2026-08-25 korrigiert wurde);
+  der dort früher vermerkte Korrekturbedarf ist als erledigt geführt
+  (`47dd3086f1d6…`).
+- **`eingang.yml`:** Die VERALTET-Erkennung las die Nachweisliste des
+  Standardzweigs durch eine Pipe in `grep -qFx`. Unter dem gesetzten
+  `pipefail` kann der SIGPIPE-Rückgabewert des abgebrochenen `sed` den
+  Treffer überschreiben — ein bereits gemergter Sammelzweig würde dann
+  fortgeschrieben, die Folge wäre ein Pull Request mit bereits gemergten
+  Einträgen. Latent (erst bei grosser Nachweisliste auslösbar), aber exakt
+  die Falle, die in beiden Arbeitsabläufen des Produkt-Repositories bereits
+  behoben und kommentiert war. Die Liste geht jetzt in eine Datei unter
+  `$RUNNER_TEMP`; es gibt keine Pipe mehr.
+- **`methodik/arbeitsprodukte.md`** führte Stakeholderliste, Glossar,
+  Kontextmodell und Product Backlog als "noch nicht angelegt", obwohl alle
+  vier seit Schritt 3 existieren und das eigene Nachweisverzeichnis
+  (`nachweise/NACHWEISE.md`) sie mit festen Verweisen führt. Auf "vorhanden"
+  mit 40-stelligen Prüfsummen nachgeführt; die beiden überholten
+  [OFFEN]-Punkte aufgelöst; die zwei PERMALINK-Platzhalter zur Prototyp-Demo
+  durch den festen Verweis ersetzt (der Nachweis-Eintrag existiert seit dem
+  2026-08-21).
+- **`methodik/re-prozess.md`** behauptete, Schritt 3 sei "noch nicht
+  begonnen"; er ist erledigt und seit dem 2026-08-20 freigegeben. Offen
+  bleibt allein die Facettenbeurteilung als eigene belegte Analyse —
+  präzisiert statt pauschal offen.
+- **`methodik/scrum-aufbau.md`** führte die DoD-Befehlskette als "noch nicht
+  festgelegt"; sie liegt als Vorschlag in ADR 0002 Abschnitt 6 vor. Offen
+  bleiben Bestätigung der Befehle und Hook-Erzwingung (R3-Q-001).
+- **`UEBERGABE.md`:** Guillemets durch gerade Anführungszeichen ersetzt
+  — Verstoss gegen die Regel dieses Repositories, entstanden in der eigenen
+  Einheit E2 vom 2026-08-25.
+
+### Geprüft und bewusst NICHT geändert
+
+`methodik/entscheide.md` vergibt für die Rollenmodell-Entscheide die Kennungen
+R1 bis R5. Ich hatte zunächst eine Umbenennung erwogen, weil der Projektauftrag
+4.4 die Rechtsregime R1 bis R5 nennt. Bei genauer Prüfung trägt der Befund
+nicht: 4.4 "Zur Bezeichnung" reserviert ausdrücklich nur die Kürzel 1a, 1b, 2
+(für die Klassifizierung) und hält fest, dass die Regime R1 bis R5 heissen — es
+reserviert die Kürzel R1 bis R5 nicht exklusiv für Regime. Dieselben Kürzel
+stehen zudem im Produkt-Repository in `docs/06_Definition_of_Ready_und_Done.md`
+für die DoR-Qualitätskriterien (R1 adäquat, R2 notwendig, ...), von niemandem
+beanstandet. R1 bis R5 sind hier tabellenlokale Entscheid-Kennungen, keine
+Regime-Verweise, und werden in keinem der beiden Repositories referenziert. Eine
+Umbenennung wäre eine Änderung ohne Regelgrundlage an einem Dokument mit
+Entscheidcharakter — deshalb unterbleibt sie. Damit ist meine frühere Ansage,
+auf RM1 bis RM5 umzubenennen, zurückgenommen.
+
+### Nicht angetastet
+
+`actions/checkout@v4` bleibt an beiden Stellen auf ein bewegliches
+Versionsschild gepinnt; zum Pinnen fehlt weiterhin der Zugriff auf die
+Prüfsumme (Sitzungszugang auf `valITino/*` beschränkt).
+
+---
+
 ## 2026-08-25 — Eingangskanal an der Quelle abgesichert (Anteil dieses Repositories an E2)
 
 Einheit E2 des freigegebenen Plans. Der Hauptteil liegt im Produkt-Repository
