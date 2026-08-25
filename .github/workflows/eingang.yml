@@ -37,6 +37,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          # Aus diesem Auscheckvorgang wird nur gelesen (git log, git diff).
+          # Geschrieben wird ausschliesslich im Produkt-Repository, das
+          # gleich darauf mit eigenem Token ausgecheckt wird. Ohne diese
+          # Zeile bliebe das Token dieses Laufs in .git/config des Laeufers
+          # stehen, waehrend danach fremde Commit-Nachrichten verarbeitet
+          # werden.
+          persist-credentials: false
 
       - name: Produkt-Repository auschecken
         uses: actions/checkout@v4
