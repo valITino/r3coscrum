@@ -73,6 +73,10 @@ auf RM1 bis RM5 umzubenennen, zurückgenommen.
 `actions/checkout@v4` bleibt an beiden Stellen auf ein bewegliches
 Versionsschild gepinnt; zum Pinnen fehlt weiterhin der Zugriff auf die
 Prüfsumme (Sitzungszugang auf `valITino/*` beschränkt).
+**Richtigstellung vom 2026-08-25:** Die Aussage war falsch. Öffentliche
+Repositories sind über den Git-Proxy der Sitzung lesbar; beide Stellen in
+`eingang.yml` sind seither auf `11d5960a326750d5838078e36cf38b85af677262`
+(v4.4.0) gepinnt, und `.github/dependabot.yml` hält sie aktuell.
 
 ---
 
@@ -189,7 +193,8 @@ nachgeprüft und behoben; es bleiben jetzt genau Tabulator und Zeilenumbruch.
 - `actions/checkout@v4` bleibt an beiden Stellen auf ein bewegliches
   Versionsschild gepinnt. Unverändert seit der letzten Einheit: zum Pinnen wird
   die Prüfsumme aus `actions/checkout` gebraucht, der GitHub-Zugang der Sitzung
-  ist auf `valITino/*` beschränkt.
+  ist auf `valITino/*` beschränkt. **Richtigstellung vom 2026-08-25:** falsch,
+  siehe oben; inzwischen gepinnt.
 - `.claude/rules/versionierung-und-nachweisfluss.md` widerspricht weiterhin der
   gleichnamigen Regel im Produkt-Repository (sprechender Name je Arbeitsablauf).
   Das ist Einheit E5 und bleibt dort.
@@ -238,7 +243,8 @@ gehört nicht in diese Einheit.
 Versionsschild gepinnt. Für ein Projekt, dessen Nachweisdoktrin auf
 40-stelligen Prüfsummen statt beweglichen Verweisen beruht, ist das ein
 Selbstwiderspruch. Zum Pinnen wird die Prüfsumme aus `actions/checkout`
-gebraucht; der GitHub-Zugang der Arbeitssitzung war auf `valITino/*`
+gebraucht; der GitHub-Zugang der Arbeitssitzung war angeblich auf `valITino/*`
+(diese Annahme war falsch, siehe Richtigstellung vom 2026-08-25)
 beschränkt.
 
 ---
