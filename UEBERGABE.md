@@ -57,10 +57,29 @@ Pruefinstanz stammt.
 | Einordnung der Uebernahmen ins Backlog | [`364b1b568a3c`](https://github.com/valITino/r3cosint/commit/364b1b568a3c74610ef0f324cd5e64f27ebdb815) |
 | Notation der Abnahmekriterien in der Definition of Ready | [`90c9923cf43e`](https://github.com/valITino/r3cosint/commit/90c9923cf43ecb81dfe410375d10d956866d1c87) |
 
+### Abbruch nach 3.4 -- die beiden Skills sind nicht abgenommen
+
+Dieselbe Pruefung ist dreimal am selben Kriterium gescheitert: eine Aussage
+ueber die Herkunft, die staerker ist als die Quelle sie traegt. Nach
+Eskalationsregel 3.4 ist die Einheit insoweit abgebrochen und dem
+Auftraggeber vorgelegt; Einzelheiten in der Uebergabe des
+Produkt-Repositories.
+
+**Das bestaetigt S2, und zwar am eigenen Leib.** S2 haelt fest: CLAUDE.md ist
+Kontext, keine Durchsetzung -- wer eine Regel garantiert durchsetzen will,
+braucht einen Hook. Der Skill `pruefbefund-melden` stellt die Regel auf, dass
+jede Aussage ihre Herkunft traegt, und ist an genau dieser Regel dreimal
+gescheitert. Eine Regel, die nur als Vorsatz existiert, wird von demselben
+Text verletzt, der sie aufstellt. Das ist kein neuer Entscheid, sondern der
+dritte Beleg fuer einen bestehenden -- und das Argument, das hinter R3-Q-001
+steht.
+
 ### Offen
 
 - Wer `.claude/skills/` beschreiben darf (ADR 0001 weist `.claude/` keiner
   Rolle zu).
+- Ob die beiden Skills bis zu einer maschinellen Pruefregel in Kraft bleiben
+  oder ruhen. Entscheidet der Auftraggeber.
 - Ob das Vorladen eines Skills je Rolle in dieser Umgebung ueberhaupt wirkt.
   Ein Kontrollversuch war negativ; er widerlegt nichts, weil Aenderungen an
   Rollendateien in der laufenden Sitzung nicht wirken. Zu Beginn der naechsten
