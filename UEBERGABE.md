@@ -4,6 +4,71 @@ Vermerke je Arbeitseinheit in diesem Repository, neueste zuoberst.
 
 ---
 
+## 2026-08-31 — Fremdes Skill-Repository ausgewertet, erste zwei Skills
+
+Der Auftraggeber hat `valITino/claude-skills-fullstack` angebunden, mit der
+Weisung, es genau anzusehen und zu uebernehmen, was Qualitaet und Rollenmodell
+staerkt. Der Hauptteil liegt im Produkt-Repository
+(`docs/uebergaben/2026-08-31_skill-repository-ausgewertet.md`); hier der
+methodische Anteil.
+
+### Erledigt
+
+- **S6 und S7** als methodische Entscheide (siehe `methodik/entscheide.md`):
+  fremdes Material wird nie woertlich uebernommen, und ein Skill entsteht nur,
+  wenn mehrere Rollen dieselbe Prozedur gleich ausfuehren.
+- **Neuer offener Punkt** zum Herkunftsvermerk bei fehlendem Rechteinhaber,
+  vorzubereiten durch den Legal Reviewer, zu entscheiden durch den
+  Auftraggeber.
+
+### Was den Ausschlag gab
+
+Der fremde Bestand fuehrt 67 Skills, darunter Rollen wie DevOps Engineer,
+Code Reviewer und Security Reviewer — als Skills, nicht als Rollen. Genau
+daran zeigt sich die Grenze, die S7 zieht: Ein Skill ist eine Prozedur, keine
+handelnde Instanz. Waeren unsere Pruefrollen Skills, liesse sich weder
+abbilden, dass der Pentester nicht schreiben darf, noch dass Pruefung und
+Umsetzung auf verschiedenen Modellen laufen. Aus rund zwanzig beurteilten
+Kandidaten sind deshalb genau zwei Skills entstanden.
+
+Die Lizenzlage gab den Ausschlag fuer S6. Die Lizenz ist MIT, ihre
+Urheberrechtszeile lautet aber "Copyright (c) 2025" ohne benannten
+Rechteinhaber; dreizehn Dateien fuehren Inhalte aus einem dritten Projekt
+weiter, eine davon ohne Lizenzangabe. Ein Vermerk, der niemanden nennt, ist
+in einem Projekt mit Belegpflicht nicht belegtauglich.
+
+### Eine Feststellung zur Beweisfuehrung
+
+Die Auswertung ist von einer unabhaengigen Vollstaendigkeitskritik
+gegengelesen worden; sie fand im Vorschlag sechzehn Luecken und sieben falsche
+Belegstellen. Keine Angabe ist ungeprueft in ein Artefakt gelangt. Eine
+Behauptung der Kritik hat die Nachpruefung selbst nicht ueberstanden und ist
+deshalb nirgends uebernommen. Das ist der Grund, weshalb V10 ("eine Abgrenzung
+ist keine Erlaubnis") einen Zwilling braucht, der hier nicht als Entscheid,
+aber als Arbeitsweise festgehalten wird: **Eine Fundstelle, die niemand
+nachgeschlagen hat, ist kein Beleg** — auch dann nicht, wenn sie von einer
+Pruefinstanz stammt.
+
+### Stand im Produkt-Repository
+
+| Gegenstand | Commit |
+|---|---|
+| Erste zwei Skills, `skills:`-Feld bei neun Rollen, ADR 0001 berichtigt | [`080d4689c3e5`](https://github.com/valITino/r3cosint/commit/080d4689c3e5615d5e73bf034b62270f3f57d92e) |
+| Einordnung der Uebernahmen ins Backlog | [`364b1b568a3c`](https://github.com/valITino/r3cosint/commit/364b1b568a3c74610ef0f324cd5e64f27ebdb815) |
+| Notation der Abnahmekriterien in der Definition of Ready | [`90c9923cf43e`](https://github.com/valITino/r3cosint/commit/90c9923cf43ecb81dfe410375d10d956866d1c87) |
+
+### Offen
+
+- Wer `.claude/skills/` beschreiben darf (ADR 0001 weist `.claude/` keiner
+  Rolle zu).
+- Ob das Vorladen eines Skills je Rolle in dieser Umgebung ueberhaupt wirkt.
+  Ein Kontrollversuch war negativ; er widerlegt nichts, weil Aenderungen an
+  Rollendateien in der laufenden Sitzung nicht wirken. Zu Beginn der naechsten
+  Sitzung erneut zu pruefen.
+- Die Rechtsfrage aus S6.
+
+---
+
 ## 2026-08-31 — Definition-of-Done-Kette abgenommen, O-13 entschieden
 
 Der Hauptteil dieser Arbeitseinheit liegt im Produkt-Repository (Uebergaben
