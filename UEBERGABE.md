@@ -4,6 +4,57 @@ Vermerke je Arbeitseinheit in diesem Repository, neueste zuoberst.
 
 ---
 
+## 2026-08-31 — Definition-of-Done-Kette abgenommen, O-13 entschieden
+
+Der Hauptteil dieser Arbeitseinheit liegt im Produkt-Repository (Uebergaben
+`docs/uebergaben/2026-08-31_makefile-dod-drei-befunde-behoben.md`); hier der
+methodische Anteil.
+
+### Erledigt
+
+- **Zwei neue methodische Entscheide** in `methodik/entscheide.md`:
+  - **V9** — Steht eine Abwaegung zwischen Laufzeit oder Bequemlichkeit und
+    Beweiskraft, entscheidet die Beweiskraft. Woertliche Weisung des
+    Auftraggebers vom 2026-08-31. Erstmals angewandt auf O-13 des
+    Architekturentscheids 0002: Die Kette benutzt den Zwischenspeicher des
+    Paketwerkzeugs nicht mehr, weil dessen Inhalt nicht erneut gegen die
+    Sperrdatei geprueft wird.
+  - **V10** — Eine Abgrenzung ist keine Erlaubnis. Was sich schliessen laesst,
+    wird geschlossen; abgegrenzt wird nur, was sich mit den Mitteln des
+    jeweiligen Artefakts nicht schliessen laesst.
+
+### Woher V10 kommt
+
+Aus einem belegten Fehler im eigenen Vorgehen, nicht aus einer Ueberlegung.
+Der Kopfabschnitt des Makefiles grenzte einen Angriffsweg ab -- "dagegen
+schuetzt die Kette nicht" --, obwohl er mit einer einzigen Zeile zu schliessen
+war. Damit war die Abgrenzung vom Ergebnis einer Pruefung zu ihrer Ausrede
+geworden. Die unabhaengige Nachpruefung hat das benannt; der Auftraggeber hat
+mit V9 entschieden; geschlossen wurde es am selben Tag.
+
+Das ist der Grund, weshalb dieser Entscheid hier steht und nicht nur im
+Architekturentscheid: Er betrifft nicht diese eine Kette, sondern jede
+Stelle, an der eine Abgrenzung geschrieben wird.
+
+### Stand im Produkt-Repository
+
+| Gegenstand | Commit |
+|---|---|
+| Zwei blockierende Befunde behoben, Kette abgenommen | [`acda82dd39ea`](https://github.com/valITino/r3cosint/commit/acda82dd39ea1b26a67131225901ec0da02aece0) |
+| O-13 umgesetzt (`UV_NO_CACHE=1`) | [`7d1fe2fdea8d`](https://github.com/valITino/r3cosint/commit/7d1fe2fdea8dc339a7890ece18e4859418cfd6f6) |
+| Abgrenzungsabschnitt nachgefuehrt | [`2bc0255c83e7`](https://github.com/valITino/r3cosint/commit/2bc0255c83e7bbbd2664df759aceeebe747246e0) |
+
+### Offen
+
+- **O-12** — ein Lauf der Kette auf der Gegenseite, in einer Umgebung, die der
+  Aufrufer nicht setzt. Solange er fehlt, ist die Kette die Selbstpruefung
+  eines kooperierenden Aufrufers. Terminiert mit dem Grundgeruest, weil die
+  Kette heute planmaessig rot endet (fehlende Pruefmittel, Lage C) und ein
+  dauerhaft roter Pflichtlauf niemanden schuetzt, sondern nur ignoriert wird.
+- **O-7, O-8, O-10, O-11** unveraendert offen.
+
+---
+
 ## 2026-08-25 — Full-Review: Anteil dieses Repositories (zieht E5 vor)
 
 Aus dem Full-Review über beide Repositories auf Weisung des Auftraggebers vom
