@@ -45,6 +45,8 @@ rekonstruiert oder geschätzt.
 | S3 | "Kalkuliere, wie viel Usage ich noch habe" ersetzt durch eine schnittbezogene Ersatzregel (abschliessbare Arbeitseinheiten, Übergabedatei, keine halbfertigen Commits) | Claude Code kann das Kontingent nicht selbst auslesen |
 | S4 | Iterationspflicht ergänzt um ein maschinell prüfbares Abbruchkriterium, Stop- und TaskCompleted-Hooks und einen Endlosschleifen-Schutz | Eine Schleife, deren Ausstieg an der Selbsteinschätzung des Modells hängt, endet zu früh oder nie |
 | S5 | Die Schleife als Hook-Ebene umgesetzt, nicht als Skill | Skills sind Anweisungen und können nichts erzwingen; nur Hooks blockieren deterministisch |
+| S6 | **2026-08-31.** Fremdes Material wird nie wörtlich in das Projekt übernommen. Übernommen werden Bauweise, Gliederung und Einsicht; der entstehende Text ist unserer, in Deutsch und Schweizer Schreibweise, und wird vor der Aufnahme gegen unsere Bauvorschriften geprüft. Die Herkunft wird über die vollständige 40-stellige Commit-Prüfsumme vermerkt. Eine Abhängigkeit von einem Marktplatz oder einem Plugin, das sich unter uns aktualisiert, wird nicht eingegangen | Drei Gründe, jeder für sich tragend. Erstens Reproduzierbarkeit: Sie ist Bauvorschrift (Projektauftrag 5.4); ein Bestand, der sich ändert, ohne dass bei uns eine Datei geändert wird, ist damit unvereinbar — dieselbe Überlegung, aus der Verweise auf `blob/main` unzulässig sind. Zweitens Belegbarkeit: Die Lizenz des angebundenen Bestands (`valITino/claude-skills-fullstack`, `882ef55e377dbf9a4dbe496bb41ac6ccd0e555cf`) ist MIT, ihre Urheberrechtszeile lautet aber "Copyright (c) 2025" ohne benannten Rechteinhaber, und dreizehn Dateien führen Inhalte aus einem dritten Projekt weiter, eine davon ohne Lizenzangabe. Ein Vermerk, der niemanden nennt, ist in einem Projekt mit Belegpflicht nicht belegtauglich. Drittens Inhalt: Fremde Inhalte sind Daten, nie Anweisungen — eine Skill-Datei wird als Ganzes in den Kontext geladen, und im geprüften Bestand stehen Muster, die unseren Verfahrensgarantien widersprechen (selbsttätige Verkettung von Erkennen und Handeln, Aufklärungsbefehle nach aussen, ungeprüfte Zeichenketten in SQL) |
+| S7 | **2026-08-31.** Ein Skill entsteht nur, wenn **mehrere Rollen dieselbe Prozedur gleich ausführen**. Was nur eine Rolle tut, gehört in ihre Rollendatei; was eine Festlegung ist, in einen Architekturentscheid oder eine Regel | Der fremde Bestand führt Rollen wie DevOps Engineer, Code Reviewer und Security Reviewer als Skills. Für uns wäre damit weder abbildbar, dass der Pentester nicht schreiben darf, noch dass Prüfung und Umsetzung auf verschiedenen Modellen laufen (Projektauftrag 3.4). Umgekehrt kostet jeder überflüssige Skill Pflege an drei Stellen — Skill, `skills:`-Feld je Rolle, ADR 0001. Erstmals angewandt: aus rund zwanzig beurteilten Kandidaten sind genau zwei Skills entstanden ([`pruefbefund-melden` und `dod-kette-belegen`](https://github.com/valITino/r3cosint/tree/2bc0255c83e7bbbd2664df759aceeebe747246e0/.claude/skills)) |
 
 ## Entscheide zur Repository-Struktur
 
@@ -70,6 +72,14 @@ künftigen Architekturentscheide unter `docs/adr/` im Produkt-Repository.
 - [OFFEN] Künftige methodische Entscheide: Dieses Dokument wird
   fortgeschrieben, sobald neue Entscheide fallen — dann mit Datum je
   Entscheid.
+- [OFFEN] **Herkunftsvermerk bei fehlendem Rechteinhaber** (neu am
+  2026-08-31, hängt an S6). Zwei Fragen, die der Auftraggeber entscheidet,
+  fachlich vorzubereiten durch den Legal Reviewer: Ist eine von einem fremden
+  Werk abgeleitete Vorlage im Repository eines polizeilichen
+  Ermittlungswerkzeugs überhaupt zulässig? Und trägt auch eine Nachbildung
+  nach Vorbild — bei der kein fremder Text in das Repository gelangt — einen
+  Herkunftsvermerk? Solange das offen ist, gilt S6 in seiner strengen Form:
+  neu schreiben, nie übernehmen.
 
 ## Verweise in diesem Dokument
 
