@@ -113,10 +113,12 @@ eigene Positionen, weil sie auf dem kritischen Pfad liegen
 
 ## Offene Punkte
 
-- [OFFEN] Die Definition of Done als konkrete Befehlskette (welche
-  Befehle, welche Schwellenwerte) ist noch nicht festgelegt; sie entsteht
-  mit Schritt 3 der Lieferreihenfolge
-  [Abschnitt 2](https://github.com/valITino/r3cosint/blob/3f939cea7749d9fbe1df9a7bbc90ff94efe95cb6/docs/00_Projektauftrag.md).
+- [OFFEN, präzisiert 2026-08-25] Die Definition of Done liegt vor
+  ([Definition of Ready und Done](https://github.com/valITino/r3cosint/blob/3a40faa87feac056cd7bfa7c0fdf3f5f77b761fb/docs/06_Definition_of_Ready_und_Done.md));
+  die konkrete Befehlskette D1 bis D12 steht als Vorschlag in ADR 0002,
+  Abschnitt 6 des Produkt-Repositories. Offen bleiben die Bestätigung der
+  Befehle durch DevOps Engineer und Auftraggeber sowie die Erzwingung über
+  Hooks (R3-Q-001).
 - [OFFEN] Die personelle Besetzung von Product Owner und Scrum Master
   (Mensch oder Claude-Code-Rolle, und wer konkret) ist im Projektauftrag
   nicht ausgewiesen.

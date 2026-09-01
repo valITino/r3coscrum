@@ -21,11 +21,11 @@ Kontextmodell [Abschnitt 6.3](https://github.com/valITino/r3cosint/blob/3f939cea
 
 | Arbeitsprodukt | Wozu | Verantwortlich | Lebensdauer | Stand im Produkt-Repository |
 |---|---|---|---|---|
-| **Stakeholderliste** | Festhalten, wer betroffen ist und mitredet: je Stakeholder mindestens Name, Funktion und Rolle, Kontakt, Verfügbarkeit, Relevanz, Fachgebiet, Ziele und Interessen | Requirements Engineer | sich weiterentwickelnd | noch nicht angelegt |
-| **Glossar** | Verbindliche Definitionen aller Fachbegriffe; Verwendung für alle Arbeitsprodukte und Oberflächentexte verpflichtend | Requirements Engineer, ein benannter Verantwortlicher | langlebig | noch nicht angelegt |
-| **Kontextmodell** | Systemgrenze, Kontextgrenze, Scope, externe Akteure und Schnittstellen | Software Architect | sich weiterentwickelnd | noch nicht angelegt |
-| **Product Backlog** | Geordnete Anforderungen mit Anforderungsart, Priorisierung und Abnahmekriterien | Product Owner | sich weiterentwickelnd | noch nicht angelegt |
-| **Interaktiver Prototyp** | Anforderungen am laufenden Bild ermitteln und validieren; Freigabe-Gate vor jedem Frontend-Produktionscode | UX/UI-Designer (fachlich), Requirements Engineer (methodisch) | kurzlebig, Wegwerf | vorhanden: [PERMALINK: prototype/OSINT_Plattform_Demo.html], wird ergänzt, nicht ersetzt |
+| **Stakeholderliste** | Festhalten, wer betroffen ist und mitredet: je Stakeholder mindestens Name, Funktion und Rolle, Kontakt, Verfügbarkeit, Relevanz, Fachgebiet, Ziele und Interessen | Requirements Engineer | sich weiterentwickelnd | vorhanden: [Stakeholderliste](https://github.com/valITino/r3cosint/blob/a48cb46fb7d2d9f8fc05bc573d1fd248cf9c989f/docs/02_Stakeholderliste.md) |
+| **Glossar** | Verbindliche Definitionen aller Fachbegriffe; Verwendung für alle Arbeitsprodukte und Oberflächentexte verpflichtend | Requirements Engineer, ein benannter Verantwortlicher | langlebig | vorhanden: [Glossar](https://github.com/valITino/r3cosint/blob/a48cb46fb7d2d9f8fc05bc573d1fd248cf9c989f/docs/03_Glossar.md) |
+| **Kontextmodell** | Systemgrenze, Kontextgrenze, Scope, externe Akteure und Schnittstellen | Software Architect | sich weiterentwickelnd | vorhanden: [Kontextmodell](https://github.com/valITino/r3cosint/blob/ef62b489e54d609b2e0a8760f38fa4478f587704/docs/04_Kontextmodell.md) |
+| **Product Backlog** | Geordnete Anforderungen mit Anforderungsart, Priorisierung und Abnahmekriterien | Product Owner | sich weiterentwickelnd | vorhanden: [Product Backlog](https://github.com/valITino/r3cosint/blob/3a40faa87feac056cd7bfa7c0fdf3f5f77b761fb/docs/05_Product_Backlog.md) |
+| **Interaktiver Prototyp** | Anforderungen am laufenden Bild ermitteln und validieren; Freigabe-Gate vor jedem Frontend-Produktionscode | UX/UI-Designer (fachlich), Requirements Engineer (methodisch) | kurzlebig, Wegwerf | vorhanden: [Prototyp Demo](https://github.com/valITino/r3cosint/blob/783081fe6d13fef8ab89bc9d5f62d3e2e368716a/prototype/OSINT_Plattform_Demo.html), wird ergänzt, nicht ersetzt |
 | **Projektauftrag** | Baseline der vereinbarten Anforderungen | Protocol Master | langlebig, änderungskontrolliert | vorhanden: [Projektauftrag](https://github.com/valITino/r3cosint/blob/3f939cea7749d9fbe1df9a7bbc90ff94efe95cb6/docs/00_Projektauftrag.md) |
 
 ## Einzelheiten je Arbeitsprodukt
@@ -78,15 +78,17 @@ Meilenstein neu erzeugt wird [Abschnitt 6.6](https://github.com/valITino/r3cosin
 
 ## Offene Punkte
 
-- [OFFEN] Die Ablagepfade von Stakeholderliste, Glossar, Kontextmodell,
-  Product Backlog sowie Definition of Ready und Done sind im
-  Projektauftrag nicht festgelegt. Sie entstehen mit Schritt 3 der
-  Lieferreihenfolge [Abschnitt 2](https://github.com/valITino/r3cosint/blob/3f939cea7749d9fbe1df9a7bbc90ff94efe95cb6/docs/00_Projektauftrag.md);
-  die Verweise hier werden dann nachgeführt.
+- Erledigt (2026-08-25 nachgeführt): Die Ablagepfade sind mit Schritt 3
+  entstanden — `docs/02_Stakeholderliste.md`, `docs/03_Glossar.md`,
+  `docs/04_Kontextmodell.md`, `docs/05_Product_Backlog.md`,
+  `docs/06_Definition_of_Ready_und_Done.md` ([Definition of Ready und
+  Done](https://github.com/valITino/r3cosint/blob/3a40faa87feac056cd7bfa7c0fdf3f5f77b761fb/docs/06_Definition_of_Ready_und_Done.md)); die Verweise oben sind nachgeführt.
 - [OFFEN] Der benannte Verantwortliche für das Glossar ist noch nicht
   bestimmt.
-- [OFFEN] Das Nachweisverzeichnis `docs/NACHWEISE.md` im
-  Produkt-Repository ist noch nicht angelegt.
+- Erledigt (2026-08-25 nachgeführt): Das Nachweisverzeichnis
+  `docs/NACHWEISE.md` existiert im Produkt-Repository, wird von
+  `scripts/nachweise-erzeugen.sh` erzeugt und liegt als übertragene Kopie
+  in diesem Repository unter `nachweise/NACHWEISE.md`.
 
 ## Verweise in diesem Dokument
 
@@ -102,7 +104,8 @@ Aufgelöst aus dem Nachweisverzeichnis (`nachweise/NACHWEISE.md`, Stand
 - [Abschnitt 2](https://github.com/valITino/r3cosint/blob/3f939cea7749d9fbe1df9a7bbc90ff94efe95cb6/docs/00_Projektauftrag.md)
 - [Projektauftrag](https://github.com/valITino/r3cosint/blob/3f939cea7749d9fbe1df9a7bbc90ff94efe95cb6/docs/00_Projektauftrag.md)
 
-Kein passender Eintrag im Nachweisverzeichnis; bleibt als Platzhalter
-stehen:
+Der Eintrag "Prototyp Demo" ist seit dem 2026-08-21 im Nachweisverzeichnis
+(Nachweislücke geschlossen, siehe Produkt-Repository,
+`docs/uebergaben/2026-08-21_nachweisluecke-prototyp-demo.md`):
 
-- [PERMALINK: prototype/OSINT_Plattform_Demo.html]
+- [Prototyp Demo](https://github.com/valITino/r3cosint/blob/783081fe6d13fef8ab89bc9d5f62d3e2e368716a/prototype/OSINT_Plattform_Demo.html)
