@@ -5,7 +5,7 @@
 | **Erzeugt durch** | `scripts/nachweise-erzeugen.sh` |
 | **Grundlage** | Projektauftrag 6.6 |
 | **Verantwortlich** | Protocol Master |
-| **Stand des Repositories** | `1b38d1ea0edbecb38e872cbe70e63979b29ece4e` |
+| **Stand des Repositories** | `86dcd4135a9e8f7159bb8da11b2fda2e3c37d047` |
 | **Artefakte** | 55 |
 
 **Diese Datei wird erzeugt, nicht von Hand gepflegt** (6.6). Sie wird bei jedem
@@ -54,8 +54,8 @@ selbst trägt die vollständigen 40 Stellen.
 | Regel Versionierung und Nachweisfluss | `.claude/rules/versionierung-und-nachweisfluss.md` | [`1aa10a11a090`](https://github.com/valITino/r3cosint/blob/1aa10a11a0909de36e8aca71f5a2c5e603bbab0b/.claude/rules/versionierung-und-nachweisfluss.md) | 2026-08-25 | Versionsschilder, Commit-Identitaet, Nachweisfluss |
 | Skill Pruefbefund melden | `.claude/skills/pruefbefund-melden/SKILL.md` | [`11c7267667d5`](https://github.com/valITino/r3cosint/blob/11c7267667d53b32dc7be751fc6ed8ddd4500a9f/.claude/skills/pruefbefund-melden/SKILL.md) | 2026-09-01 | Erste Skill des Projekts, Prozedur fuer Pruefberichte: Pflichtfelder je Befund, Negativbefunde zwingend |
 | Skill DoD-Kette belegen | `.claude/skills/dod-kette-belegen/SKILL.md` | [`11c7267667d5`](https://github.com/valITino/r3cosint/blob/11c7267667d53b32dc7be751fc6ed8ddd4500a9f/.claude/skills/dod-kette-belegen/SKILL.md) | 2026-09-01 | Zweite Skill des Projekts, Prozedur fuer Fertigmeldungen: Befehl frisch ausfuehren, Lage je Schritt benennen |
-| Arbeitsablauf Nachweisfluss | `.github/workflows/nachweise-uebertragen.yml` | [`403f84d0cd48`](https://github.com/valITino/r3cosint/blob/403f84d0cd48c527c9643596253788b665ff97c2/.github/workflows/nachweise-uebertragen.yml) | 2026-08-26 | Erzeugt und uebertraegt das Nachweisverzeichnis nach Repo B (6.6) |
-| Arbeitsablauf Meilenstein | `.github/workflows/meilenstein-tag.yml` | [`403f84d0cd48`](https://github.com/valITino/r3cosint/blob/403f84d0cd48c527c9643596253788b665ff97c2/.github/workflows/meilenstein-tag.yml) | 2026-08-26 | Versionsschild und Release bei Meilenstein-Merge (6.6) |
+| Arbeitsablauf Nachweisfluss | `.github/workflows/nachweise-uebertragen.yml` | [`a91c620b364e`](https://github.com/valITino/r3cosint/blob/a91c620b364ee3c5a64c5e358c80b9f69150bee1/.github/workflows/nachweise-uebertragen.yml) | 2026-09-01 | Erzeugt und uebertraegt das Nachweisverzeichnis nach Repo B (6.6) |
+| Arbeitsablauf Meilenstein | `.github/workflows/meilenstein-tag.yml` | [`a91c620b364e`](https://github.com/valITino/r3cosint/blob/a91c620b364ee3c5a64c5e358c80b9f69150bee1/.github/workflows/meilenstein-tag.yml) | 2026-09-01 | Versionsschild und Release bei Meilenstein-Merge (6.6) |
 | Belegpruefer | `scripts/belege-pruefen.sh` | [`4b9adf781ddb`](https://github.com/valITino/r3cosint/blob/4b9adf781ddb86bea0b9f84d6cb59bb1ccea416e/scripts/belege-pruefen.sh) | 2026-09-01 | Prueft Herkunftsangaben in der Dokumentation gegen ihren Fundort; nicht abgenommen, Abbruch nach 3.4 (docs/uebergaben/2026-09-01_belegpruefer-abbruch-nach-3-4.md) |
 | Belegpruefer Ausnahmeliste | `scripts/belege-ausnahmen.txt` | [`20a1a1d9758f`](https://github.com/valITino/r3cosint/blob/20a1a1d9758f203fb4f39d89d47bd3822c81c196/scripts/belege-ausnahmen.txt) | 2026-09-01 | Ortsgebundene Ausnahmeliste zum Belegpruefer, Teil der Pruefung und nicht Beiwerk |
 | Erzeuger Nachweisverzeichnis | `scripts/nachweise-erzeugen.sh` | [`1e7e8f6ebf3a`](https://github.com/valITino/r3cosint/blob/1e7e8f6ebf3a13f76a8c1ed7c4355cf3771c4260/scripts/nachweise-erzeugen.sh) | 2026-09-01 | Erzeugt docs/NACHWEISE.md; Artefaktliste ist hier massgebend |
