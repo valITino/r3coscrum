@@ -4,13 +4,13 @@ Vermerke je Arbeitseinheit in diesem Repository, neueste zuoberst.
 
 ---
 
-## 2026-08-31 — Belegpruefer, zweiter Abbruch nach 3.4 am selben Tag
+## 2026-09-01 — Belegpruefer, zweiter Abbruch nach 3.4
 
-Der Auftraggeber hat am 2026-08-31 eine Pruefregel freigegeben, die jede
+Der Auftraggeber hat am 2026-09-01 eine Pruefregel freigegeben, die jede
 Zahl, jedes Zitat und jeden Verweis maschinell gegen seinen Fundort haelt.
 Sie ist gebaut, wirksam und **nicht abgenommen**. Der Hauptteil liegt im
 Produkt-Repository
-(`docs/uebergaben/2026-08-31_belegpruefer-abbruch-nach-3-4.md`); hier der
+(`docs/uebergaben/2026-09-01_belegpruefer-abbruch-nach-3-4.md`); hier der
 methodische Anteil.
 
 ### Erledigt
@@ -21,8 +21,8 @@ methodische Anteil.
 
 ### Woher V11 kommt
 
-Aus zwei Abbruechen desselben Tages, beide nach Eskalationsregel 3.4, beide
-am gleichen Muster. Beim Belegpruefer ist es besonders deutlich: Runde 2 fand
+Aus zwei Abbruechen an zwei aufeinanderfolgenden Tagen, beide nach
+Eskalationsregel 3.4, beide am gleichen Muster. Beim Belegpruefer ist es besonders deutlich: Runde 2 fand
 einen Fehler, den die Behebung aus Runde 1 verursacht hatte. Runde 3 fand
 einen, den die Behebung aus Runde 2 erst erreichbar gemacht hatte -- eine
 Existenzpruefung, die zwei Runden lang toter Code gewesen war und beim
