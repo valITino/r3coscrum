@@ -4,6 +4,57 @@ Vermerke je Arbeitseinheit in diesem Repository, neueste zuoberst.
 
 ---
 
+## 2026-08-31 — Belegpruefer, zweiter Abbruch nach 3.4 am selben Tag
+
+Der Auftraggeber hat am 2026-08-31 eine Pruefregel freigegeben, die jede
+Zahl, jedes Zitat und jeden Verweis maschinell gegen seinen Fundort haelt.
+Sie ist gebaut, wirksam und **nicht abgenommen**. Der Hauptteil liegt im
+Produkt-Repository
+(`docs/uebergaben/2026-08-31_belegpruefer-abbruch-nach-3-4.md`); hier der
+methodische Anteil.
+
+### Erledigt
+
+- **V11** als methodischer Entscheid: Eine Behebung ist nicht fertig, wenn
+  der Befund weg ist, sondern wenn die Schicht geprueft ist, die sie neu
+  erreichbar gemacht hat.
+
+### Woher V11 kommt
+
+Aus zwei Abbruechen desselben Tages, beide nach Eskalationsregel 3.4, beide
+am gleichen Muster. Beim Belegpruefer ist es besonders deutlich: Runde 2 fand
+einen Fehler, den die Behebung aus Runde 1 verursacht hatte. Runde 3 fand
+einen, den die Behebung aus Runde 2 erst erreichbar gemacht hatte -- eine
+Existenzpruefung, die zwei Runden lang toter Code gewesen war und beim
+Scharfschalten Fehlalarme ausloeste.
+
+Bemerkenswert ist, wer es jeweils gefunden hat: nie eine Selbstpruefung,
+immer eine unabhaengige Instanz auf einem anderen Modell. Das ist der
+praktische Beleg fuer die Rollentrennung aus Projektauftrag 3.4 -- nicht als
+Grundsatz, sondern als gemessene Erfahrung von einem Tag.
+
+### Was daraus fuer das Werkzeug folgte
+
+Die drei gescheiterten Runden hatten jeweils versucht, die Liste der eigenen
+Grenzen zu vervollstaendigen. Die abgelieferte Fassung behauptet stattdessen
+nicht mehr, sie sei vollstaendig: Sie sagt bei jedem Lauf, dass die Liste
+unvollstaendig ist, wie oft sie schon unvollstaendig war, und dass
+Rueckgabewert 0 heisst "nichts von dem gefunden, was hier aufgezaehlt ist" --
+nicht "nichts vorhanden".
+
+Das ist derselbe Gedanke wie V10 ("eine Abgrenzung ist keine Erlaubnis"), von
+der anderen Seite: Wo sich eine Luecke nicht schliessen laesst, ist die
+ehrliche Angabe ihrer Unbekanntheit mehr wert als die naechste Liste, die
+wieder unvollstaendig ist.
+
+### Offen
+
+- Ob der Belegpruefer in `make dod` eingebunden wird. Er ist es **nicht**;
+  ein zusaetzlicher Kettenschritt waere eine Fortschreibung von ADR 0002.
+- Ob "die Liste der Grenzen ist unvollstaendig" als Abnahmekriterium reicht.
+
+---
+
 ## 2026-08-31 — Fremdes Skill-Repository ausgewertet, erste zwei Skills
 
 Der Auftraggeber hat `valITino/claude-skills-fullstack` angebunden, mit der
