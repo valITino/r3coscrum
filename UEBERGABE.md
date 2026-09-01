@@ -4,6 +4,62 @@ Vermerke je Arbeitseinheit in diesem Repository, neueste zuoberst.
 
 ---
 
+## 2026-09-01 — D20 geprüft: die Prüfmittel, nach denen niemand fragte
+
+Der Kettenschritt D20 ist am 2026-09-01 unabhängig geprüft worden — durch
+Static Software Tester, Dynamic Software Tester und Protocol Master, alle
+drei auf einem anderen Modell als die Umsetzung, wie es Abschnitt 3.4 des
+Projektauftrags verlangt. Der Hauptteil liegt im Produkt-Repository
+([`f5e885ad64b2f98eabf1e49bfcfb4c07134a73ce`](https://github.com/valITino/r3cosint/commit/f5e885ad64b2f98eabf1e49bfcfb4c07134a73ce));
+hier der methodische Anteil.
+
+### Erledigt
+
+- **V12** als methodischer Entscheid: Nennt ein Text ein Prüfmittel, dessen
+  Ausfall eine bestimmte Wirkung haben soll, muss der Code genau dieses
+  Prüfmittel prüfen.
+- **V13** als methodischer Entscheid: Eine Angabe, die nichts steuert,
+  sondern etwas anderes nur wiederholt, wird gestrichen und nicht
+  nachgeführt.
+
+### Woher V12 kommt
+
+Aus einem blockierenden Befund, den die Prüfung gebracht und der Koordinator
+gegen die Dateien und gegen einen ausgeführten Lauf nachgeprüft hat. Der
+Architekturentscheid und die Definition of Done nannten sechs Prüfmittel,
+deren Ausfall die Lage C ergeben sollte; der Code prüfte drei. Das Fehlen
+eines der drei ungeprüften ergab gemessen nicht Lage C, sondern hunderte
+Scheinfunde — rot mit falscher Begründung, also genau der Fehlermodus, den
+der Architekturentscheid an derselben Stelle als vermieden beschrieb.
+
+Das ist die vierte Stufe derselben Fehlerklasse in diesem Projekt. Zuerst
+wurde die Verfügbarkeit eines Namens statt der Anwesenheit des Gegenstands
+gemessen, dann eine Liste von Namen statt des Inhalts, dann der Gegenstand
+ohne Beleg, dass das Messmittel misst — und nun benennt der Text ein
+Messmittel, nach dem niemand fragt. Jede Stufe wurde erst sichtbar,
+nachdem die vorherige behoben war; das ist die Bauart des Problems und der
+Grund, weshalb V11 gilt.
+
+### Woher V13 kommt
+
+Zwei Kommentare im Makefile zählten die Ausführungsreihenfolge der Kette
+auf, obwohl die Reihenfolge allein aus der Zielliste stammt. Beide waren
+veraltet. Der eine Absatz warnte wörtlich vor genau dieser zweiten
+Aufzählung, "die bei der naechsten Fortschreibung erneut veralten koennte",
+und führte im selben Absatz eine. Beide sind gestrichen worden, nicht
+nachgeführt: eine nachgeführte Aufzählung ist beim nächsten Mal wieder
+falsch, eine gestrichene kann nicht falsch werden.
+
+### Offen
+
+- Die Abnahme des Belegprüfers steht weiterhin aus. Diese Prüfrunde ist ihr
+  statischer und ihr dynamischer Teil, nicht ihr Ersatz.
+- Neu offen im Produkt-Repository: Die Bezugsdokumente werden auf
+  Vorhandensein und Aussagefähigkeit geprüft, nicht auf Aktualität. Eine
+  veraltete Referenzmenge fällt heute durch kein Netz.
+
+---
+
 ## 2026-09-01 — Belegpruefer, zweiter Abbruch nach 3.4
 
 Der Auftraggeber hat am 2026-09-01 eine Pruefregel freigegeben, die jede
