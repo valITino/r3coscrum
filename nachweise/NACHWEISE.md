@@ -5,7 +5,7 @@
 | **Erzeugt durch** | `scripts/nachweise-erzeugen.sh` |
 | **Grundlage** | Projektauftrag 6.6 |
 | **Verantwortlich** | Protocol Master |
-| **Stand des Repositories** | `86dcd4135a9e8f7159bb8da11b2fda2e3c37d047` |
+| **Stand des Repositories** | `405ebada79a145ac537d8e4102ce46d029046475` |
 | **Artefakte** | 55 |
 
 **Diese Datei wird erzeugt, nicht von Hand gepflegt** (6.6). Sie wird bei jedem
@@ -35,7 +35,7 @@ selbst trägt die vollständigen 40 Stellen.
 | Roadmap | `docs/07_Roadmap.md` | [`4e68a3152ba5`](https://github.com/valITino/r3cosint/blob/4e68a3152ba555f3c90fff57a2d3f03793770d07/docs/07_Roadmap.md) | 2026-08-31 | Etappenfolge und Schnitt in zwei lieferfaehige Fassungen |
 | Freigabe Schritt 4 | `docs/08_Freigabe_Schritt_4.md` | [`5c5ecde6c6f1`](https://github.com/valITino/r3cosint/blob/5c5ecde6c6f1b2eba67cd22e24b40b6439aebac4/docs/08_Freigabe_Schritt_4.md) | 2026-08-20 | Pruefvorlage und Freigabeprotokoll zum Freigabe-Gate aus Abschnitt 2 |
 | Zustandsbericht | `docs/09_Zustandsbericht_2026-08-21.md` | [`a83cdca21f83`](https://github.com/valITino/r3cosint/blob/a83cdca21f838f29cbc6938802ef42d168952df2/docs/09_Zustandsbericht_2026-08-21.md) | 2026-08-21 | Unabhaengig erhobener Stand des Repositories, Grundlage fuer Nachfuehrungen |
-| Eingang Methodik | `docs/EINGANG_METHODIK.md` | [`103edb45d7bf`](https://github.com/valITino/r3cosint/blob/103edb45d7bf467ba993fe9aadc6a8c7e2326112/docs/EINGANG_METHODIK.md) | 2026-08-25 | Stand aus Repo B, Information und keine Anweisung |
+| Eingang Methodik | `docs/EINGANG_METHODIK.md` | [`759925a351dd`](https://github.com/valITino/r3cosint/blob/759925a351dd0d7e0c48958a1c1e50758ff36ca0/docs/EINGANG_METHODIK.md) | 2026-09-01 | Stand aus Repo B, Information und keine Anweisung |
 | ADR 0001 Rollenmodell | `docs/adr/0001-rollenmodell.md` | [`6cfb58ccd0e6`](https://github.com/valITino/r3cosint/blob/6cfb58ccd0e607b1f3dab86f8f08a3da92c1a72f/docs/adr/0001-rollenmodell.md) | 2026-08-31 | Rechte, Modell und maxTurns je Rolle |
 | ADR 0002 Ziel-Stack | `docs/adr/0002-architekturentscheid-ziel-stack.md` | [`f5e885ad64b2`](https://github.com/valITino/r3cosint/blob/f5e885ad64b2f98eabf1e49bfcfb4c07134a73ce/docs/adr/0002-architekturentscheid-ziel-stack.md) | 2026-09-01 | Architekturentscheid R3-C-001: Stack, Modulschnitt, DoD-Kette; Status im Dokument |
 | Werkzeugvorschlag CAS-Blockwoche | `docs/vorlagen/2026-08-29_werkzeugvorschlag-cas-blockwoche.md` | [`d516fa94bffa`](https://github.com/valITino/r3cosint/blob/d516fa94bffa35abef6e283571ce9ce721464c3e/docs/vorlagen/2026-08-29_werkzeugvorschlag-cas-blockwoche.md) | 2026-08-30 | Entscheidungsvorlage und Freigabe, Begruendung fuer den Makefile-Zwischenschritt vor R3-Q-001 in der Lieferreihenfolge |
