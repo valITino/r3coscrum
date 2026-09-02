@@ -4,6 +4,57 @@ Vermerke je Arbeitseinheit in diesem Repository, neueste zuoberst.
 
 ---
 
+## 2026-09-02 — R3-Q-001: das Definition-of-Done-Gate, entworfen und nicht gebaut
+
+Der Auftraggeber hat am 2026-09-02 angewiesen, die Gates aus R3-Q-001 zuerst
+als Fortschreibung von Abschnitt 6 des Architekturentscheids 0002 zu
+entwerfen und vorzulegen; gebaut wird erst nach seiner schriftlichen
+Freigabe. Der Hauptteil liegt im Produkt-Repository
+([`21cc3ddbf45668c2e185958f8e2a8d42eeaf0150`](https://github.com/valITino/r3cosint/commit/21cc3ddbf45668c2e185958f8e2a8d42eeaf0150),
+dort `docs/uebergaben/2026-09-02_r3-q-001-entwurf-dod-gate.md`); hier der
+methodische Anteil.
+
+### Erledigt
+
+- Entwurf als Abschnitt 6.12 des Architekturentscheids mit siebzehn
+  Entscheiden, Status "Entwurf, nicht freigegeben". Geprueft auf einem anderen
+  Modell als die Umsetzung in zwei Runden: fuenf Prueflinsen mit je einem
+  Widerleger je Befund (dreizehn Befunde eingearbeitet), danach der Static
+  Software Tester fuer die Form (vier Befunde eingearbeitet).
+- Kein Eintrag in `methodik/entscheide.md`: In dieser Einheit ist kein
+  methodischer Entscheid gefallen.
+
+### Vorgeschlagen, nicht eingetragen
+
+- Der Software Architect schlaegt einen methodischen Entscheid vor: die
+  Unterscheidung zwischen einer Pruefkette, die streng bleibt, und einem Gate
+  der Arbeitsumgebung, das einen abzaehlbaren, selbstpruefenden und
+  terminierten Ausfall duldet, waehrend die Gegenseite ihn nicht kennt. Der
+  Entscheid liegt beim Auftraggeber mit der Freigabe von 6.12; der Eintrag
+  hier folgt danach durch den Protocol Master.
+- Zwei Beobachtungen zum Vorgehen, die in den Entwurf eingegangen sind: Das
+  Ereignis `TaskCompleted` feuert nur, wenn eine Aufgabenliste gefuehrt wird;
+  ob jede Arbeitseinheit als Aufgabe gefuehrt wird, ist eine Frage des
+  Vorgehens und liegt beim Auftraggeber (O-23 des Architekturentscheids).
+  Und: Die Nutzungsgrenze der Sitzung hat den laufenden Pruef-Workflow
+  abgebrochen; er ist nach der Ruecksetzung fortgesetzt worden, und die
+  fortgesetzten Widerleger prueften teils gegen bereits berichtigten Text.
+  Massgeblich blieb die Nachpruefung des Koordinators am urspruenglichen
+  Wortlaut, mit ausgefuehrten Befehlen in der Uebergabe des
+  Produkt-Repositories.
+
+### Offen
+
+- Freigabe des Entwurfs; die Entscheidpunkte E-A bis E-K stehen in der
+  Uebergabe des Produkt-Repositories.
+- Der Name `CLAUDE_CODE_STOP_HOOK_BLOCK_CAP` steht in drei verbindlichen
+  Dokumenten des Produkt-Repositories und ist in der am 2026-09-02 gelesenen
+  Hook-Dokumentation nicht belegt (O-19).
+- Die vollstaendige Review beider Repositories (Weisung vom 2026-09-02) laeuft
+  und wird als eigener Zustandsbericht uebergeben.
+
+---
+
 ## 2026-09-01 — D20 geprüft: die Prüfmittel, nach denen niemand fragte
 
 Der Kettenschritt D20 ist am 2026-09-01 unabhängig geprüft worden — durch
