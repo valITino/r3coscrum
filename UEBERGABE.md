@@ -50,8 +50,17 @@ methodische Anteil.
 - Der Name `CLAUDE_CODE_STOP_HOOK_BLOCK_CAP` steht in drei verbindlichen
   Dokumenten des Produkt-Repositories und ist in der am 2026-09-02 gelesenen
   Hook-Dokumentation nicht belegt (O-19).
-- Die vollstaendige Review beider Repositories (Weisung vom 2026-09-02) laeuft
-  und wird als eigener Zustandsbericht uebergeben.
+- Die Projektreview beider Repositories (Weisung vom 2026-09-02) ist
+  abgeschlossen: elf Dimensionen, 131 Befunde, 106 bestaetigt (3 blockierend,
+  51 erheblich, 52 gering), 25 widerlegt. Bericht im Produkt-Repository:
+  [`22559962a9ee7e25b134fcfb5625bebe10ee3fab`](https://github.com/valITino/r3cosint/commit/22559962a9ee7e25b134fcfb5625bebe10ee3fab),
+  Datei docs/10_Zustandsbericht_2026-09-02.md. Fuenf erhebliche Befunde
+  betreffen dieses Repository (Datumsaussage im Kopf von methodik/entscheide.md,
+  Verweis auf einen umbenannten Dateinamen bei V11, "D1 bis D12" in
+  methodik/scrum-aufbau.md, drei ueberholte Verweisstaende in
+  methodik/arbeitsprodukte.md, leeres sprints/ bei laufender Lieferung); dazu
+  vier geringe. Behebung durch die zustaendigen Rollen nach Entscheid des
+  Auftraggebers; nichts davon ist in dieser Einheit geaendert worden.
 
 ---
 
