@@ -4,6 +4,60 @@ Vermerke je Arbeitseinheit in diesem Repository, neueste zuoberst.
 
 ---
 
+## 2026-09-03 — R3-Q-001: O-24 umgesetzt, fünfte Prüfrunde, erneuter Abbruch nach 3.4
+
+Der Auftraggeber hat am 2026-09-03 O-24 entschieden ("O-24 entscheiden:
+Tabellenzeilen zerlegen, dann die vier Befunde beheben"). Der Hauptteil dieser
+Einheit liegt im Produkt-Repository
+([`d96e3970b782c563fe8419cfc2c72200a85e6ec0`](https://github.com/valITino/r3cosint/commit/d96e3970b782c563fe8419cfc2c72200a85e6ec0),
+dort `docs/uebergaben/2026-09-03_r3-q-001-o-24-zusicherungen.md`); hier der
+methodische Anteil.
+
+### Erledigt
+
+- Der Entscheid O-24 ist als **V14** in `methodik/entscheide.md` eingetragen:
+  Eine Prueftabelle fuehrt je Zeile genau eine Zusicherung mit dauerhafter
+  Kennung und ausdruecklichem Messumfang (Kanal, Ereignis, Anzahl); der
+  Selbsttest meldet je Kennung genau eine Pruefung, und die Deckung wird
+  mechanisch in beide Richtungen geprueft. Umgesetzt im Produkt-Repository
+  als Abschnitt 6.12.25 des Architekturentscheids 0002 mit 153 Zusicherungen
+  (eine zurueckgezogen).
+- Die vier offenen Befunde der Vorgaengereinheit sind behoben und in zwei
+  weiteren Pruefrunden auf einem anderen Modell belegt. Das Gate verhaelt
+  sich in allen dynamischen Pruefpunkten richtig.
+- Die Einheit ist trotzdem erneut nach Projektauftrag 3.4 abgebrochen:
+  Dieselbe Fehlerklasse ("ein Selbsttestfall besteht, ohne seine Behauptung
+  zu belegen") trat in Runde 4 zum vierten und in Runde 5 zum fuenften Mal
+  auf -- jetzt als Pruefung, die einen anderen Kanal misst als ihre Zeile
+  nennt (16 Zeilen), und als Pruefaufbau, der die verletzende Lage nicht
+  herstellt (eine Zeile, per Mutation belegt). Vorgelegt ist O-25.
+
+### Vorgeschlagen, nicht eingetragen
+
+- **Messumfang und Trennschaerfe maschinell erzwingen (O-25).** Beide Pruefer
+  schlagen unabhaengig dasselbe vor: eine Kanalspalte in der Prueftabelle mit
+  festem Wertevorrat, die der Selbsttest gegen die tatsaechlich benutzte
+  Messart abgleicht, und je Zusicherung eine Mutationsprobe (welche Aenderung
+  am Gate laesst sie fehlschlagen), die der Selbsttest ausfuehrt. Der
+  Koordinator empfiehlt beides; der Entscheid liegt beim Auftraggeber. Als
+  methodischer Entscheid kaeme er zu V14 hinzu: "Eine Pruefung ist erst dann
+  Beleg, wenn sie ihre eigene Verneinung erkennt."
+- Die Beobachtung aus fuenf Runden, als Regelvorschlag: Wer den Wortlaut einer
+  Zusicherung schaerft, zieht die Messung im selben Schritt nach und belegt
+  das mit einem Lauf, der die Verletzung zeigt. Sonst erzeugt jede
+  Praezisierung eine neue Schicht ungemessener Zusagen.
+- Weiterhin unentschieden (aus der Vorgaengereinheit): "Weisung ist nicht
+  Freigabe" und "Ein Pruefmittel wird bestanden, nicht umgangen".
+
+### Was hier offen bleibt
+
+- Der methodische Entscheid, den der Software Architect mit dem Entwurf des
+  Gates vorgeschlagen hat (strenge Pruefkette gegen ein Gate, das einen
+  abzaehlbaren, selbstpruefenden und terminierten Ausfall duldet), wartet
+  weiter auf die Freigabe von 6.12.
+
+---
+
 ## 2026-09-02/03 — R3-Q-001: das Definition-of-Done-Gate, gebaut auf Weisung, nach 3.4 abgebrochen
 
 Nach der Vorlage des Entwurfs hat der Auftraggeber am 2026-09-02 angewiesen,
