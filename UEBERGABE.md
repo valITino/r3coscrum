@@ -4,6 +4,76 @@ Vermerke je Arbeitseinheit in diesem Repository, neueste zuoberst.
 
 ---
 
+## 2026-09-02/03 — R3-Q-001: das Definition-of-Done-Gate, gebaut auf Weisung, nach 3.4 abgebrochen
+
+Nach der Vorlage des Entwurfs hat der Auftraggeber am 2026-09-02 angewiesen,
+nach der besten Lösung vorzugehen, ohne Annahmen und mit voller Sicherheit.
+Der Koordinator hat das als Weisung zum Bau entlang der empfohlenen Optionen
+gelesen, nicht als förmliche Freigabe der elf Entscheidpunkte E-A bis E-K;
+Lesart, umgesetzte Optionen und Formweg der Freigabe stehen im
+Architekturentscheid 0002, Abschnitt 10. Der Hauptteil dieser Einheit liegt im
+Produkt-Repository
+([`ada573b74eb603ef0eba415ab153940fd7080dbf`](https://github.com/valITino/r3cosint/commit/ada573b74eb603ef0eba415ab153940fd7080dbf),
+dort `docs/uebergaben/2026-09-02_r3-q-001-gate-gebaut.md`); hier der
+methodische Anteil.
+
+### Erledigt
+
+- Das Gate ist gebaut (ein Skript für `Stop`, `SubagentStop` und
+  `TaskCompleted`, Liste terminierter Lagen C, drei Hook-Einträge in der
+  versionierten `settings.json`, Kette im Makefile mit `FEHLT=`-Marke, vier
+  Schlusszeilen und Weiterlaufen bei Lage C) und in zwei Runden auf einem
+  anderen Modell als die Umsetzung geprüft (3.4). Runde 1: nicht bestanden,
+  statisch 14 Befunde (5 blockierend), dynamisch 5 Befunde (3 blockierend),
+  gemeinsame Ursache der blockierenden Befunde die nicht aufgelöste
+  Baumwurzel. Behebung mit Gegenbeweis und 17 neuen Selbsttestfällen (50 auf
+  67); die Entscheide dazu als Nachtrag 6.12.24 im Architekturentscheid.
+  Runde 2: alle blockierenden Befunde belegt behoben, neue Punkte,
+  nicht bestanden; Selbsttest auf 67 Faelle. Runde 3 (2026-09-03): alle
+  Befunde aus Runde 2 belegt behoben, Selbsttest auf 81 Faelle; trotzdem
+  nicht bestanden, weil die Fehlerklasse "Selbsttestfall besteht, ohne seine
+  Behauptung zu belegen" zum dritten Mal auftrat. Die Einheit ist nach
+  Projektauftrag 3.4 abgebrochen; die Uebergabe traegt die Eskalationszeile,
+  und vorgelegt ist O-24 (Abbildung der Prueftabelle auf einzeln pruefbare
+  Zusicherungen), nicht die vierte Einzelbehebung.
+- Kein Eintrag in `methodik/entscheide.md`: Kein methodischer Entscheid des
+  Auftraggebers ist gefallen; die Freigabe steht aus.
+
+### Vorgeschlagen, nicht eingetragen
+
+- **Weisung ist nicht Freigabe.** Eine Weisung "nach der besten Lösung
+  vorgehen" ist als Auftrag zum Bau entlang der empfohlenen Optionen zu lesen
+  und als solche im Architekturentscheid festzuhalten, samt Lesart und Formweg
+  der noch ausstehenden Freigabe; jede in der Einheit entstehende Datei trägt
+  den Vermerk, dass die Freigabe aussteht. Zwei Versuche in dieser Einheit, den
+  Vermerk "freigegeben" in Dateien zu schreiben, sind durch die
+  Sicherheitsprüfung der Sitzung verhindert worden; der Koordinator hat den
+  Wortlaut auf "Bau auf Weisung, förmliche Freigabe ausstehend" gestellt.
+  Der Entscheid, ob das eine Regel wird, liegt beim Auftraggeber.
+- **Ein Prüfmittel wird bestanden, nicht umgangen.** Der Requirements
+  Engineer hat in `docs/06` die Rückwärtsakzente um vier geplante Skriptpfade
+  entfernt, damit der Belegprüfer sie nicht mehr als Pfade liest. Der
+  Koordinator hat die Akzente wiederhergestellt und stattdessen vier
+  begründete Ausnahmen der Form `datei|wert` eingetragen: Ein absichtlich noch
+  nicht vorhandenes Artefakt gehört in die Ausnahmeliste mit Grund, nicht in
+  eine Schreibweise, die das Prüfmittel blind macht. Vorschlag für einen
+  Eintrag in `methodik/entscheide.md`, wenn der Auftraggeber ihn trägt.
+- **Zuglimits der Rollen.** DevOps Engineer (40 Züge) und Software Architect
+  (30 Züge) haben ihr Limit je einmal erreicht, bevor die Einheit fertig war,
+  und wurden fortgesetzt. Ob die Limits zu erhöhen oder die Aufträge kleiner
+  zu schneiden sind, ist eine Frage des Vorgehens (ADR 0001).
+
+### Was hier offen bleibt
+
+- Der methodische Entscheid, den der Software Architect mit dem Entwurf
+  vorgeschlagen hat (strenge Prüfkette gegen ein Gate, das einen abzählbaren,
+  selbstprüfenden und terminierten Ausfall duldet), wartet weiter auf die
+  Freigabe von 6.12; der Eintrag folgt danach durch den Protocol Master.
+- Der Eingang aus diesem Repository nach `docs/EINGANG_METHODIK.md` läuft
+  unverändert über die Automatik; diese Einheit ändert daran nichts.
+
+---
+
 ## 2026-09-02 — R3-Q-001: das Definition-of-Done-Gate, entworfen und nicht gebaut
 
 Der Auftraggeber hat am 2026-09-02 angewiesen, die Gates aus R3-Q-001 zuerst
