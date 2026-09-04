@@ -4,6 +4,76 @@ Vermerke je Arbeitseinheit in diesem Repository, neueste zuoberst.
 
 ---
 
+## 2026-09-04 — R3-Q-001: O-25 umgesetzt, Runden 6 bis 8, erneuter Abbruch nach 3.4, O-26 vorgelegt
+
+Der Auftraggeber hat am 2026-09-03 O-25 entschieden ("O-25 entscheiden:
+beides umsetzen, dann sechste Runde."). Der Hauptteil dieser Einheit liegt im
+Produkt-Repository
+([`ce8ed8a0487d6b7dc8b2f805d3110996fd50e765`](https://github.com/valITino/r3cosint/commit/ce8ed8a0487d6b7dc8b2f805d3110996fd50e765),
+dort `docs/uebergaben/2026-09-04_r3-q-001-o-25-kanal-und-mutation.md`); hier
+der methodische Anteil.
+
+### Erledigt
+
+- Der Entscheid O-25 ist als **V15** in `methodik/entscheide.md` eingetragen:
+  Eine Pruefung ist erst dann Beleg, wenn sie ihre eigene Verneinung erkennt
+  -- je Zusicherung nennt die Prueftabelle den gemessenen Kanal aus einem
+  abschliessenden Wertevorrat und die Aenderung am Gegenstand, die sie
+  fehlschlagen lassen muss; der Selbsttest gleicht den Kanal maschinell ab
+  und fuehrt jede Mutation gegen eine Kopie aus. Umgesetzt im
+  Produkt-Repository als Abschnitt 6.12.26 des Architekturentscheids 0002
+  mit 154 Zusicherungen, 145 Mutationen und neun
+  begruendeten Ausnahmen ("keine", drei geschlossene Gruende).
+- Der offene Punkt O-25 in `methodik/entscheide.md` ist geschlossen.
+- Beide Modi des Selbsttests enden mit Rueckgabewert 0 (154 von 154
+  Zusicherungen, Kanalabgleich ohne Abweichung, 145 von 145 tabelleneigenen
+  Mutationen erkannt); das Gate verhaelt sich in allen dynamischen
+  Pruefpunkten der Runden 6 bis 8 richtig, ohne ein einziges falsches Gruen.
+- Die Einheit ist trotzdem erneut nach Projektauftrag 3.4 abgebrochen: Die
+  achte Runde ist statisch bestanden und dynamisch nicht bestanden. Mit
+  sechzehn eigenen, nicht in der Tabelle stehenden Mutationen hat der Pruefer
+  fuenf Aenderungen am Gate gefunden, die keine Zusicherung fallen lassen --
+  darunter die Verschiebung der Eskalationsschwelle (eine Zusicherung misst
+  "die Zeile ... woertlich" als Teilzeichenkette) und zwei Behauptungen des
+  Architekturentscheids ohne jede Zeile (ein Zaehlschluessel, ein Element der
+  Markengrammatik). Achter Auftritt der Fehlerklasse "ein Selbsttestfall
+  besteht, ohne seine Behauptung zu belegen". Vorgelegt ist O-26.
+
+### Vorgeschlagen, nicht eingetragen
+
+- **Eine Praemisse ist zu belegen, bevor sie eine Messvorschrift wird.** In
+  Bau 4 hielten zwei Entscheide des Architekturentscheids der Probe am Code
+  nicht stand: Eine Zeile sollte auf zwei Kanaelen messen, weil unter der
+  Verneinung "die Kette liefe" -- sie laeuft in der herstellbaren Lage nicht;
+  eine andere nannte eine Mutation am Gate fuer eine Zusicherung, die nur die
+  Kette misst. Beide Male hat erst die ausgefuehrte Probe die Luecke gezeigt,
+  und beide Male war die Berichtigung klein. Regelvorschlag: Wer eine
+  Messvorschrift schreibt, laesst vor dem Eintrag einen Lauf zeigen, dass die
+  Verneinung auf genau diesem Kanal sichtbar wird -- sonst ist die Vorschrift
+  eine Annahme mit Tabellenzeile. Das ist V14 und V15 zu Ende gedacht: auch
+  der Entscheid, der die Messung anordnet, braucht seinen Gegenbeweis.
+- **Grund 3 als Regel fuer Schwesterzusicherungen.** Drei Zeilen teilen ihren
+  Fall mit einer Schwester, deren Kanal die Verneinung trennt, waehrend der
+  eigene sie nicht von anderen Ursachen desselben Messwerts unterscheiden
+  kann. Statt eine unerkennbare Mutation zu erfinden oder die Zeile zu
+  streichen, nennt sie die Schwester und den Grund der Nichttrennbarkeit. Ob
+  das eine allgemeine methodische Regel wird, entscheidet der Auftraggeber.
+- Weiterhin unentschieden (aus den Vorgaengereinheiten): "Weisung ist nicht
+  Freigabe", "Ein Pruefmittel wird bestanden, nicht umgangen", und der
+  Regelvorschlag aus der O-24-Einheit (Wortlaut und Messung im selben Schritt
+  nachziehen) -- letzterer ist mit V15 in der Sache erledigt, sobald der
+  Auftraggeber V15 traegt.
+
+### Was hier offen bleibt
+
+- Der methodische Entscheid, den der Software Architect mit dem Entwurf des
+  Gates vorgeschlagen hat (strenge Pruefkette gegen ein Gate, das einen
+  abzaehlbaren, selbstpruefenden und terminierten Ausfall duldet), wartet
+  weiter auf die Freigabe von 6.12 (Formweg: Merge des Pull Requests im
+  Produkt-Repository).
+
+---
+
 ## 2026-09-03 — R3-Q-001: O-24 umgesetzt, fünfte Prüfrunde, erneuter Abbruch nach 3.4
 
 Der Auftraggeber hat am 2026-09-03 O-24 entschieden ("O-24 entscheiden:
