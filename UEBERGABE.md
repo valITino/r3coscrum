@@ -4,6 +4,351 @@ Vermerke je Arbeitseinheit in diesem Repository, neueste zuoberst.
 
 ---
 
+## 2026-09-06 — R3-Q-001: O-26 umgesetzt, Runden 9 bis 11, dritter Abbruch nach 3.4, O-27 vorgelegt
+
+Der Auftraggeber hat am 2026-09-06 O-26 entschieden ("Na dann weiter gehts,
+so wie du es sagst" -- Annahme des Vorschlags aus dem Bericht des
+Koordinators vom 2026-09-05). Der Hauptteil dieser Einheit liegt im
+Produkt-Repository
+([`12402c82a11a`](https://github.com/valITino/r3cosint/commit/12402c82a11a5a0b7f6bb86c7b614d7580b68c72),
+dort `docs/uebergaben/2026-09-06_r3-q-001-o-26-praedikat-und-deckung.md`);
+hier der methodische Anteil. Die Einheit erstreckt sich ueber den 2026-09-06
+und den 2026-09-07.
+
+### Erledigt
+
+- Der Entscheid O-26 ist als **V16** in `methodik/entscheide.md` eingetragen:
+  Ein Abnahmekriterium, das jede neue Luecke zum Abbruchgrund macht, beendet
+  keine Abnahme -- die Abnahme eines Pruefmittels verlangt vollstaendig
+  erkannte tabelleneigene Mutationen und eine Fremdmutationsrunde in
+  benannten Kategorien ohne blockierenden Befund; dazu bindet die
+  Prueftabelle die Messart je Zusicherung wie den Kanal und wird maschinell
+  gegen den Text der Festlegung gehalten. Umgesetzt im Produkt-Repository
+  als Abschnitt 6.12.27 des Architekturentscheids 0002 mit 207
+  Zusicherungen, 197 Mutationen und zehn begruendeten Ausnahmen.
+- Der offene Punkt O-26 ist geschlossen; **O-27** ist als offener Punkt
+  eingetragen.
+- Beide Modi des Selbsttests enden mit Rueckgabewert 0 (207 von 207
+  Zusicherungen; Kanal-, Praedikat-, Schluessel-, Gegenstands-, Grammatik-
+  und Aussagendeckung ohne Abweichung; 197 von 197 tabelleneigenen
+  Mutationen erkannt). Teil 1 des Abnahmekriteriums ist in den Runden 9, 10
+  und 11 erfuellt und statisch bestaetigt.
+- Die Einheit ist zum dritten Mal nach Projektauftrag 3.4 abgebrochen:
+  Teil 2 des Abnahmekriteriums -- eine blind gewaehlte Fremdmutationsrunde
+  ohne blockierenden Befund in vier Kategorien -- ist in Runde 9 (drei),
+  Runde 10 (sieben) und Runde 11 (zehn unerkannte Fremdmutationen) nicht
+  erfuellt. Der Abbruch nach dem dritten Fehlschlag war nach dem zweiten
+  vorab festgelegt und im Architekturentscheid protokolliert. Das Gate
+  selbst war in allen elf Runden gegen echte Baeume nie falsch gruen; die
+  Luecken liegen im Nachweis, nicht im Schutz.
+
+### Vorgeschlagen, nicht eingetragen
+
+- **Eine Vollstaendigkeitspruefung leitet ihre Sollmenge aus dem Gegenstand
+  ab, nicht aus einer Aufzaehlung im Text.** Drei Runden lang hat jede
+  nachgetragene Aufzaehlung (Zaehlschluessel, Grammatikelemente, normative
+  Aussagen) genau die Luecke geschlossen, die die vorige Runde gezeigt
+  hatte, und die naechste Runde fand die naechste Auspraegung derselben
+  Klasse. Vollstaendig war in Runde 11 allein die Kategorie, deren Sollmenge
+  aus dem Gate selbst erhoben wurde (die Schluesselliterale). Eine Liste im
+  Text ist eine zweite Quelle der Wahrheit; sie deckt, was jemand
+  aufgeschrieben hat, nicht, was da ist. Ob das Regel wird, haengt am
+  Entscheid zu O-27.
+- **Ein vorab festgelegter Ausgang schuetzt den Abbruch vor dem Ermessen.**
+  Nach dem zweiten Fehlschlag hat der Koordinator den dritten Versuch mit
+  vorab festgelegtem Ausgang angesetzt und das im Architekturentscheid
+  protokolliert. Der Abbruch nach dem dritten Fehlschlag war dadurch kein
+  Ermessensentscheid unter dem Eindruck kleiner, leicht behebbarer Befunde
+  -- und genau solche lagen vor. Regelvorschlag: Wird die Schwelle nach 3.4
+  in einer Einheit absehbar (zweiter Fehlschlag am selben Kriterium), wird
+  der Ausgang des dritten Versuchs vor dem Versuch schriftlich festgelegt.
+- **Eine mechanische Deckung muss geschlossen ausfallen.** Drei Deckungen
+  des Selbsttests bestehen "leer", wenn ihr Lesen misslingt (ein leeres
+  Muster trifft jede Zeile, eine leere Sollmenge hat null Luecken).
+  Regelvorschlag: Jede Vollstaendigkeitspruefung verlangt eine Mindestzahl
+  groesser null und behandelt eine leere Sollmenge oder ein leeres Muster
+  als Fehlschlag. Ob das Regel wird, entscheidet der Auftraggeber.
+
+### Offen
+
+- O-27 beim Auftraggeber; danach entweder eine weitere Einheit mit Runde 12
+  oder der Abschluss mit geaendertem Abnahmekriterium. Die foermliche
+  Freigabe der Entscheidpunkte E-A bis E-K und die Abnahme des Gates
+  stehen aus; Formweg ist der Merge der beiden Pull Requests. Empfehlung
+  des Koordinators: noch nicht mergen.
+
+### Nachtrag 2026-09-07: O-27 entschieden, Merge empfohlen
+
+- Der Auftraggeber hat die Wahl zu O-27 an den Koordinator delegiert
+  ("Dann wähle den besten und korrektesten Weg aus, ich vertraue dir und
+  deiner Expertise."). Gewaehlt und damit entschieden: Weg (a) und (b)
+  zusammen in einer Einheit, Runde 12 als letzte Fremdmutationsrunde;
+  Einzelheiten in `methodik/entscheide.md` (O-27) und im
+  Produkt-Repository (ADR 0002, 6.12.27 k). Die Umsetzung folgt in der
+  naechsten Sitzung; der Sitzungsauftrag liegt im Produkt-Repository unter
+  `docs/vorlagen/2026-09-07_sitzungsauftrag-o-27.md`.
+- Empfehlung des Koordinators damit geaendert: beide Pull Requests jetzt
+  mergen. Der Merge im Produkt-Repository ist die foermliche Freigabe der
+  Entscheidpunkte E-A bis E-K (ADR 0002, Abschnitt 10) und schaltet das
+  Gate scharf; die Abnahme des Gates bleibt davon getrennt und folgt nach
+  Runde 12.
+
+---
+
+## 2026-09-04 — R3-Q-001: O-25 umgesetzt, Runden 6 bis 8, erneuter Abbruch nach 3.4, O-26 vorgelegt
+
+Der Auftraggeber hat am 2026-09-03 O-25 entschieden ("O-25 entscheiden:
+beides umsetzen, dann sechste Runde."). Der Hauptteil dieser Einheit liegt im
+Produkt-Repository
+([`ce8ed8a0487d6b7dc8b2f805d3110996fd50e765`](https://github.com/valITino/r3cosint/commit/ce8ed8a0487d6b7dc8b2f805d3110996fd50e765),
+dort `docs/uebergaben/2026-09-04_r3-q-001-o-25-kanal-und-mutation.md`); hier
+der methodische Anteil.
+
+### Erledigt
+
+- Der Entscheid O-25 ist als **V15** in `methodik/entscheide.md` eingetragen:
+  Eine Pruefung ist erst dann Beleg, wenn sie ihre eigene Verneinung erkennt
+  -- je Zusicherung nennt die Prueftabelle den gemessenen Kanal aus einem
+  abschliessenden Wertevorrat und die Aenderung am Gegenstand, die sie
+  fehlschlagen lassen muss; der Selbsttest gleicht den Kanal maschinell ab
+  und fuehrt jede Mutation gegen eine Kopie aus. Umgesetzt im
+  Produkt-Repository als Abschnitt 6.12.26 des Architekturentscheids 0002
+  mit 154 Zusicherungen, 145 Mutationen und neun
+  begruendeten Ausnahmen ("keine", drei geschlossene Gruende).
+- Der offene Punkt O-25 in `methodik/entscheide.md` ist geschlossen.
+- Beide Modi des Selbsttests enden mit Rueckgabewert 0 (154 von 154
+  Zusicherungen, Kanalabgleich ohne Abweichung, 145 von 145 tabelleneigenen
+  Mutationen erkannt); das Gate verhaelt sich in allen dynamischen
+  Pruefpunkten der Runden 6 bis 8 richtig, ohne ein einziges falsches Gruen.
+- Die Einheit ist trotzdem erneut nach Projektauftrag 3.4 abgebrochen: Die
+  achte Runde ist statisch bestanden und dynamisch nicht bestanden. Mit
+  sechzehn eigenen, nicht in der Tabelle stehenden Mutationen hat der Pruefer
+  fuenf Aenderungen am Gate gefunden, die keine Zusicherung fallen lassen --
+  darunter die Verschiebung der Eskalationsschwelle (eine Zusicherung misst
+  "die Zeile ... woertlich" als Teilzeichenkette) und zwei Behauptungen des
+  Architekturentscheids ohne jede Zeile (ein Zaehlschluessel, ein Element der
+  Markengrammatik). Achter Auftritt der Fehlerklasse "ein Selbsttestfall
+  besteht, ohne seine Behauptung zu belegen". Vorgelegt ist O-26.
+
+### Vorgeschlagen, nicht eingetragen
+
+- **Eine Praemisse ist zu belegen, bevor sie eine Messvorschrift wird.** In
+  Bau 4 hielten zwei Entscheide des Architekturentscheids der Probe am Code
+  nicht stand: Eine Zeile sollte auf zwei Kanaelen messen, weil unter der
+  Verneinung "die Kette liefe" -- sie laeuft in der herstellbaren Lage nicht;
+  eine andere nannte eine Mutation am Gate fuer eine Zusicherung, die nur die
+  Kette misst. Beide Male hat erst die ausgefuehrte Probe die Luecke gezeigt,
+  und beide Male war die Berichtigung klein. Regelvorschlag: Wer eine
+  Messvorschrift schreibt, laesst vor dem Eintrag einen Lauf zeigen, dass die
+  Verneinung auf genau diesem Kanal sichtbar wird -- sonst ist die Vorschrift
+  eine Annahme mit Tabellenzeile. Das ist V14 und V15 zu Ende gedacht: auch
+  der Entscheid, der die Messung anordnet, braucht seinen Gegenbeweis.
+- **Grund 3 als Regel fuer Schwesterzusicherungen.** Drei Zeilen teilen ihren
+  Fall mit einer Schwester, deren Kanal die Verneinung trennt, waehrend der
+  eigene sie nicht von anderen Ursachen desselben Messwerts unterscheiden
+  kann. Statt eine unerkennbare Mutation zu erfinden oder die Zeile zu
+  streichen, nennt sie die Schwester und den Grund der Nichttrennbarkeit. Ob
+  das eine allgemeine methodische Regel wird, entscheidet der Auftraggeber.
+- Weiterhin unentschieden (aus den Vorgaengereinheiten): "Weisung ist nicht
+  Freigabe", "Ein Pruefmittel wird bestanden, nicht umgangen", und der
+  Regelvorschlag aus der O-24-Einheit (Wortlaut und Messung im selben Schritt
+  nachziehen) -- letzterer ist mit V15 in der Sache erledigt, sobald der
+  Auftraggeber V15 traegt.
+
+### Was hier offen bleibt
+
+- Der methodische Entscheid, den der Software Architect mit dem Entwurf des
+  Gates vorgeschlagen hat (strenge Pruefkette gegen ein Gate, das einen
+  abzaehlbaren, selbstpruefenden und terminierten Ausfall duldet), wartet
+  weiter auf die Freigabe von 6.12 (Formweg: Merge des Pull Requests im
+  Produkt-Repository).
+
+---
+
+## 2026-09-03 — R3-Q-001: O-24 umgesetzt, fünfte Prüfrunde, erneuter Abbruch nach 3.4
+
+Der Auftraggeber hat am 2026-09-03 O-24 entschieden ("O-24 entscheiden:
+Tabellenzeilen zerlegen, dann die vier Befunde beheben"). Der Hauptteil dieser
+Einheit liegt im Produkt-Repository
+([`d96e3970b782c563fe8419cfc2c72200a85e6ec0`](https://github.com/valITino/r3cosint/commit/d96e3970b782c563fe8419cfc2c72200a85e6ec0),
+dort `docs/uebergaben/2026-09-03_r3-q-001-o-24-zusicherungen.md`); hier der
+methodische Anteil.
+
+### Erledigt
+
+- Der Entscheid O-24 ist als **V14** in `methodik/entscheide.md` eingetragen:
+  Eine Prueftabelle fuehrt je Zeile genau eine Zusicherung mit dauerhafter
+  Kennung und ausdruecklichem Messumfang (Kanal, Ereignis, Anzahl); der
+  Selbsttest meldet je Kennung genau eine Pruefung, und die Deckung wird
+  mechanisch in beide Richtungen geprueft. Umgesetzt im Produkt-Repository
+  als Abschnitt 6.12.25 des Architekturentscheids 0002 mit 153 Zusicherungen
+  (eine zurueckgezogen).
+- Die vier offenen Befunde der Vorgaengereinheit sind behoben und in zwei
+  weiteren Pruefrunden auf einem anderen Modell belegt. Das Gate verhaelt
+  sich in allen dynamischen Pruefpunkten richtig.
+- Die Einheit ist trotzdem erneut nach Projektauftrag 3.4 abgebrochen:
+  Dieselbe Fehlerklasse ("ein Selbsttestfall besteht, ohne seine Behauptung
+  zu belegen") trat in Runde 4 zum vierten und in Runde 5 zum fuenften Mal
+  auf -- jetzt als Pruefung, die einen anderen Kanal misst als ihre Zeile
+  nennt (16 Zeilen), und als Pruefaufbau, der die verletzende Lage nicht
+  herstellt (eine Zeile, per Mutation belegt). Vorgelegt ist O-25.
+
+### Vorgeschlagen, nicht eingetragen
+
+- **Messumfang und Trennschaerfe maschinell erzwingen (O-25).** Beide Pruefer
+  schlagen unabhaengig dasselbe vor: eine Kanalspalte in der Prueftabelle mit
+  festem Wertevorrat, die der Selbsttest gegen die tatsaechlich benutzte
+  Messart abgleicht, und je Zusicherung eine Mutationsprobe (welche Aenderung
+  am Gate laesst sie fehlschlagen), die der Selbsttest ausfuehrt. Der
+  Koordinator empfiehlt beides; der Entscheid liegt beim Auftraggeber. Als
+  methodischer Entscheid kaeme er zu V14 hinzu: "Eine Pruefung ist erst dann
+  Beleg, wenn sie ihre eigene Verneinung erkennt."
+- Die Beobachtung aus fuenf Runden, als Regelvorschlag: Wer den Wortlaut einer
+  Zusicherung schaerft, zieht die Messung im selben Schritt nach und belegt
+  das mit einem Lauf, der die Verletzung zeigt. Sonst erzeugt jede
+  Praezisierung eine neue Schicht ungemessener Zusagen.
+- Weiterhin unentschieden (aus der Vorgaengereinheit): "Weisung ist nicht
+  Freigabe" und "Ein Pruefmittel wird bestanden, nicht umgangen".
+
+### Was hier offen bleibt
+
+- Der methodische Entscheid, den der Software Architect mit dem Entwurf des
+  Gates vorgeschlagen hat (strenge Pruefkette gegen ein Gate, das einen
+  abzaehlbaren, selbstpruefenden und terminierten Ausfall duldet), wartet
+  weiter auf die Freigabe von 6.12.
+
+---
+
+## 2026-09-02/03 — R3-Q-001: das Definition-of-Done-Gate, gebaut auf Weisung, nach 3.4 abgebrochen
+
+Nach der Vorlage des Entwurfs hat der Auftraggeber am 2026-09-02 angewiesen,
+nach der besten Lösung vorzugehen, ohne Annahmen und mit voller Sicherheit.
+Der Koordinator hat das als Weisung zum Bau entlang der empfohlenen Optionen
+gelesen, nicht als förmliche Freigabe der elf Entscheidpunkte E-A bis E-K;
+Lesart, umgesetzte Optionen und Formweg der Freigabe stehen im
+Architekturentscheid 0002, Abschnitt 10. Der Hauptteil dieser Einheit liegt im
+Produkt-Repository
+([`ada573b74eb603ef0eba415ab153940fd7080dbf`](https://github.com/valITino/r3cosint/commit/ada573b74eb603ef0eba415ab153940fd7080dbf),
+dort `docs/uebergaben/2026-09-02_r3-q-001-gate-gebaut.md`); hier der
+methodische Anteil.
+
+### Erledigt
+
+- Das Gate ist gebaut (ein Skript für `Stop`, `SubagentStop` und
+  `TaskCompleted`, Liste terminierter Lagen C, drei Hook-Einträge in der
+  versionierten `settings.json`, Kette im Makefile mit `FEHLT=`-Marke, vier
+  Schlusszeilen und Weiterlaufen bei Lage C) und in zwei Runden auf einem
+  anderen Modell als die Umsetzung geprüft (3.4). Runde 1: nicht bestanden,
+  statisch 14 Befunde (5 blockierend), dynamisch 5 Befunde (3 blockierend),
+  gemeinsame Ursache der blockierenden Befunde die nicht aufgelöste
+  Baumwurzel. Behebung mit Gegenbeweis und 17 neuen Selbsttestfällen (50 auf
+  67); die Entscheide dazu als Nachtrag 6.12.24 im Architekturentscheid.
+  Runde 2: alle blockierenden Befunde belegt behoben, neue Punkte,
+  nicht bestanden; Selbsttest auf 67 Faelle. Runde 3 (2026-09-03): alle
+  Befunde aus Runde 2 belegt behoben, Selbsttest auf 81 Faelle; trotzdem
+  nicht bestanden, weil die Fehlerklasse "Selbsttestfall besteht, ohne seine
+  Behauptung zu belegen" zum dritten Mal auftrat. Die Einheit ist nach
+  Projektauftrag 3.4 abgebrochen; die Uebergabe traegt die Eskalationszeile,
+  und vorgelegt ist O-24 (Abbildung der Prueftabelle auf einzeln pruefbare
+  Zusicherungen), nicht die vierte Einzelbehebung.
+- Kein Eintrag in `methodik/entscheide.md`: Kein methodischer Entscheid des
+  Auftraggebers ist gefallen; die Freigabe steht aus.
+
+### Vorgeschlagen, nicht eingetragen
+
+- **Weisung ist nicht Freigabe.** Eine Weisung "nach der besten Lösung
+  vorgehen" ist als Auftrag zum Bau entlang der empfohlenen Optionen zu lesen
+  und als solche im Architekturentscheid festzuhalten, samt Lesart und Formweg
+  der noch ausstehenden Freigabe; jede in der Einheit entstehende Datei trägt
+  den Vermerk, dass die Freigabe aussteht. Zwei Versuche in dieser Einheit, den
+  Vermerk "freigegeben" in Dateien zu schreiben, sind durch die
+  Sicherheitsprüfung der Sitzung verhindert worden; der Koordinator hat den
+  Wortlaut auf "Bau auf Weisung, förmliche Freigabe ausstehend" gestellt.
+  Der Entscheid, ob das eine Regel wird, liegt beim Auftraggeber.
+- **Ein Prüfmittel wird bestanden, nicht umgangen.** Der Requirements
+  Engineer hat in `docs/06` die Rückwärtsakzente um vier geplante Skriptpfade
+  entfernt, damit der Belegprüfer sie nicht mehr als Pfade liest. Der
+  Koordinator hat die Akzente wiederhergestellt und stattdessen vier
+  begründete Ausnahmen der Form `datei|wert` eingetragen: Ein absichtlich noch
+  nicht vorhandenes Artefakt gehört in die Ausnahmeliste mit Grund, nicht in
+  eine Schreibweise, die das Prüfmittel blind macht. Vorschlag für einen
+  Eintrag in `methodik/entscheide.md`, wenn der Auftraggeber ihn trägt.
+- **Zuglimits der Rollen.** DevOps Engineer (40 Züge) und Software Architect
+  (30 Züge) haben ihr Limit je einmal erreicht, bevor die Einheit fertig war,
+  und wurden fortgesetzt. Ob die Limits zu erhöhen oder die Aufträge kleiner
+  zu schneiden sind, ist eine Frage des Vorgehens (ADR 0001).
+
+### Was hier offen bleibt
+
+- Der methodische Entscheid, den der Software Architect mit dem Entwurf
+  vorgeschlagen hat (strenge Prüfkette gegen ein Gate, das einen abzählbaren,
+  selbstprüfenden und terminierten Ausfall duldet), wartet weiter auf die
+  Freigabe von 6.12; der Eintrag folgt danach durch den Protocol Master.
+- Der Eingang aus diesem Repository nach `docs/EINGANG_METHODIK.md` läuft
+  unverändert über die Automatik; diese Einheit ändert daran nichts.
+
+---
+
+## 2026-09-02 — R3-Q-001: das Definition-of-Done-Gate, entworfen und nicht gebaut
+
+Der Auftraggeber hat am 2026-09-02 angewiesen, die Gates aus R3-Q-001 zuerst
+als Fortschreibung von Abschnitt 6 des Architekturentscheids 0002 zu
+entwerfen und vorzulegen; gebaut wird erst nach seiner schriftlichen
+Freigabe. Der Hauptteil liegt im Produkt-Repository
+([`21cc3ddbf45668c2e185958f8e2a8d42eeaf0150`](https://github.com/valITino/r3cosint/commit/21cc3ddbf45668c2e185958f8e2a8d42eeaf0150),
+dort `docs/uebergaben/2026-09-02_r3-q-001-entwurf-dod-gate.md`); hier der
+methodische Anteil.
+
+### Erledigt
+
+- Entwurf als Abschnitt 6.12 des Architekturentscheids mit siebzehn
+  Entscheiden, Status "Entwurf, nicht freigegeben". Geprueft auf einem anderen
+  Modell als die Umsetzung in zwei Runden: fuenf Prueflinsen mit je einem
+  Widerleger je Befund (dreizehn Befunde eingearbeitet), danach der Static
+  Software Tester fuer die Form (vier Befunde eingearbeitet).
+- Kein Eintrag in `methodik/entscheide.md`: In dieser Einheit ist kein
+  methodischer Entscheid gefallen.
+
+### Vorgeschlagen, nicht eingetragen
+
+- Der Software Architect schlaegt einen methodischen Entscheid vor: die
+  Unterscheidung zwischen einer Pruefkette, die streng bleibt, und einem Gate
+  der Arbeitsumgebung, das einen abzaehlbaren, selbstpruefenden und
+  terminierten Ausfall duldet, waehrend die Gegenseite ihn nicht kennt. Der
+  Entscheid liegt beim Auftraggeber mit der Freigabe von 6.12; der Eintrag
+  hier folgt danach durch den Protocol Master.
+- Zwei Beobachtungen zum Vorgehen, die in den Entwurf eingegangen sind: Das
+  Ereignis `TaskCompleted` feuert nur, wenn eine Aufgabenliste gefuehrt wird;
+  ob jede Arbeitseinheit als Aufgabe gefuehrt wird, ist eine Frage des
+  Vorgehens und liegt beim Auftraggeber (O-23 des Architekturentscheids).
+  Und: Die Nutzungsgrenze der Sitzung hat den laufenden Pruef-Workflow
+  abgebrochen; er ist nach der Ruecksetzung fortgesetzt worden, und die
+  fortgesetzten Widerleger prueften teils gegen bereits berichtigten Text.
+  Massgeblich blieb die Nachpruefung des Koordinators am urspruenglichen
+  Wortlaut, mit ausgefuehrten Befehlen in der Uebergabe des
+  Produkt-Repositories.
+
+### Offen
+
+- Freigabe des Entwurfs; die Entscheidpunkte E-A bis E-K stehen in der
+  Uebergabe des Produkt-Repositories.
+- Der Name `CLAUDE_CODE_STOP_HOOK_BLOCK_CAP` steht in drei verbindlichen
+  Dokumenten des Produkt-Repositories und ist in der am 2026-09-02 gelesenen
+  Hook-Dokumentation nicht belegt (O-19).
+- Die Projektreview beider Repositories (Weisung vom 2026-09-02) ist
+  abgeschlossen: elf Dimensionen, 131 Befunde, 106 bestaetigt (3 blockierend,
+  51 erheblich, 52 gering), 25 widerlegt. Bericht im Produkt-Repository:
+  [`22559962a9ee7e25b134fcfb5625bebe10ee3fab`](https://github.com/valITino/r3cosint/commit/22559962a9ee7e25b134fcfb5625bebe10ee3fab),
+  Datei docs/10_Zustandsbericht_2026-09-02.md. Fuenf erhebliche Befunde
+  betreffen dieses Repository (Datumsaussage im Kopf von methodik/entscheide.md,
+  Verweis auf einen umbenannten Dateinamen bei V11, "D1 bis D12" in
+  methodik/scrum-aufbau.md, drei ueberholte Verweisstaende in
+  methodik/arbeitsprodukte.md, leeres sprints/ bei laufender Lieferung); dazu
+  vier geringe. Behebung durch die zustaendigen Rollen nach Entscheid des
+  Auftraggebers; nichts davon ist in dieser Einheit geaendert worden.
+
+---
+
 ## 2026-09-01 — D20 geprüft: die Prüfmittel, nach denen niemand fragte
 
 Der Kettenschritt D20 ist am 2026-09-01 unabhängig geprüft worden — durch
