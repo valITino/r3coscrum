@@ -106,7 +106,17 @@ künftigen Architekturentscheide unter `docs/adr/` im Produkt-Repository.
   blockiert und Formänderungen Backlog sind. Einschätzung des Koordinators,
   als solche gekennzeichnet: (a) einmal, dann (b) mit dokumentierter
   Restlücke als ehrlicher Abschluss; das Gate selbst war in elf Runden gegen
-  echte Bäume nie falsch grün. Entscheid des Auftraggebers.
+  echte Bäume nie falsch grün. **Entschieden am 2026-09-07 durch
+  Delegation** — Wortlaut des Auftraggebers: "Dann wähle den besten und
+  korrektesten Weg aus, ich vertraue dir und deiner Expertise." Wahl des
+  Koordinators und damit Entscheid: Weg (a) und Weg (b) zusammen in einer
+  Einheit — Pfaddeckung über die Ausführungsspur des Gates, Grammatikdeckung
+  über mechanisch erzeugte Schwächungen des Musters, beide fail-closed;
+  DT11-06, DT11-11 und S11-04 bis S11-06 behoben; Teil 2 des
+  Abnahmekriteriums auf falsches Grün am Gate bezogen; Runde 12 als letzte
+  Fremdmutationsrunde, danach Abnahmevorlage oder dokumentierte Restlücke.
+  Umsetzung in der nächsten Einheit (Produkt-Repository, ADR 0002, 6.12.27 k
+  und 6.12.28).
 - [OFFEN] **Herkunftsvermerk bei fehlendem Rechteinhaber** (neu am
   2026-08-31, hängt an S6). Zwei Fragen, die der Auftraggeber entscheidet,
   fachlich vorzubereiten durch den Legal Reviewer: Ist eine von einem fremden

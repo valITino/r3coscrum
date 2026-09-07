@@ -77,6 +77,22 @@ und den 2026-09-07.
   stehen aus; Formweg ist der Merge der beiden Pull Requests. Empfehlung
   des Koordinators: noch nicht mergen.
 
+### Nachtrag 2026-09-07: O-27 entschieden, Merge empfohlen
+
+- Der Auftraggeber hat die Wahl zu O-27 an den Koordinator delegiert
+  ("Dann wähle den besten und korrektesten Weg aus, ich vertraue dir und
+  deiner Expertise."). Gewaehlt und damit entschieden: Weg (a) und (b)
+  zusammen in einer Einheit, Runde 12 als letzte Fremdmutationsrunde;
+  Einzelheiten in `methodik/entscheide.md` (O-27) und im
+  Produkt-Repository (ADR 0002, 6.12.27 k). Die Umsetzung folgt in der
+  naechsten Sitzung; der Sitzungsauftrag liegt im Produkt-Repository unter
+  `docs/vorlagen/2026-09-07_sitzungsauftrag-o-27.md`.
+- Empfehlung des Koordinators damit geaendert: beide Pull Requests jetzt
+  mergen. Der Merge im Produkt-Repository ist die foermliche Freigabe der
+  Entscheidpunkte E-A bis E-K (ADR 0002, Abschnitt 10) und schaltet das
+  Gate scharf; die Abnahme des Gates bleibt davon getrennt und folgt nach
+  Runde 12.
+
 ---
 
 ## 2026-09-04 — R3-Q-001: O-25 umgesetzt, Runden 6 bis 8, erneuter Abbruch nach 3.4, O-26 vorgelegt
