@@ -4,6 +4,81 @@ Vermerke je Arbeitseinheit in diesem Repository, neueste zuoberst.
 
 ---
 
+## 2026-09-06 — R3-Q-001: O-26 umgesetzt, Runden 9 bis 11, dritter Abbruch nach 3.4, O-27 vorgelegt
+
+Der Auftraggeber hat am 2026-09-06 O-26 entschieden ("Na dann weiter gehts,
+so wie du es sagst" -- Annahme des Vorschlags aus dem Bericht des
+Koordinators vom 2026-09-05). Der Hauptteil dieser Einheit liegt im
+Produkt-Repository
+([`12402c82a11a`](https://github.com/valITino/r3cosint/commit/12402c82a11a5a0b7f6bb86c7b614d7580b68c72),
+dort `docs/uebergaben/2026-09-06_r3-q-001-o-26-praedikat-und-deckung.md`);
+hier der methodische Anteil. Die Einheit erstreckt sich ueber den 2026-09-06
+und den 2026-09-07.
+
+### Erledigt
+
+- Der Entscheid O-26 ist als **V16** in `methodik/entscheide.md` eingetragen:
+  Ein Abnahmekriterium, das jede neue Luecke zum Abbruchgrund macht, beendet
+  keine Abnahme -- die Abnahme eines Pruefmittels verlangt vollstaendig
+  erkannte tabelleneigene Mutationen und eine Fremdmutationsrunde in
+  benannten Kategorien ohne blockierenden Befund; dazu bindet die
+  Prueftabelle die Messart je Zusicherung wie den Kanal und wird maschinell
+  gegen den Text der Festlegung gehalten. Umgesetzt im Produkt-Repository
+  als Abschnitt 6.12.27 des Architekturentscheids 0002 mit 207
+  Zusicherungen, 197 Mutationen und zehn begruendeten Ausnahmen.
+- Der offene Punkt O-26 ist geschlossen; **O-27** ist als offener Punkt
+  eingetragen.
+- Beide Modi des Selbsttests enden mit Rueckgabewert 0 (207 von 207
+  Zusicherungen; Kanal-, Praedikat-, Schluessel-, Gegenstands-, Grammatik-
+  und Aussagendeckung ohne Abweichung; 197 von 197 tabelleneigenen
+  Mutationen erkannt). Teil 1 des Abnahmekriteriums ist in den Runden 9, 10
+  und 11 erfuellt und statisch bestaetigt.
+- Die Einheit ist zum dritten Mal nach Projektauftrag 3.4 abgebrochen:
+  Teil 2 des Abnahmekriteriums -- eine blind gewaehlte Fremdmutationsrunde
+  ohne blockierenden Befund in vier Kategorien -- ist in Runde 9 (drei),
+  Runde 10 (sieben) und Runde 11 (zehn unerkannte Fremdmutationen) nicht
+  erfuellt. Der Abbruch nach dem dritten Fehlschlag war nach dem zweiten
+  vorab festgelegt und im Architekturentscheid protokolliert. Das Gate
+  selbst war in allen elf Runden gegen echte Baeume nie falsch gruen; die
+  Luecken liegen im Nachweis, nicht im Schutz.
+
+### Vorgeschlagen, nicht eingetragen
+
+- **Eine Vollstaendigkeitspruefung leitet ihre Sollmenge aus dem Gegenstand
+  ab, nicht aus einer Aufzaehlung im Text.** Drei Runden lang hat jede
+  nachgetragene Aufzaehlung (Zaehlschluessel, Grammatikelemente, normative
+  Aussagen) genau die Luecke geschlossen, die die vorige Runde gezeigt
+  hatte, und die naechste Runde fand die naechste Auspraegung derselben
+  Klasse. Vollstaendig war in Runde 11 allein die Kategorie, deren Sollmenge
+  aus dem Gate selbst erhoben wurde (die Schluesselliterale). Eine Liste im
+  Text ist eine zweite Quelle der Wahrheit; sie deckt, was jemand
+  aufgeschrieben hat, nicht, was da ist. Ob das Regel wird, haengt am
+  Entscheid zu O-27.
+- **Ein vorab festgelegter Ausgang schuetzt den Abbruch vor dem Ermessen.**
+  Nach dem zweiten Fehlschlag hat der Koordinator den dritten Versuch mit
+  vorab festgelegtem Ausgang angesetzt und das im Architekturentscheid
+  protokolliert. Der Abbruch nach dem dritten Fehlschlag war dadurch kein
+  Ermessensentscheid unter dem Eindruck kleiner, leicht behebbarer Befunde
+  -- und genau solche lagen vor. Regelvorschlag: Wird die Schwelle nach 3.4
+  in einer Einheit absehbar (zweiter Fehlschlag am selben Kriterium), wird
+  der Ausgang des dritten Versuchs vor dem Versuch schriftlich festgelegt.
+- **Eine mechanische Deckung muss geschlossen ausfallen.** Drei Deckungen
+  des Selbsttests bestehen "leer", wenn ihr Lesen misslingt (ein leeres
+  Muster trifft jede Zeile, eine leere Sollmenge hat null Luecken).
+  Regelvorschlag: Jede Vollstaendigkeitspruefung verlangt eine Mindestzahl
+  groesser null und behandelt eine leere Sollmenge oder ein leeres Muster
+  als Fehlschlag. Ob das Regel wird, entscheidet der Auftraggeber.
+
+### Offen
+
+- O-27 beim Auftraggeber; danach entweder eine weitere Einheit mit Runde 12
+  oder der Abschluss mit geaendertem Abnahmekriterium. Die foermliche
+  Freigabe der Entscheidpunkte E-A bis E-K und die Abnahme des Gates
+  stehen aus; Formweg ist der Merge der beiden Pull Requests. Empfehlung
+  des Koordinators: noch nicht mergen.
+
+---
+
 ## 2026-09-04 — R3-Q-001: O-25 umgesetzt, Runden 6 bis 8, erneuter Abbruch nach 3.4, O-26 vorgelegt
 
 Der Auftraggeber hat am 2026-09-03 O-25 entschieden ("O-25 entscheiden:

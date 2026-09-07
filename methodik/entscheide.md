@@ -30,6 +30,7 @@ rekonstruiert oder geschätzt.
 | V13 | **2026-09-01.** Eine Angabe, die nichts steuert, sondern etwas anderes nur wiederholt, wird gestrichen und nicht nachgeführt | Im selben Prüfdurchgang gefunden: Zwei Kommentare im Makefile zählten die Ausführungsreihenfolge der Kette auf, obwohl die Reihenfolge allein aus der Zielliste stammt. Beide Aufzählungen waren veraltet, weil die Aufnahme eines neuen Schritts sie nicht erreicht hatte. Der eine Absatz warnte wörtlich vor genau dieser zweiten Aufzählung, "die bei der nächsten Fortschreibung erneut veralten könnte" -- und führte im selben Absatz eine. Eine nachgeführte Aufzählung ist beim nächsten Mal wieder falsch; eine gestrichene kann nicht falsch werden |
 | V14 | **2026-09-03.** Eine Prüftabelle führt je Zeile genau **eine** Zusicherung mit dauerhafter Kennung und ausdrücklichem Messumfang (Kanal, Ereignis, Anzahl); der Selbsttest meldet je Kennung genau eine Prüfung, und die Deckung zwischen Tabelle und Prüfungen wird mechanisch in beide Richtungen geprüft. Wörtliche Weisung des Auftraggebers: "O-24 entscheiden: Tabellenzeilen zerlegen, dann die vier Befunde beheben" | Entstanden aus drei Prüfrunden am Definition-of-Done-Gate, in denen dieselbe Fehlerklasse dreimal auftrat: Ein Selbsttestfall bestand, ohne die Zusage seiner mehrteiligen Tabellenzeile zu messen. Umgesetzt im Produkt-Repository als Abschnitt 6.12.25 des Architekturentscheids 0002 ([`d96e3970b782`](https://github.com/valITino/r3cosint/commit/d96e3970b782c563fe8419cfc2c72200a85e6ec0)). Die Grenze des Entscheids ist im selben Commit belegt: Die mechanische Deckung sieht Kennungen, nicht Messumfang und nicht Trennschärfe — dafür ist O-25 vorgelegt |
 | V15 | **2026-09-03.** Eine Prüfung ist erst dann Beleg, wenn sie ihre eigene Verneinung erkennt: Jede Zusicherung einer Prüftabelle nennt den gemessenen Kanal aus einem abschliessenden Wertevorrat und die Änderung am Gegenstand, die sie fehlschlagen lassen muss; der Selbsttest gleicht den Kanal je Kennung maschinell gegen die Tabelle ab und führt jede Mutation gegen eine Kopie aus, wobei genau diese Zusicherung fallen muss. Eine Zusicherung ohne ausführbare Mutation trägt einen Grund aus einer geschlossenen Liste. Wörtliche Weisung des Auftraggebers: "O-25 entscheiden: beides umsetzen, dann sechste Runde." | Entstanden aus fünf Prüfrunden am Definition-of-Done-Gate, in denen dieselbe Fehlerklasse fünfmal auftrat und der mechanische Deckungsprüfer nach V14 sie nicht finden konnte, weil er Kennungen sieht, nicht Messumfang und nicht Trennschärfe. Umgesetzt im Produkt-Repository als Abschnitt 6.12.26 des Architekturentscheids 0002 ([`ce8ed8a0487d`](https://github.com/valITino/r3cosint/commit/ce8ed8a0487d6b7dc8b2f805d3110996fd50e765)): Kanalspalte mit neun Werten, Mutationsdatei `scripts/dod-gate-mutationen.txt` mit 145 ausführbaren Mutationen und neun begründeten Ausnahmen, Modus `--mutationen` des Selbsttests. Die Grenze ist im selben Commit belegt: Die Mutationsprobe prüft nur die Mutationen, die die Tabelle selbst nennt; die achte Prüfrunde hat mit sechzehn Fremdmutationen fünf Änderungen am Gate gefunden, die keine Zusicherung fallen lassen, weil der Wortlaut einer Zusicherung und das Prädikat ihrer Messung von keinem Mechanismus gegeneinander gehalten werden und die Deckung der Tabelle gegenüber dem ADR-Text ausserhalb der Tabelle nichts prüft — dafür ist O-26 vorgelegt |
+| V16 | **2026-09-06.** Ein Abnahmekriterium, das jede neue Lücke zum Abbruchgrund macht, beendet keine Abnahme: Die Abnahme eines Prüfmittels verlangt, dass die tabelleneigenen Mutationen vollständig erkannt werden und eine Fremdmutationsrunde in benannten, abzählbaren Kategorien ohne blockierenden Befund durchläuft; Fremdmutationen ausserhalb dieser Kategorien sind danach Backlog, kein Abbruchgrund. Dazu bindet die Prüftabelle die Messart (Prädikat) je Zusicherung wie den Kanal, und die Tabelle wird maschinell gegen den Text der Festlegung gehalten: Jeder Zählschlüssel, jedes Grammatikelement und jede normative Aussage hat eine Zeile, in beide Richtungen. Wörtliche Weisung des Auftraggebers: "Na dann weiter gehts, so wie du es sagst" (Annahme des Vorschlags O-26 aus dem Bericht des Koordinators vom 2026-09-05) | Entstanden aus acht Prüfrunden, die nicht konvergierten: Jede Runde fand eine weitere ungedeckte Stelle, jede Behebung war richtig, ein Ende kam nicht. Umgesetzt im Produkt-Repository als Abschnitt 6.12.27 des Architekturentscheids 0002 ([`12402c82a11a`](https://github.com/valITino/r3cosint/commit/12402c82a11a5a0b7f6bb86c7b614d7580b68c72)): neun Prädikate, 207 Zusicherungen, Schlüssel-, Gegenstands-, Grammatik- und Aussagendeckung, Ausgabeform als Invariante über alle Gate-Aufrufe, 197 ausführbare Mutationen und zehn begründete Ausnahmen; Teil 1 des Kriteriums ist in drei Runden erfüllt. Die Grenze ist im selben Commit belegt: Teil 2, die Fremdmutationsrunde, ist dreimal nicht erfüllt (Runden 9 bis 11 mit drei, sieben und zehn unerkannten Fremdmutationen), weil jede Deckung an einer Aufzählung im Text festgemacht war und nicht am Gegenstand — Schwächungen des Markenmusters, nie beschrittene Ausgangspfade des Gates, mehrere Aufrufstellen einer Aussage; allein die Kategorie, deren Sollmenge aus dem Gate selbst erhoben wurde (die Schlüssel), war vollständig. Die Einheit ist nach 3.4 abgebrochen, wie nach dem zweiten Fehlschlag vorab festgelegt; dafür ist O-27 vorgelegt. Zweite Grenze: Die Prädikatbindung greift bei typisierten Messhüllen über den Namen; bei den zwei verbliebenen freien Hüllen bleibt sie Selbstauskunft und wird durch die statische Prüfung gehalten |
 
 ## Entscheide zum Rollenmodell
 
@@ -82,22 +83,30 @@ künftigen Architekturentscheide unter `docs/adr/` im Produkt-Repository.
   sechste Runde."), als V15 eingetragen und im Produkt-Repository als
   Abschnitt 6.12.26 des Architekturentscheids 0002 umgesetzt
   ([`ce8ed8a0487d`](https://github.com/valITino/r3cosint/commit/ce8ed8a0487d6b7dc8b2f805d3110996fd50e765)).
-- [OFFEN] **O-26, Prädikatbindung, Schlüssel- und Grammatikdeckung,
-  Abnahmekriterium für den Selbsttest** (neu am 2026-09-04, hängt an V15).
-  Die achte Prüfrunde hat gezeigt, dass Kanalabgleich und tabelleneigene
-  Mutationsprobe die Fehlerklasse nicht beenden: Fünf Fremdmutationen des
-  Prüfers liessen keine Zusicherung fallen. Vorgeschlagen sind fünf
-  Bausteine (ADR 0002, 6.12.26 g): ein Prädikat je Zusicherung aus einem
-  geschlossenen Vorrat, das die Messhülle mitmeldet und der Selbsttest
-  abgleicht; die maschinelle Deckung jedes Zählschlüssels der
-  Klassifizierungstabelle und jedes Elements der Markengrammatik durch eine
-  Zeile; die sechs Befunde der achten Runde als Zeilen; und ein
-  Abnahmekriterium, das die Runden beendet — tabelleneigene Mutationen
-  vollständig erkannt und eine Fremdmutationsrunde ohne blockierenden Befund
-  in den benannten Kategorien, weitere Fremdmutationen danach als Backlog.
-  Als methodischer Entscheid käme hinzu: "Ein Abnahmekriterium, das jede neue
-  Lücke zum Abbruchgrund macht, beendet keine Abnahme." Entscheid des
-  Auftraggebers.
+- [ERLEDIGT 2026-09-06] **O-26, Prädikatbindung, Schlüssel- und
+  Grammatikdeckung, Abnahmekriterium für den Selbsttest** — vom
+  Auftraggeber entschieden ("Na dann weiter gehts, so wie du es sagst",
+  Annahme des Vorschlags aus dem Bericht vom 2026-09-05), als V16
+  eingetragen und im Produkt-Repository als Abschnitt 6.12.27 des
+  Architekturentscheids 0002 umgesetzt ([`12402c82a11a`](https://github.com/valITino/r3cosint/commit/12402c82a11a5a0b7f6bb86c7b614d7580b68c72)).
+  Teil 2 des Abnahmekriteriums (Fremdmutationsrunde) ist dreimal nicht
+  erfüllt; die Einheit ist nach 3.4 abgebrochen, dafür ist O-27 vorgelegt.
+- [OFFEN] **O-27, Deckung am Gegenstand für Pfade und Grammatik — oder
+  Abnahmekriterium auf falsches Grün am Gate beziehen** (neu am
+  2026-09-06, hängt an V16). Drei Fremdmutationsrunden haben dieselbe
+  Klasse gezeigt: Eine Deckung, deren Sollmenge eine Aufzählung im Text
+  ist, bleibt hinter dem Gegenstand zurück; nur die Kategorie, deren
+  Sollmenge aus dem Gate selbst erhoben wurde, war vollständig. Zwei Wege
+  als Vorschlag (ADR 0002, 6.12.27 k): (a) Pfaddeckung über eine
+  Ausführungsspur des Gates (jede Ausgangsstelle mindestens einmal
+  beschritten) und Grammatikdeckung relativ zum Muster (mechanisch erzeugte
+  Schwächungen, jede muss eine Zeile fallen lassen), dazu die Deckungen
+  fail-closed, in einer weiteren Einheit mit Runde 12; (b) Teil 2 des
+  Abnahmekriteriums auf das Gate beziehen, sodass allein ein falsches Grün
+  blockiert und Formänderungen Backlog sind. Einschätzung des Koordinators,
+  als solche gekennzeichnet: (a) einmal, dann (b) mit dokumentierter
+  Restlücke als ehrlicher Abschluss; das Gate selbst war in elf Runden gegen
+  echte Bäume nie falsch grün. Entscheid des Auftraggebers.
 - [OFFEN] **Herkunftsvermerk bei fehlendem Rechteinhaber** (neu am
   2026-08-31, hängt an S6). Zwei Fragen, die der Auftraggeber entscheidet,
   fachlich vorzubereiten durch den Legal Reviewer: Ist eine von einem fremden
