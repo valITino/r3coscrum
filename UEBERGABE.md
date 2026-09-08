@@ -4,6 +4,66 @@ Vermerke je Arbeitseinheit in diesem Repository, neueste zuoberst.
 
 ---
 
+## 2026-09-07 — R3-Q-001: O-27 umgesetzt, Runde 12 als letzte Fremdmutationsrunde
+
+Der Auftraggeber hat am 2026-09-07 die Wahl zwischen den beiden Wegen zu O-27
+an den Koordinator delegiert ("Dann wähle den besten und korrektesten Weg aus,
+ich vertraue dir und deiner Expertise."). Gewählt sind beide Wege zusammen.
+Der Hauptteil dieser Einheit liegt im Produkt-Repository
+([`71596aae9b6f`](https://github.com/valITino/r3cosint/commit/71596aae9b6fd20324c7e16863ca18a16b57794a),
+dort `docs/uebergaben/2026-09-07_r3-q-001-o-27-deckung-am-gegenstand.md`);
+hier der methodische Anteil. Die Einheit erstreckt sich über den 2026-09-07
+und den 2026-09-08.
+
+### Erledigt
+
+- Der Entscheid O-27 ist als **V17** in `methodik/entscheide.md` eingetragen:
+  Die Sollmenge einer Deckung wird aus dem Gegenstand selbst erhoben, jede
+  Deckung ist fail-closed, das Abnahmekriterium ist auf das falsche Grün am
+  Prüfling bezogen, und die Zahl der Prüfrunden wird vorab begrenzt.
+- Der offene Punkt **O-27 ist geschlossen**.
+- Beide Modi des Selbsttests enden mit Rückgabewert 0: Normalmodus 262 von
+  262 Zusicherungen, Mutationsmodus 250 von 250 erkannten Mutationen, alle
+  elf Deckungen ohne Abweichung.
+- Runde 12 ist als **letzte** Fremdmutationsrunde gelaufen: 29 blind
+  gewählte Fremdmutationen, 28 erkannt, ein blockierender Befund
+  (`DT12-M14`), behoben und mit gezielter Wiederholung als Fremdbeleg
+  bestätigt.
+
+### Was methodisch bemerkenswert ist
+
+Zum ersten Mal hat eine Prüfrunde nicht eine weitere Lücke in einer
+Aufzählung gefunden, sondern die Aufzählung als Massstab abgelöst. Der
+Unterschied zeigt sich an den Zahlen: Wo die Deckung ihre Sollmenge aus dem
+Gegenstand erhebt, ist sie vollständig geworden; wo sie an einer zweiten,
+nicht erhobenen Grammatik hängt, ist sie es nicht — und genau dort hat die
+zwölfte Runde ihren einen Treffer gelandet. Das ist kein Argument gegen den
+Entscheid, sondern seine Bestätigung, und es ist als benannte Restlücke
+festgehalten statt als weiterer Anlauf.
+
+Zweitens hat sich in derselben Einheit die Fehlerklasse, gegen die sich V17
+richtet, **im Prüfmittel selbst** gezeigt: Die Wache über den Deckungsblock
+mass ein Feld, das vier der Blockzeilen nicht enthielt, und eine Deckung mit
+leerer Sollmenge bestand unbemerkt. Beides ist behoben, beides war nur
+sichtbar, weil eine fremde Rolle den Bau gegengelesen hat.
+
+Drittens: **Teil 2 des Abnahmekriteriums ist nicht erfüllt.** Er verlangt eine
+Fremdmutationsrunde ohne blockierenden Befund, und Runde 12 hatte einen. Die
+Abnahme wird trotzdem vorgelegt — auf der Grundlage des Wegs, den dieselbe
+Festlegung **vor** der Runde für genau diesen Fall bestimmt hat. Ein
+Abnahmekriterium taugt nur, wenn auch sein Fehlschlag vorab geregelt ist;
+sonst wird es im Fehlschlag umgedeutet.
+
+### Offen
+
+- Die **Abnahme des Gates** aus R3-Q-001 ist dem Auftraggeber vorgelegt und
+  steht aus (Produkt-Repository, ADR 0002, Abschnitt 10).
+- **O-25** bleibt offen.
+- Drei benannte Restlücken und die nachrangigen Befunde der Runden 11 und 12
+  sind im Backlog unter R3-Q-001 geführt.
+
+---
+
 ## 2026-09-06 — R3-Q-001: O-26 umgesetzt, Runden 9 bis 11, dritter Abbruch nach 3.4, O-27 vorgelegt
 
 Der Auftraggeber hat am 2026-09-06 O-26 entschieden ("Na dann weiter gehts,
