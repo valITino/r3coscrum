@@ -4,6 +4,81 @@ Vermerke je Arbeitseinheit in diesem Repository, neueste zuoberst.
 
 ---
 
+## 2026-09-21 — R3-Q-001: Abnahme aktenkundig; E4 als R3-Q-010 auf die Definition of Ready gebracht, nicht gebaut
+
+Arbeitseinheit auf Weisung des Auftraggebers vom 2026-09-21. Der Hauptteil
+liegt im Produkt-Repository
+([`e5bab959aa48`](https://github.com/valITino/r3cosint/commit/e5bab959aa4886eefc7983ce23916bbd798d8a83),
+dort `docs/uebergaben/2026-09-21_r3-q-001-abnahme-eingetragen-e4-dor.md`);
+hier der methodische Anteil.
+
+### Erledigt
+
+- **Die Abnahme des Prüfmittels aus R3-Q-001 ist aktenkundig.** Sie war am
+  2026-09-08 über den ersten Formweg erteilt worden — Merge des Pull Requests
+  #15 im Produkt-Repository, dessen Text den Merge ausdrücklich als Erteilung
+  der Abnahme benennt (Merge-Commit
+  [`9870b0d115b8`](https://github.com/valITino/r3cosint/commit/9870b0d115b8ef330a7c19777af5741093e4f0e9),
+  09:51:49 UTC, ohne Kommentar, ohne Review, ohne Auflage); der zugehörige
+  Merge in diesem Repository ist der Pull Request #9
+  ([`9c28499252ab`](https://github.com/valITino/r3coscrum/commit/9c28499252ab3f42a96dc43bf096c3a6353ce0cb)).
+  Eingetragen ist der Entscheid im Produkt-Repository (ADR 0002, Abschnitt 10;
+  ADR 0001; CLAUDE.md; Backlog R3-Q-001) und hier in `methodik/entscheide.md`
+  (V17 um die erteilte Abnahme ergänzt, O-27 um den Entscheid ergänzt).
+- **Nicht umfasst** sind O-25, der Belegprüfer D20 (O-15), R3-Q-005 und die
+  Freigabe des Grundgerüsts. **Teil 2 des Abnahmekriteriums war nicht
+  erfüllt**; getragen hat allein der in ADR 0002, 6.12.28 g vorab festgelegte
+  Weg. Das steht an jeder Stelle so.
+- **E4 hat einen Umfang:** Backlog-Eintrag R3-Q-010 (beide PreToolUse-Gates,
+  sieben Abnahmekriterien, Prüfaufwand 5 h, ready mit ausdrücklichem
+  Vorbehalt zu R1), eingeordnet in ADR 0002, 6.13; neuer offener Punkt O-28.
+  Massgeblich waren allein die im Zustandsbericht vom 2026-09-02 belegten
+  Lücken, am 2026-09-21 nachgemessen und von einer Prüfrolle auf einem
+  anderen Modell belegt. Die Umsetzung ist in E4.1 bis E4.3 zerlegt; gebaut
+  ist nichts.
+
+### Was methodisch bemerkenswert ist
+
+- Ein Abnahmeentscheid, der über einen Merge erteilt wird, ist erst dann
+  aktenkundig, wenn ihn jemand aus der Merge-Historie in die Dokumente
+  überträgt. Zwischen Merge und Eintrag lagen hier 13 Tage; in dieser Zeit war
+  `main` des Produkt-Repositories an D20 rot (eine Abschnittsangabe ohne
+  ADR-Nennung in der Übergabe vom 2026-09-07 — die Klasse K-01 des
+  Zustandsberichts: der Belegprüfer liest nur versionierte Dateien, und die
+  Datei war vor `git add` geprüft worden). Behoben; die Übergabe dieser Einheit
+  ist vor dem letzten Kettenlauf versioniert worden.
+- Der Umfang von E4 wurde nicht aus dem abgeleitet, was ein Gate "sonst noch
+  könnte", sondern aus belegten Lücken; was bewusst nicht aufgenommen ist,
+  steht mit Grund im Eintrag. Ein als widerlegt geführter Befund (ST-13) wurde
+  aufgenommen, weil sein operativer Teil bestätigt ist und der
+  Widerlegungsgrund im Bericht abgeschnitten und nicht überliefert ist — als
+  abweichende Beurteilung gekennzeichnet, nicht stillschweigend.
+- Das Prüfmittel für die beiden Gates ist bewusst kleiner angelegt als das des
+  Definition-of-Done-Gates: eine Fallliste mit Mutationsprobe, ohne
+  Zusicherungsapparatur, mit benannter Grenze. Ein Prüfmittel, das aufwendiger
+  ist als der geprüfte Gegenstand, bindet Kontingent ohne Zuwachs an
+  Sicherheit.
+- Zwei Orchestrierungen sind an Turn-Grenzen von Rollen gescheitert, weil die
+  Rollen den ganzen ADR lasen; die dritte hat jeder Rolle Zeilenbereiche und
+  Anker vorgegeben. Eine Prüfrolle hat an der Übergabe die Eskalationsregel
+  3.4 angesprochen, weil ein geplanter, von der Commit-Prüfsumme abhängiger
+  Schritt dreimal als offen gemeldet wurde; der Koordinator hat das dem
+  Auftraggeber offen vorgelegt statt umgedeutet.
+
+### Offen
+
+- Freigabe des Umfangs von R3-Q-010 und Entscheid über den Schnitt E4.1 bis
+  E4.3 durch den Auftraggeber; O-28 bedingt offen.
+- E3 (Regel zu fremden Inhalten im Harness und die zurückgestellte Skill)
+  braucht eine eigene Festlegungseinheit: kein Befundbestand, und vor der
+  dritten Skill steht der Entscheid, wer `.claude/skills/` schreibt (ADR 0001,
+  Abschnitt 8), dazu der nicht belegte Kontrollversuch zum Vorladen (SK-02).
+- O-25 und O-15 bleiben offen; die Lesart von R1 für Einträge mit benanntem
+  Stakeholder ist in der Definition of Ready festzuhalten (Backlog, offener
+  Punkt 19).
+
+---
+
 ## 2026-09-07 — R3-Q-001: O-27 umgesetzt, Runde 12 als letzte Fremdmutationsrunde
 
 Der Auftraggeber hat am 2026-09-07 die Wahl zwischen den beiden Wegen zu O-27
