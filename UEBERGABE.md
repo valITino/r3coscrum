@@ -34,8 +34,23 @@ dort `docs/uebergaben/2026-09-22_git-historie-starthook.md`).
 ### Offen
 
 - Merge durch den Auftraggeber, dann E4.1 in einer neuen Sitzung von `main`.
-- Unverändert: offene Punkte 12, 15 und 20 des Backlogs, O-28 bedingt, O-25,
-  O-15, Restbefunde an den Hooks.
+- Unverändert: offene Punkte 12, 15 und 20 des Backlogs, O-28 bedingt, O-15,
+  Restbefunde an den Hooks.
+
+### Nachtrag nach dem Codex-Review (Pull Request #10, Befund P2)
+
+O-25 des ADR 0002 ist seit dem 2026-09-03 **entschieden** (dort Abschnitt 8;
+hier V15 und der erledigte Punkt oben), wurde aber seit dem 2026-09-07 in
+beiden Repositories als "bleibt offen" mitgeführt, ohne dass eine Stelle den
+Grund nennt. Berichtigt im Eintrag zu O-27 in `methodik/entscheide.md` und
+in diesem Vermerk; im Produkt-Repository in `CLAUDE.md`, Backlog, ADR 0002
+(Status-Block 6.13, Abnahmeeintrag in Abschnitt 10 mit Vermerk) und im
+Nachweiserzeuger
+([`98512f42ad1e`](https://github.com/valITino/r3cosint/commit/98512f42ad1e7752235dabab03981d0b058d4c2f)).
+Die Vermerke vom 2026-09-21 und 2026-09-22 (erste Einheit) und die
+Übergaben des Produkt-Repositories bleiben als Stand davor stehen; sie
+führen O-25 noch als offen, und dieser Nachtrag sagt, dass das unzutreffend
+war.
 
 ---
 

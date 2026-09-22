@@ -138,8 +138,10 @@ künftigen Architekturentscheide unter `docs/adr/` im Produkt-Repository.
   Anweisung); zugehöriger Merge des Pull Requests #9 in diesem Repository,
   Merge-Commit
   [`9c28499252ab`](https://github.com/valITino/r3coscrum/commit/9c28499252ab3f42a96dc43bf096c3a6353ce0cb),
-  09:51:04 UTC. Die Abnahme umfasst **nicht** O-25 des ADR 0002 (bleibt
-  offen), **nicht** den Belegprüfer D20 (O-15, fällig vor der Freigabe des
+  09:51:04 UTC. Die Abnahme umfasst **nicht** O-25 des ADR 0002 (am
+  2026-09-03 entschieden, siehe V15 und den erledigten Punkt oben; nicht
+  Gegenstand der Abnahme — berichtigt am 2026-09-22 nach dem Codex-Review am
+  Pull Request #10, vorher stand hier "bleibt offen"), **nicht** den Belegprüfer D20 (O-15, fällig vor der Freigabe des
   Grundgerüsts), **nicht** R3-Q-005 (die Lücke aus E-K bleibt) und **nicht**
   die Freigabe des Grundgerüsts. Teil 2 des Abnahmekriteriums war nicht
   erfüllt; getragen hat allein der in ADR 0002, 6.12.28 g vorab festgelegte
