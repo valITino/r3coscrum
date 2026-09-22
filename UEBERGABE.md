@@ -4,6 +4,41 @@ Vermerke je Arbeitseinheit in diesem Repository, neueste zuoberst.
 
 ---
 
+## 2026-09-22 (2) — Git-Historie beim Sitzungsstart nachgeholt; Pull Requests eröffnet
+
+Zweite Einheit des Tages, auf Delegation des Auftraggebers ("Ich überlasse es
+dir, da du einen besseren Überblick hast"). Hauptteil im Produkt-Repository
+([`bb6c1965fa27`](https://github.com/valITino/r3cosint/commit/bb6c1965fa271f7f1d28cc57d3c0fc192ad8cb15),
+dort `docs/uebergaben/2026-09-22_git-historie-starthook.md`).
+
+### Erledigt
+
+- **Der flache Klon ist ein gelöstes Bauproblem**, nicht mehr ein Handgriff
+  je Sitzung: ein versionierter `SessionStart`-Hook holt die Git-Historie
+  nach, wenn der Klon flach ist (S8, Nachtrag). Verifikation auf einem
+  anderen Modell, Ergebnis in der Übergabe des Produkt-Repositories.
+- **Pull Requests beider Repositories eröffnet** (Produkt-Repository: Pull
+  Request #17; dieses Repository: der Pull Request dieses Zweigs). Der Merge im
+  Produkt-Repository gilt nach seinem Text als Abnahme der beiden Starthooks
+  (erster Formweg); der Merge liegt beim Auftraggeber.
+
+### Was methodisch bemerkenswert ist
+
+- Eine delegierte Frage wird nicht mit "später" beantwortet, wenn dieselbe
+  Klasse am selben Tag bereits einmal gelöst wurde: Zwei Handgriffe je
+  Sitzung sind zwei Bauprobleme, nicht eines.
+- Der Remote des Klons wird nicht gepinnt, die Prüfsumme eines
+  Werkzeugarchivs schon — die Grenze verläuft zwischen dem, was dem Klon
+  gehört, und dem, was von aussen kommt.
+
+### Offen
+
+- Merge durch den Auftraggeber, dann E4.1 in einer neuen Sitzung von `main`.
+- Unverändert: offene Punkte 12, 15 und 20 des Backlogs, O-28 bedingt, O-25,
+  O-15, Restbefunde an den Hooks.
+
+---
+
 ## 2026-09-22 — Weisung aktenkundig: R3-Q-010 freigegeben, Lesart zu 3.4 und zu R1; gitleaks als Starthook dauerhaft bereitgestellt
 
 Arbeitseinheit auf Weisung des Auftraggebers vom 2026-09-22. Der Hauptteil
