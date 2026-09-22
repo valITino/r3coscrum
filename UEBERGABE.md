@@ -4,6 +4,53 @@ Vermerke je Arbeitseinheit in diesem Repository, neueste zuoberst.
 
 ---
 
+## 2026-09-22 (3) — Beide Pull Requests gemergt; Nachweisfluss am Regelwerk gescheitert; dritter Codex-Lauf
+
+Dritte Einheit des Tages. Hauptteil im Produkt-Repository
+([`3c712292c74c`](https://github.com/valITino/r3cosint/commit/3c712292c74c14c8d7934f1edcfbbe3deceaad84),
+dort `docs/uebergaben/2026-09-22_abnahme-starthooks-und-codex-dritter-lauf.md`).
+
+### Erledigt
+
+- **Abnahme der beiden Starthooks** durch den Merge des Pull Requests #17
+  (`a462aacfcedaa5ae62e92b14335f9db6718499be`) und des Pull Requests #10
+  dieses Repositories (`494409cf431e447ef26ce18f99832e467ec8a08d`) am
+  2026-09-22 — in ADR 0002, Abschnitt 10, `CLAUDE.md`, Backlog und hier
+  (S8) eingetragen.
+- **Vier Befunde des dritten Codex-Laufs** (eine Minute vor dem Merge
+  gemeldet) behoben und auf einem anderen Modell geprueft; der Zweig traegt
+  den geprueften Stand, ein Pull Request wird nur auf Weisung eroeffnet.
+
+### Was methodisch bemerkenswert ist
+
+- **Der Nachweisfluss ist am eigenen Regelwerk gescheitert:** Nach dem Merge
+  wies `main` dieses Repositories den Commit der Automatik ab ("Changes must
+  be made through a pull request"). Die Regel "nie direkt auf main" und die
+  Regel "`nachweise/` beschreibt ausschliesslich die Automatik" stehen damit
+  gegeneinander; welche weicht (Umgehung im Regelwerk fuer den Akteur des
+  Tokens oder Nachweisfluss ueber Pull Request), ist ein Entscheid des
+  Auftraggebers, im Produkt-Repository vorgelegt. Bis dahin fehlt hier der
+  Nachweisstand `a462aacf…`.
+- **Ein Zitat aus einem fremden Review ist keine Quelle.** Der falsche
+  Wortlaut eines `githooks(5)`-Zitats stammte aus dem Codex-Kommentar und
+  wurde ungeprueft weitergegeben; die statische Pruefung hat ihn am Original
+  gefunden. Das Kriterium "woertliches Zitat belegbar" ist damit zweimal
+  gescheitert.
+- **Die Klasse "vererbte Umgebung lenkt einen Schreibzugriff in den
+  Arbeitsbaum" ist offen** und laesst sich nicht leerpruefen; sie wird als
+  benannte Grenze gefuehrt, nicht als Liste geschlossener Vektoren.
+
+### Offen
+
+- Entscheid zum Nachweisfluss (Regelwerk oder Pull Request); Wiederholung
+  des Laufs.
+- Entscheid, ob die vier Behebungen als Pull Request vorgelegt werden.
+- Entscheid zum Codex-Review (Frage des Auftraggebers, beantwortet im
+  Produkt-Repository: GitHub-App, nur vom Kontoinhaber zu entfernen).
+- Danach E4.1 in einer neuen Sitzung von `main`.
+
+---
+
 ## 2026-09-22 (2) — Git-Historie beim Sitzungsstart nachgeholt; Pull Requests eröffnet
 
 Zweite Einheit des Tages, auf Delegation des Auftraggebers ("Ich überlasse es
