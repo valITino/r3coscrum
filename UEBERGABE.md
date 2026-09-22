@@ -4,6 +4,218 @@ Vermerke je Arbeitseinheit in diesem Repository, neueste zuoberst.
 
 ---
 
+## 2026-09-22 (2) — Git-Historie beim Sitzungsstart nachgeholt; Pull Requests eröffnet
+
+Zweite Einheit des Tages, auf Delegation des Auftraggebers ("Ich überlasse es
+dir, da du einen besseren Überblick hast"). Hauptteil im Produkt-Repository
+([`bb6c1965fa27`](https://github.com/valITino/r3cosint/commit/bb6c1965fa271f7f1d28cc57d3c0fc192ad8cb15),
+dort `docs/uebergaben/2026-09-22_git-historie-starthook.md`).
+
+### Erledigt
+
+- **Der flache Klon ist ein gelöstes Bauproblem**, nicht mehr ein Handgriff
+  je Sitzung: ein versionierter `SessionStart`-Hook holt die Git-Historie
+  nach, wenn der Klon flach ist (S8, Nachtrag). Verifikation auf einem
+  anderen Modell, Ergebnis in der Übergabe des Produkt-Repositories.
+- **Pull Requests beider Repositories eröffnet** (Produkt-Repository: Pull
+  Request #17; dieses Repository: der Pull Request dieses Zweigs). Der Merge im
+  Produkt-Repository gilt nach seinem Text als Abnahme der beiden Starthooks
+  (erster Formweg); der Merge liegt beim Auftraggeber.
+
+### Was methodisch bemerkenswert ist
+
+- Eine delegierte Frage wird nicht mit "später" beantwortet, wenn dieselbe
+  Klasse am selben Tag bereits einmal gelöst wurde: Zwei Handgriffe je
+  Sitzung sind zwei Bauprobleme, nicht eines.
+- Der Remote des Klons wird nicht gepinnt, die Prüfsumme eines
+  Werkzeugarchivs schon — die Grenze verläuft zwischen dem, was dem Klon
+  gehört, und dem, was von aussen kommt.
+
+### Offen
+
+- Merge durch den Auftraggeber, dann E4.1 in einer neuen Sitzung von `main`.
+- Unverändert: offene Punkte 12, 15 und 20 des Backlogs, O-28 bedingt, O-15,
+  Restbefunde an den Hooks.
+
+### Nachtrag nach dem Codex-Review (Pull Request #10, Befund P2)
+
+O-25 des ADR 0002 ist seit dem 2026-09-03 **entschieden** (dort Abschnitt 8;
+hier V15 und der erledigte Punkt oben), wurde aber seit dem 2026-09-07 in
+beiden Repositories als "bleibt offen" mitgeführt, ohne dass eine Stelle den
+Grund nennt. Berichtigt im Eintrag zu O-27 in `methodik/entscheide.md` und
+in diesem Vermerk; im Produkt-Repository in `CLAUDE.md`, Backlog, ADR 0002
+(Status-Block 6.13, Abnahmeeintrag in Abschnitt 10 mit Vermerk) und im
+Nachweiserzeuger
+([`98512f42ad1e`](https://github.com/valITino/r3cosint/commit/98512f42ad1e7752235dabab03981d0b058d4c2f)).
+Die Vermerke vom 2026-09-21 und 2026-09-22 (erste Einheit) und die
+Übergaben des Produkt-Repositories bleiben als Stand davor stehen; sie
+führen O-25 noch als offen, und dieser Nachtrag sagt, dass das unzutreffend
+war.
+
+
+### Nachtrag nach dem Codex-Review (Pull Request #17 des Produkt-Repositories)
+
+Der Code-Review-Bot hat am Pull Request #17 vier berechtigte Befunde an den
+beiden Starthooks gemeldet; alle vier sind behoben und auf einem anderen
+Modell in drei Runden nachgeprüft ([`1d9da15e4617`](https://github.com/valITino/r3cosint/commit/1d9da15e4617555f73a60a49f6dbc968cb166a87),
+dort `docs/uebergaben/2026-09-22_git-historie-starthook.md`, Nachtrag nach
+dem Codex-Review; ADR 0002, Abschnitt 10, E-E und E-F je zweiter Nachtrag).
+
+Was methodisch bemerkenswert ist:
+
+- **Eine Zusicherung über ein fremdes Werkzeug wurde aus dessen
+  Dokumentation geschlossen statt am Werkzeug gemessen.** Die erste
+  Behebung (explizite Refspec) deckte nur einen der zwei Wege, auf denen die
+  konfigurierte Refspec wirkt (Abrufliste, nicht Refmap); Static und Dynamic
+  Software Tester haben das unabhängig voneinander am Gegenstand gefunden.
+  Erst die zweite Behebung (`--refmap=''`) trug die Zusicherung "Zweige
+  unberührt" — zweimal gescheitert, im dritten Antreten bestanden; nach 3.4
+  keine Eskalation, die Zählung ist im Produkt-Repository festgehalten.
+- **Ein als Zitat ausgewiesener Satz, der in der Quelle nicht steht, ist ein
+  blockierender Befund**, auch wenn die Sache stimmt: Die statische
+  Schlussprüfung hat ein erfundenes Zitat aus `git-fetch(1)` in drei
+  Kommentarstellen gefunden (Vorgabe aus dem Auftrag des Koordinators);
+  ersetzt durch wörtlich belegte Passagen.
+- **Was die Umgebung braucht, wird nicht gelöscht:** `GIT_CONFIG_*` bleibt
+  stehen, weil der Harness darüber Anmeldung und URL-Umschreibung setzt; die
+  Wirkung auf Zweige ist anders abgeschaltet. Entscheid im Produkt-Repository
+  begründet.
+- Der Belegprüfer D20 liest Git-Ref-Namen in Rückwärtsakzenten als Pfade
+  (bekannte Grenze); Ref-Namen werden deshalb ohne Akzente geschrieben.
+---
+
+## 2026-09-22 — Weisung aktenkundig: R3-Q-010 freigegeben, Lesart zu 3.4 und zu R1; gitleaks als Starthook dauerhaft bereitgestellt
+
+Arbeitseinheit auf Weisung des Auftraggebers vom 2026-09-22. Der Hauptteil
+liegt im Produkt-Repository
+([`13a23b98d0ed`](https://github.com/valITino/r3cosint/commit/13a23b98d0ed5c4e5531ddfb01f43a6b91f4d8a8),
+dort `docs/uebergaben/2026-09-22_weisung-r3-q-010-freigabe-gitleaks-starthook.md`);
+hier der methodische Anteil.
+
+### Erledigt
+
+- **Die Weisung ist aktenkundig** — vier Entscheide in einer Nachricht:
+  Umfang von R3-Q-010 freigegeben und Schnitt E4.1 bis E4.3 bestätigt (im
+  Produkt-Repository in ADR 0002, 6.13, im Backlog und in CLAUDE.md; hier
+  unter "Offene Punkte"), die Lesart des Koordinators zur Zählfrage nach 3.4
+  bestätigt (V18), der Entscheid zur Lesart von R1 an den Koordinator
+  delegiert und von ihm gefällt (V19; im Produkt-Repository in
+  `docs/06_Definition_of_Ready_und_Done.md`), dazu "gitleaks permanent
+  einbauen bitte." (S8; im Produkt-Repository als versionierter
+  `SessionStart`-Hook).
+- **Gebaut ist an E4 nichts.** Die nächste Einheit ist E4.1; sie ändert nach
+  ADR 0002, 6.13 g keine Zeile an den beiden Gates.
+
+### Was methodisch bemerkenswert ist
+
+- Eine Weisung, die vier Entscheide in vier Sätzen trägt, wird an jeder
+  Stelle im Wortlaut zitiert, nicht paraphrasiert; die Sätze "steht aus"
+  bleiben als Stand davor stehen. Der Aufwand, das an sieben Stellen zu
+  tun, ist der Preis dafür, dass der zweite Formweg (Anweisung an die
+  Sitzung) denselben Beleg hergibt wie der erste (Merge eines Pull Requests).
+- Ein delegierter Entscheid ("Das, was richtig ist und Sinn macht") wird
+  nicht stillschweigend gefällt: Die gewählte Option, die verworfene und der
+  Grund stehen in der Definition of Ready, im Backlog und hier. Die erste
+  Fassung der Lesart hatte drei fachliche Lücken, die der Requirements
+  Engineer — die Rolle, die den Text eingetragen hat — selbst gemeldet hat;
+  sie sind vor dem Commit eingearbeitet, und die Fortschreibungszeile sagt
+  das.
+- Die Zählfrage nach 3.4 ist an einem Fall entschieden und als Lesart
+  verallgemeinert, mit ausdrücklicher Grenze: Sie macht einen ausführbaren,
+  dreimal offen gebliebenen Schritt nicht zum Nicht-Scheitern.
+- Ein Umgebungsproblem, das dreimal von Hand behoben wurde, ist ein
+  Bauproblem. Die Bereitstellung liegt jetzt im Repository, mit gepinnter
+  Prüfsumme und doppelter Prüfung, und sie behauptet nichts, was sie nicht
+  trägt: für andere Architekturen installiert sie nichts, und die Lage-C-
+  Meldung der Kette bleibt unangetastet.
+
+### Offen
+
+- E4.1 bauen (nächste Einheit). Vorher empfohlen: Merge der beiden
+  Arbeitszweige; die Pull Requests werden nur auf ausdrückliche Anweisung
+  eröffnet.
+- Frage an den Auftraggeber: Soll ein flacher Klon beim Sitzungsstart
+  ebenfalls durch einen Hook nachgeholt werden?
+- Offene Punkte 12 und 15 des Backlogs (benannter Stakeholder für R3-Q-001
+  bis R3-Q-009); O-28 bedingt offen; O-25 und O-15 offen.
+
+---
+
+## 2026-09-21 — R3-Q-001: Abnahme aktenkundig; E4 als R3-Q-010 auf die Definition of Ready gebracht, nicht gebaut
+
+Arbeitseinheit auf Weisung des Auftraggebers vom 2026-09-21. Der Hauptteil
+liegt im Produkt-Repository
+([`e5bab959aa48`](https://github.com/valITino/r3cosint/commit/e5bab959aa4886eefc7983ce23916bbd798d8a83),
+dort `docs/uebergaben/2026-09-21_r3-q-001-abnahme-eingetragen-e4-dor.md`);
+hier der methodische Anteil.
+
+### Erledigt
+
+- **Die Abnahme des Prüfmittels aus R3-Q-001 ist aktenkundig.** Sie war am
+  2026-09-08 über den ersten Formweg erteilt worden — Merge des Pull Requests
+  #15 im Produkt-Repository, dessen Text den Merge ausdrücklich als Erteilung
+  der Abnahme benennt (Merge-Commit
+  [`9870b0d115b8`](https://github.com/valITino/r3cosint/commit/9870b0d115b8ef330a7c19777af5741093e4f0e9),
+  09:51:49 UTC, ohne Kommentar, ohne Review, ohne Auflage); der zugehörige
+  Merge in diesem Repository ist der Pull Request #9
+  ([`9c28499252ab`](https://github.com/valITino/r3coscrum/commit/9c28499252ab3f42a96dc43bf096c3a6353ce0cb)).
+  Eingetragen ist der Entscheid im Produkt-Repository (ADR 0002, Abschnitt 10;
+  ADR 0001; CLAUDE.md; Backlog R3-Q-001) und hier in `methodik/entscheide.md`
+  (V17 um die erteilte Abnahme ergänzt, O-27 um den Entscheid ergänzt).
+- **Nicht umfasst** sind O-25, der Belegprüfer D20 (O-15), R3-Q-005 und die
+  Freigabe des Grundgerüsts. **Teil 2 des Abnahmekriteriums war nicht
+  erfüllt**; getragen hat allein der in ADR 0002, 6.12.28 g vorab festgelegte
+  Weg. Das steht an jeder Stelle so.
+- **E4 hat einen Umfang:** Backlog-Eintrag R3-Q-010 (beide PreToolUse-Gates,
+  sieben Abnahmekriterien, Prüfaufwand 5 h, ready mit ausdrücklichem
+  Vorbehalt zu R1), eingeordnet in ADR 0002, 6.13; neuer offener Punkt O-28.
+  Massgeblich waren allein die im Zustandsbericht vom 2026-09-02 belegten
+  Lücken, am 2026-09-21 nachgemessen und von einer Prüfrolle auf einem
+  anderen Modell belegt. Die Umsetzung ist in E4.1 bis E4.3 zerlegt; gebaut
+  ist nichts.
+
+### Was methodisch bemerkenswert ist
+
+- Ein Abnahmeentscheid, der über einen Merge erteilt wird, ist erst dann
+  aktenkundig, wenn ihn jemand aus der Merge-Historie in die Dokumente
+  überträgt. Zwischen Merge und Eintrag lagen hier 13 Tage; in dieser Zeit war
+  `main` des Produkt-Repositories an D20 rot (eine Abschnittsangabe ohne
+  ADR-Nennung in der Übergabe vom 2026-09-07 — die Klasse K-01 des
+  Zustandsberichts: der Belegprüfer liest nur versionierte Dateien, und die
+  Datei war vor `git add` geprüft worden). Behoben; die Übergabe dieser Einheit
+  ist vor dem letzten Kettenlauf versioniert worden.
+- Der Umfang von E4 wurde nicht aus dem abgeleitet, was ein Gate "sonst noch
+  könnte", sondern aus belegten Lücken; was bewusst nicht aufgenommen ist,
+  steht mit Grund im Eintrag. Ein als widerlegt geführter Befund (ST-13) wurde
+  aufgenommen, weil sein operativer Teil bestätigt ist und der
+  Widerlegungsgrund im Bericht abgeschnitten und nicht überliefert ist — als
+  abweichende Beurteilung gekennzeichnet, nicht stillschweigend.
+- Das Prüfmittel für die beiden Gates ist bewusst kleiner angelegt als das des
+  Definition-of-Done-Gates: eine Fallliste mit Mutationsprobe, ohne
+  Zusicherungsapparatur, mit benannter Grenze. Ein Prüfmittel, das aufwendiger
+  ist als der geprüfte Gegenstand, bindet Kontingent ohne Zuwachs an
+  Sicherheit.
+- Zwei Orchestrierungen sind an Turn-Grenzen von Rollen gescheitert, weil die
+  Rollen den ganzen ADR lasen; die dritte hat jeder Rolle Zeilenbereiche und
+  Anker vorgegeben. Eine Prüfrolle hat an der Übergabe die Eskalationsregel
+  3.4 angesprochen, weil ein geplanter, von der Commit-Prüfsumme abhängiger
+  Schritt dreimal als offen gemeldet wurde; der Koordinator hat das dem
+  Auftraggeber offen vorgelegt statt umgedeutet.
+
+### Offen
+
+- Freigabe des Umfangs von R3-Q-010 und Entscheid über den Schnitt E4.1 bis
+  E4.3 durch den Auftraggeber; O-28 bedingt offen.
+- E3 (Regel zu fremden Inhalten im Harness und die zurückgestellte Skill)
+  braucht eine eigene Festlegungseinheit: kein Befundbestand, und vor der
+  dritten Skill steht der Entscheid, wer `.claude/skills/` schreibt (ADR 0001,
+  Abschnitt 8), dazu der nicht belegte Kontrollversuch zum Vorladen (SK-02).
+- O-25 und O-15 bleiben offen; die Lesart von R1 für Einträge mit benanntem
+  Stakeholder ist in der Definition of Ready festzuhalten (Backlog, offener
+  Punkt 19).
+
+---
+
 ## 2026-09-07 — R3-Q-001: O-27 umgesetzt, Runde 12 als letzte Fremdmutationsrunde
 
 Der Auftraggeber hat am 2026-09-07 die Wahl zwischen den beiden Wegen zu O-27
