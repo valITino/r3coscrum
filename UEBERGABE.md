@@ -52,6 +52,36 @@ Die Vermerke vom 2026-09-21 und 2026-09-22 (erste Einheit) und die
 führen O-25 noch als offen, und dieser Nachtrag sagt, dass das unzutreffend
 war.
 
+
+### Nachtrag nach dem Codex-Review (Pull Request #17 des Produkt-Repositories)
+
+Der Code-Review-Bot hat am Pull Request #17 vier berechtigte Befunde an den
+beiden Starthooks gemeldet; alle vier sind behoben und auf einem anderen
+Modell in drei Runden nachgeprüft ([`1d9da15e4617`](https://github.com/valITino/r3cosint/commit/1d9da15e4617555f73a60a49f6dbc968cb166a87),
+dort `docs/uebergaben/2026-09-22_git-historie-starthook.md`, Nachtrag nach
+dem Codex-Review; ADR 0002, Abschnitt 10, E-E und E-F je zweiter Nachtrag).
+
+Was methodisch bemerkenswert ist:
+
+- **Eine Zusicherung über ein fremdes Werkzeug wurde aus dessen
+  Dokumentation geschlossen statt am Werkzeug gemessen.** Die erste
+  Behebung (explizite Refspec) deckte nur einen der zwei Wege, auf denen die
+  konfigurierte Refspec wirkt (Abrufliste, nicht Refmap); Static und Dynamic
+  Software Tester haben das unabhängig voneinander am Gegenstand gefunden.
+  Erst die zweite Behebung (`--refmap=''`) trug die Zusicherung "Zweige
+  unberührt" — zweimal gescheitert, im dritten Antreten bestanden; nach 3.4
+  keine Eskalation, die Zählung ist im Produkt-Repository festgehalten.
+- **Ein als Zitat ausgewiesener Satz, der in der Quelle nicht steht, ist ein
+  blockierender Befund**, auch wenn die Sache stimmt: Die statische
+  Schlussprüfung hat ein erfundenes Zitat aus `git-fetch(1)` in drei
+  Kommentarstellen gefunden (Vorgabe aus dem Auftrag des Koordinators);
+  ersetzt durch wörtlich belegte Passagen.
+- **Was die Umgebung braucht, wird nicht gelöscht:** `GIT_CONFIG_*` bleibt
+  stehen, weil der Harness darüber Anmeldung und URL-Umschreibung setzt; die
+  Wirkung auf Zweige ist anders abgeschaltet. Entscheid im Produkt-Repository
+  begründet.
+- Der Belegprüfer D20 liest Git-Ref-Namen in Rückwärtsakzenten als Pfade
+  (bekannte Grenze); Ref-Namen werden deshalb ohne Akzente geschrieben.
 ---
 
 ## 2026-09-22 — Weisung aktenkundig: R3-Q-010 freigegeben, Lesart zu 3.4 und zu R1; gitleaks als Starthook dauerhaft bereitgestellt
