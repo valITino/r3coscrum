@@ -4,6 +4,63 @@ Vermerke je Arbeitseinheit in diesem Repository, neueste zuoberst.
 
 ---
 
+## 2026-09-22 — Weisung aktenkundig: R3-Q-010 freigegeben, Lesart zu 3.4 und zu R1; gitleaks als Starthook dauerhaft bereitgestellt
+
+Arbeitseinheit auf Weisung des Auftraggebers vom 2026-09-22. Der Hauptteil
+liegt im Produkt-Repository
+([`13a23b98d0ed`](https://github.com/valITino/r3cosint/commit/13a23b98d0ed5c4e5531ddfb01f43a6b91f4d8a8),
+dort `docs/uebergaben/2026-09-22_weisung-r3-q-010-freigabe-gitleaks-starthook.md`);
+hier der methodische Anteil.
+
+### Erledigt
+
+- **Die Weisung ist aktenkundig** — vier Entscheide in einer Nachricht:
+  Umfang von R3-Q-010 freigegeben und Schnitt E4.1 bis E4.3 bestätigt (im
+  Produkt-Repository in ADR 0002, 6.13, im Backlog und in CLAUDE.md; hier
+  unter "Offene Punkte"), die Lesart des Koordinators zur Zählfrage nach 3.4
+  bestätigt (V18), der Entscheid zur Lesart von R1 an den Koordinator
+  delegiert und von ihm gefällt (V19; im Produkt-Repository in
+  `docs/06_Definition_of_Ready_und_Done.md`), dazu "gitleaks permanent
+  einbauen bitte." (S8; im Produkt-Repository als versionierter
+  `SessionStart`-Hook).
+- **Gebaut ist an E4 nichts.** Die nächste Einheit ist E4.1; sie ändert nach
+  ADR 0002, 6.13 g keine Zeile an den beiden Gates.
+
+### Was methodisch bemerkenswert ist
+
+- Eine Weisung, die vier Entscheide in vier Sätzen trägt, wird an jeder
+  Stelle im Wortlaut zitiert, nicht paraphrasiert; die Sätze "steht aus"
+  bleiben als Stand davor stehen. Der Aufwand, das an sieben Stellen zu
+  tun, ist der Preis dafür, dass der zweite Formweg (Anweisung an die
+  Sitzung) denselben Beleg hergibt wie der erste (Merge eines Pull Requests).
+- Ein delegierter Entscheid ("Das, was richtig ist und Sinn macht") wird
+  nicht stillschweigend gefällt: Die gewählte Option, die verworfene und der
+  Grund stehen in der Definition of Ready, im Backlog und hier. Die erste
+  Fassung der Lesart hatte drei fachliche Lücken, die der Requirements
+  Engineer — die Rolle, die den Text eingetragen hat — selbst gemeldet hat;
+  sie sind vor dem Commit eingearbeitet, und die Fortschreibungszeile sagt
+  das.
+- Die Zählfrage nach 3.4 ist an einem Fall entschieden und als Lesart
+  verallgemeinert, mit ausdrücklicher Grenze: Sie macht einen ausführbaren,
+  dreimal offen gebliebenen Schritt nicht zum Nicht-Scheitern.
+- Ein Umgebungsproblem, das dreimal von Hand behoben wurde, ist ein
+  Bauproblem. Die Bereitstellung liegt jetzt im Repository, mit gepinnter
+  Prüfsumme und doppelter Prüfung, und sie behauptet nichts, was sie nicht
+  trägt: für andere Architekturen installiert sie nichts, und die Lage-C-
+  Meldung der Kette bleibt unangetastet.
+
+### Offen
+
+- E4.1 bauen (nächste Einheit). Vorher empfohlen: Merge der beiden
+  Arbeitszweige; die Pull Requests werden nur auf ausdrückliche Anweisung
+  eröffnet.
+- Frage an den Auftraggeber: Soll ein flacher Klon beim Sitzungsstart
+  ebenfalls durch einen Hook nachgeholt werden?
+- Offene Punkte 12 und 15 des Backlogs (benannter Stakeholder für R3-Q-001
+  bis R3-Q-009); O-28 bedingt offen; O-25 und O-15 offen.
+
+---
+
 ## 2026-09-21 — R3-Q-001: Abnahme aktenkundig; E4 als R3-Q-010 auf die Definition of Ready gebracht, nicht gebaut
 
 Arbeitseinheit auf Weisung des Auftraggebers vom 2026-09-21. Der Hauptteil
