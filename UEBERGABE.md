@@ -4,6 +4,42 @@ Vermerke je Arbeitseinheit in diesem Repository, neueste zuoberst.
 
 ---
 
+## 2026-09-23 (1) — E4.1: Prüfmittel für die beiden PreToolUse-Gates gebaut (R3-Q-010)
+
+Erste Einheit des Tages, nach Weisung ("E4 bauen, nach Plan, ohne Umwege").
+Hauptteil im Produkt-Repository
+([`a3f5cb24247b`](https://github.com/valITino/r3cosint/commit/a3f5cb24247b1c471e48b6b9305c552af08ff7a7),
+dort `docs/uebergaben/2026-09-23_e4-1-pruefmittel-pretooluse-gates.md`).
+
+### Erledigt
+
+- **Prüfmittel `scripts/pretooluse-gates-selbsttest.sh`** mit 202 Fällen und
+  zehn Mutationen, beide Modi grün, Arbeitsbaum im Lauf als unverändert
+  gemessen; keine Zeile an den Gates (S9). Zwei Abnahmekriterien von
+  R3-Q-010 erfüllt, ST-01 bis ST-03 erstmals fremdbelegt.
+- Verifikation auf einem anderen Modell: statisch und dynamisch je eine Runde
+  mit demselben blockierenden Befund, Behebung, eine Nachprüfung, bestanden.
+
+### Was methodisch bemerkenswert ist
+
+- **Ein blockierender Fall belegt eine Behebung nur, wenn er an ihr hängt.**
+  Die ST-01-Fälle endeten im main-Kontext mit und ohne Behebung gleich, weil
+  eine allgemeinere Sperre alles überdeckte; die Vormessung des Koordinators
+  und der Fremdbeleg vom 2026-09-21 trugen dieselbe Schwäche. Getragen hat die
+  Mutationsprobe: erst die zehnte Mutation, die die Behebung zurücksetzt,
+  macht die Fälle trennscharf (S9).
+- **Eine Aufzählung misst, was sie führt.** Die dynamische Runde fand mit
+  eigenen Schreibweisen vier neue Lücken am main-Gate; sie stehen als
+  Prüfstand-Fälle mit dem heutigen Wert, nicht als stillschweigende Härtung.
+
+### Offen
+
+- E4.2 und E4.3 in derselben Sitzung; Entscheid des Software Architects zu
+  den vier neuen Lücken und zur Subshell-Form; Pull Requests am Ende der
+  Sitzung, der Merge gilt als Abnahme.
+
+---
+
 ## 2026-09-22 (3) — Beide Pull Requests gemergt; Nachweisfluss am Regelwerk gescheitert; dritter Codex-Lauf
 
 Dritte Einheit des Tages. Hauptteil im Produkt-Repository
