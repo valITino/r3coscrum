@@ -4,6 +4,122 @@ Vermerke je Arbeitseinheit in diesem Repository, neueste zuoberst.
 
 ---
 
+## 2026-09-23 (3) — E4.3: Ränder der beiden PreToolUse-Gates — ST-09, ST-13, benannte Grenzen und P-10 (R3-Q-010)
+
+Dritte Einheit des Tages. Hauptteil im Produkt-Repository
+([`56e27e5bb8ea`](https://github.com/valITino/r3cosint/commit/56e27e5bb8eac5e5d50561387c8ce44907652ba7),
+Nachweisverzeichnis
+[`53d6300b9aab`](https://github.com/valITino/r3cosint/commit/53d6300b9aab1b0ff8bdfc525c126ce53cbc57f3),
+dort `docs/uebergaben/2026-09-23_e4-3-raender-st-09-st-13-grenzen.md`).
+
+### Erledigt
+
+- **Die letzten beiden belegten Lücken geschlossen, die Grenzen benannt** (S9):
+  das Prototyp-Gate führt bei Bash dieselbe Befehlsklassenliste als
+  Schreibwirkung wie das main-Gate; beide Gates blockieren eine nicht
+  auswertbare Eingabe mit Rückgabewert 2 und Meldung; P-10 und die
+  Subshell-Grenze stehen als Grenzen im Kopfkommentar. Prüfmittel nach dem
+  Nachtrag mit 258 Fällen, 19 Mutationen und 23 Fallklassen, keine belegte
+  Lücke verbleibt.
+- Damit sind alle sieben Abnahmekriterien von R3-Q-010 gebaut und auf einem
+  anderen Modell verifiziert (je eine statische und eine dynamische Runde,
+  Behebung, je eine Nachprüfung). Die Abnahme liegt beim Auftraggeber: Merge
+  der Pull Requests beider Repositories.
+
+### Was methodisch bemerkenswert ist
+
+- **Eine Behebung kann eine Schwäche importieren:** Die aus dem main-Gate
+  übernommene Ausnahme für flüchtige Ziele (gegen den Fehlalarm bei
+  "2>/dev/null") liess in beiden Gates Umleitungen über "/tmp/.." durch. Sie
+  wurde nicht als Grenze festgeschrieben, sondern noch am selben Tag behoben:
+  Ein Preis, der sich beheben lässt, wird nicht zur Grenze erklärt.
+- **Der Wortlaut eines Kommentars entscheidet über ein Kriterium:** Der
+  dynamische Prüfer wertete "benannte Grenzen" zunächst als nicht bestanden,
+  weil ein als Preis benannter Fall keinen durchlaufenden Fall hatte; die
+  Neufassung als Restbefund löste das ohne Codezeile.
+
+### Offen
+
+- DT-E43-6/N-1, N-3 und der dabei gefundene DT-E43-8 am selben Tag als Nachtrag
+  behoben (Produkt-Repository
+  Commit [`d4b5c66c6279`](https://github.com/valITino/r3cosint/commit/d4b5c66c6279d3628345258b2a5a87196c37608a), Nachweisverzeichnis [`28b9ac18a046`](https://github.com/valITino/r3cosint/commit/28b9ac18a046e95e21b606214ed16b62b0695e0e)); offen bleiben DT-E43-4 (deno eval, node --eval,
+  bun -e), Preis P38 und der Entscheid des Software Architects zu den
+  Prüfstand-Fällen.
+- Nächste Einheit nach ADR 0002, 6.13 g: E3 (Festlegung), dann Grundgerüst.
+
+---
+
+## 2026-09-23 (2) — E4.2: Erkennungslücken ST-04, ST-05 und P-01 am Prototyp-Gate geschlossen (R3-Q-010)
+
+Zweite Einheit des Tages. Hauptteil im Produkt-Repository
+([`5467c30a42d5`](https://github.com/valITino/r3cosint/commit/5467c30a42d5579f7ac56929222e5a2f39b81a12),
+dort `docs/uebergaben/2026-09-23_e4-2-prototyp-gate-erkennungsluecken.md`).
+
+### Erledigt
+
+- **Drei belegte Lücken am Prototyp-Gate geschlossen**, nach dem Vorgehen aus S9:
+  Soll zuerst auf 2 (der Lauf fiel mit genau den 16 Fällen), dann das Gate,
+  dann der Vermerk. Prüfmittel mit 225 Fällen und elf Mutationen, jetzt auch
+  mit Prüfung der Meldung; zwei weitere Abnahmekriterien von R3-Q-010 erfüllt.
+- Verifikation auf einem anderen Modell: je eine statische und eine dynamische
+  Runde mit blockierendem Befund, Behebung, eine Nachprüfung, bestanden.
+
+### Was methodisch bemerkenswert ist
+
+- **Ein Kriterium, das eine Meldung verlangt, braucht einen Test, der die
+  Meldung liest.** Der Prüfsatz blieb grün, als eine Kopie des Gates weder 5.6
+  noch die Richtung nannte; erst die dynamische Runde fand das.
+- **Jede Erweiterung eines Musters hat einen Preis, den die Gegenproben messen
+  müssen:** Das neue Präfix blockierte Pfade, die den Prototyp nie verlassen
+  ("./lib/utils"); behoben durch ein engeres Präfix und sechs neue Gegenproben.
+- **Lesarten werden festgehalten, nicht stillschweigend angewandt:** "Bezugsform"
+  ist das Konstrukt, die Pfadschreibweise bleibt in Richtung 2 präfixgebunden;
+  die Asymmetrie steht als benannte Grenze im Kopfkommentar, die Aufnahme ist
+  Sache einer Fortschreibung des ADR.
+
+### Offen
+
+- E4.3 (ST-09, ST-13, benannte Grenzen, P-10) in derselben Sitzung; Entscheid
+  des Software Architects zu den Prüfstand-Fällen (L01 bis L11).
+
+---
+
+## 2026-09-23 (1) — E4.1: Prüfmittel für die beiden PreToolUse-Gates gebaut (R3-Q-010)
+
+Erste Einheit des Tages, nach Weisung ("E4 bauen, nach Plan, ohne Umwege").
+Hauptteil im Produkt-Repository
+([`a3f5cb24247b`](https://github.com/valITino/r3cosint/commit/a3f5cb24247b1c471e48b6b9305c552af08ff7a7),
+dort `docs/uebergaben/2026-09-23_e4-1-pruefmittel-pretooluse-gates.md`).
+
+### Erledigt
+
+- **Prüfmittel `scripts/pretooluse-gates-selbsttest.sh`** mit 202 Fällen und
+  zehn Mutationen, beide Modi grün, Arbeitsbaum im Lauf als unverändert
+  gemessen; keine Zeile an den Gates (S9). Zwei Abnahmekriterien von
+  R3-Q-010 erfüllt, ST-01 bis ST-03 erstmals fremdbelegt.
+- Verifikation auf einem anderen Modell: statisch und dynamisch je eine Runde
+  mit demselben blockierenden Befund, Behebung, eine Nachprüfung, bestanden.
+
+### Was methodisch bemerkenswert ist
+
+- **Ein blockierender Fall belegt eine Behebung nur, wenn er an ihr hängt.**
+  Die ST-01-Fälle endeten im main-Kontext mit und ohne Behebung gleich, weil
+  eine allgemeinere Sperre alles überdeckte; die Vormessung des Koordinators
+  und der Fremdbeleg vom 2026-09-21 trugen dieselbe Schwäche. Getragen hat die
+  Mutationsprobe: erst die zehnte Mutation, die die Behebung zurücksetzt,
+  macht die Fälle trennscharf (S9).
+- **Eine Aufzählung misst, was sie führt.** Die dynamische Runde fand mit
+  eigenen Schreibweisen vier neue Lücken am main-Gate; sie stehen als
+  Prüfstand-Fälle mit dem heutigen Wert, nicht als stillschweigende Härtung.
+
+### Offen
+
+- E4.2 und E4.3 in derselben Sitzung; Entscheid des Software Architects zu
+  den vier neuen Lücken und zur Subshell-Form; Pull Requests am Ende der
+  Sitzung, der Merge gilt als Abnahme.
+
+---
+
 ## 2026-09-22 (3) — Beide Pull Requests gemergt; Nachweisfluss am Regelwerk gescheitert; dritter Codex-Lauf
 
 Dritte Einheit des Tages. Hauptteil im Produkt-Repository
