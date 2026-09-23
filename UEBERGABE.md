@@ -18,8 +18,9 @@ dort `docs/uebergaben/2026-09-23_e4-3-raender-st-09-st-13-grenzen.md`).
   das Prototyp-Gate führt bei Bash dieselbe Befehlsklassenliste als
   Schreibwirkung wie das main-Gate; beide Gates blockieren eine nicht
   auswertbare Eingabe mit Rückgabewert 2 und Meldung; P-10 und die
-  Subshell-Grenze stehen als Grenzen im Kopfkommentar. Prüfmittel mit 247
-  Fällen, 15 Mutationen und 22 Fallklassen, keine belegte Lücke verbleibt.
+  Subshell-Grenze stehen als Grenzen im Kopfkommentar. Prüfmittel nach dem
+  Nachtrag mit 258 Fällen, 19 Mutationen und 23 Fallklassen, keine belegte
+  Lücke verbleibt.
 - Damit sind alle sieben Abnahmekriterien von R3-Q-010 gebaut und auf einem
   anderen Modell verifiziert (je eine statische und eine dynamische Runde,
   Behebung, je eine Nachprüfung). Die Abnahme liegt beim Auftraggeber: Merge
@@ -29,10 +30,9 @@ dort `docs/uebergaben/2026-09-23_e4-3-raender-st-09-st-13-grenzen.md`).
 
 - **Eine Behebung kann eine Schwäche importieren:** Die aus dem main-Gate
   übernommene Ausnahme für flüchtige Ziele (gegen den Fehlalarm bei
-  "2>/dev/null") lässt in beiden Gates Umleitungen über "/tmp/.." durch. Sie
-  ist als offener Restbefund im Kopfkommentar und in der Übergabe geführt,
-  nicht als benannte Grenze festgeschrieben: Ein Preis, der sich beheben
-  lässt, wird nicht zur Grenze erklärt.
+  "2>/dev/null") liess in beiden Gates Umleitungen über "/tmp/.." durch. Sie
+  wurde nicht als Grenze festgeschrieben, sondern noch am selben Tag behoben:
+  Ein Preis, der sich beheben lässt, wird nicht zur Grenze erklärt.
 - **Der Wortlaut eines Kommentars entscheidet über ein Kriterium:** Der
   dynamische Prüfer wertete "benannte Grenzen" zunächst als nicht bestanden,
   weil ein als Preis benannter Fall keinen durchlaufenden Fall hatte; die
@@ -40,9 +40,11 @@ dort `docs/uebergaben/2026-09-23_e4-3-raender-st-09-st-13-grenzen.md`).
 
 ### Offen
 
-- Restbefunde: DT-E43-6/N-1 (Ausnahme flüchtiger Ziele, beide Gates), N-3
-  (Teil "length == 1" ohne Mutation), DT-E43-4 (deno eval, node --eval,
-  bun -e), Preis P38; Entscheid des Software Architects zu den Prüfstand-Fällen.
+- DT-E43-6/N-1, N-3 und der dabei gefundene DT-E43-8 am selben Tag als Nachtrag
+  behoben (Produkt-Repository
+  Commit [`d4b5c66c6279`](https://github.com/valITino/r3cosint/commit/d4b5c66c6279d3628345258b2a5a87196c37608a), Nachweisverzeichnis [`28b9ac18a046`](https://github.com/valITino/r3cosint/commit/28b9ac18a046e95e21b606214ed16b62b0695e0e)); offen bleiben DT-E43-4 (deno eval, node --eval,
+  bun -e), Preis P38 und der Entscheid des Software Architects zu den
+  Prüfstand-Fällen.
 - Nächste Einheit nach ADR 0002, 6.13 g: E3 (Festlegung), dann Grundgerüst.
 
 ---
