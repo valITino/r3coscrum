@@ -4,6 +4,49 @@ Vermerke je Arbeitseinheit in diesem Repository, neueste zuoberst.
 
 ---
 
+## 2026-09-23 (3) — E4.3: Ränder der beiden PreToolUse-Gates — ST-09, ST-13, benannte Grenzen und P-10 (R3-Q-010)
+
+Dritte Einheit des Tages. Hauptteil im Produkt-Repository
+([`56e27e5bb8ea`](https://github.com/valITino/r3cosint/commit/56e27e5bb8eac5e5d50561387c8ce44907652ba7),
+Nachweisverzeichnis
+[`53d6300b9aab`](https://github.com/valITino/r3cosint/commit/53d6300b9aab1b0ff8bdfc525c126ce53cbc57f3),
+dort `docs/uebergaben/2026-09-23_e4-3-raender-st-09-st-13-grenzen.md`).
+
+### Erledigt
+
+- **Die letzten beiden belegten Lücken geschlossen, die Grenzen benannt** (S9):
+  das Prototyp-Gate führt bei Bash dieselbe Befehlsklassenliste als
+  Schreibwirkung wie das main-Gate; beide Gates blockieren eine nicht
+  auswertbare Eingabe mit Rückgabewert 2 und Meldung; P-10 und die
+  Subshell-Grenze stehen als Grenzen im Kopfkommentar. Prüfmittel mit 247
+  Fällen, 15 Mutationen und 22 Fallklassen, keine belegte Lücke verbleibt.
+- Damit sind alle sieben Abnahmekriterien von R3-Q-010 gebaut und auf einem
+  anderen Modell verifiziert (je eine statische und eine dynamische Runde,
+  Behebung, je eine Nachprüfung). Die Abnahme liegt beim Auftraggeber: Merge
+  der Pull Requests beider Repositories.
+
+### Was methodisch bemerkenswert ist
+
+- **Eine Behebung kann eine Schwäche importieren:** Die aus dem main-Gate
+  übernommene Ausnahme für flüchtige Ziele (gegen den Fehlalarm bei
+  "2>/dev/null") lässt in beiden Gates Umleitungen über "/tmp/.." durch. Sie
+  ist als offener Restbefund im Kopfkommentar und in der Übergabe geführt,
+  nicht als benannte Grenze festgeschrieben: Ein Preis, der sich beheben
+  lässt, wird nicht zur Grenze erklärt.
+- **Der Wortlaut eines Kommentars entscheidet über ein Kriterium:** Der
+  dynamische Prüfer wertete "benannte Grenzen" zunächst als nicht bestanden,
+  weil ein als Preis benannter Fall keinen durchlaufenden Fall hatte; die
+  Neufassung als Restbefund löste das ohne Codezeile.
+
+### Offen
+
+- Restbefunde: DT-E43-6/N-1 (Ausnahme flüchtiger Ziele, beide Gates), N-3
+  (Teil "length == 1" ohne Mutation), DT-E43-4 (deno eval, node --eval,
+  bun -e), Preis P38; Entscheid des Software Architects zu den Prüfstand-Fällen.
+- Nächste Einheit nach ADR 0002, 6.13 g: E3 (Festlegung), dann Grundgerüst.
+
+---
+
 ## 2026-09-23 (2) — E4.2: Erkennungslücken ST-04, ST-05 und P-01 am Prototyp-Gate geschlossen (R3-Q-010)
 
 Zweite Einheit des Tages. Hauptteil im Produkt-Repository
