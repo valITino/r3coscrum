@@ -4,6 +4,51 @@ Vermerke je Arbeitseinheit in diesem Repository, neueste zuoberst.
 
 ---
 
+## 2026-09-24 — E3: Freigabe eingetragen; E3.1 und E3.2 gebaut (R3-Q-011)
+
+Einheit vom 2026-09-24, drei Schritte und Abschluss. Hauptteil im
+Produkt-Repository, dort `docs/uebergaben/2026-09-24_e3-1-und-e3-2.md`
+([`4b39fd847f40`](https://github.com/valITino/r3cosint/commit/4b39fd847f40a8637baeaa74c889c6a6a517bf18)); Nachweisverzeichnis
+[`697df5c7259a`](https://github.com/valITino/r3cosint/commit/697df5c7259acb9c9cf33b0e0f2db2b05db7a09d).
+
+### Erledigt
+
+- **Freigabe von E3 eingetragen** (Commit
+  [`0415dace763b`](https://github.com/valITino/r3cosint/commit/0415dace763bb40f0f6403c0463c3f6517f2c36b)): erteilt am
+  2026-09-24 durch den Merge des Pull Requests #23 des Produkt-Repositories
+  (Merge-Commit [`3e5caf71b2bc`](https://github.com/valITino/r3cosint/commit/3e5caf71b2bca97b7f9764a19841025875974df7); hier Pull
+  Request #13, Merge-Commit [`33bb5dfa1819`](https://github.com/valITino/r3coscrum/commit/33bb5dfa18193ce25fc861c53d53b78b265fddcf)),
+  ohne Auflagen, zugleich Bestätigung des Abnahmeeintrags zu R3-Q-010. Die
+  Weisung vom selben Tag steht im Wortlaut in ADR 0002, 6.14 und im Backlog
+  unter R3-Q-011: E3.1 und der Bau von E3.2 in einer Sitzung, der Versuch zur
+  Regel zu Beginn von E3.3, die drei Posten unter R3-Q-010 und O-29 nach E3.3.
+- **E3.1 gebaut** (Commit [`2adfc37cad8d`](https://github.com/valITino/r3cosint/commit/2adfc37cad8d2d95ef9da103ab76fec9d63f225a)):
+  die Regel zu fremden Inhalten im Harness, ohne Pfadbindung, vom Koordinator.
+- **E3.2 gebaut, ohne den Versuch** (Commit
+  [`757135b19eb6`](https://github.com/valITino/r3cosint/commit/757135b19eb628e3f278d4bb2005af9e3a6e488f)): die Skill zur
+  Einschleusungsprüfung vom SecDevOps Engineer, ihre Zuordnung zu sechs Rollen
+  und die Nachführung von ADR 0001. Einen Prüfsatz gibt es noch nicht.
+
+### Was methodisch bemerkenswert ist
+
+- **Die Hooks wirkten in dieser Sitzung nicht:** Sie begann ausserhalb der
+  Repositories. Die Kette lief deshalb vor jedem Commit von Hand; die
+  Starthooks sind von Hand ausgeführt.
+- **Zwei gekennzeichnete Sätze für zwei Versuche** stehen nur in ihrer Datei.
+  Ihre Wahrung ist über Zählungen geprüft, nie über eine Ausgabe des Satzes.
+- **Prüfbesetzung nach Teilen:** Weil die Hauptsitzung auf dem `model`-Feld
+  des Static Software Testers lief, prüfte er die Teile der Hauptsitzung und
+  der Rollen mit gleichem Feld abweichend besetzt, die übrigen auf seinem Feld.
+
+### Offen
+
+- Vor dem Merge die Gegenprobe zur Regel in einer neuen Sitzung auf main ohne
+  die Regel; danach E3.3 mit dem Versuch zur Regel als erster Nachricht.
+- Restbefunde nach der Übergabe des Produkt-Repositories, dazu die offenen
+  Punkte aus dem Vermerk vom 2026-09-23 (4).
+
+---
+
 ## 2026-09-23 (4) — R3-Q-010 abgenommen und eingetragen; E3 als R3-Q-011 auf der Definition of Ready, nicht gebaut
 
 Vierte Einheit vom 2026-09-23, abgeschlossen am 2026-09-24. Hauptteil im
