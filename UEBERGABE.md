@@ -4,6 +4,66 @@ Vermerke je Arbeitseinheit in diesem Repository, neueste zuoberst.
 
 ---
 
+## 2026-09-23 (4) — R3-Q-010 abgenommen und eingetragen; E3 als R3-Q-011 auf der Definition of Ready, nicht gebaut
+
+Vierte Einheit vom 2026-09-23, abgeschlossen am 2026-09-24. Hauptteil im
+Produkt-Repository
+([`4ef9b65b82cd`](https://github.com/valITino/r3cosint/commit/4ef9b65b82cd30aae702d17700d3a8ed4dc5ef9a),
+Nachweisverzeichnis
+[`9ffbab7be8e8`](https://github.com/valITino/r3cosint/commit/9ffbab7be8e8c4285624bd71570f88278355f12d),
+dort `docs/uebergaben/2026-09-23_e3-dor.md`); der Abnahmeeintrag zu R3-Q-010
+steht im Commit
+[`bf4576083612`](https://github.com/valITino/r3cosint/commit/bf45760836124d87b3e71c3882cf1ebfffe153da).
+
+### Erledigt
+
+- **Abnahme von R3-Q-010 aktenkundig:** erteilt am 2026-09-23 durch den Merge
+  des Pull Requests #21 des Produkt-Repositories (Merge-Commit
+  [`9a84b9ccd1ec`](https://github.com/valITino/r3cosint/commit/9a84b9ccd1ecb81b19739f64defc5881e83e2db5);
+  hier Pull Request #12, Merge-Commit
+  [`cb838ecd35ba`](https://github.com/valITino/r3coscrum/commit/cb838ecd35baba30fb04ab64300e501ab55ed0b6)),
+  ohne Auflagen, im Umfang der drei Übergaben vom 2026-09-23 einschliesslich
+  Restbefunde; eingetragen in ADR 0002 (Abschnitt 10, 6.13), ADR 0001
+  (Abschnitt 8: zwei Entscheide des Auftraggebers — Skills schreibt der
+  SecDevOps Engineer; die Prüfstand-Fälle des Prüfmittels sind in ADR 0002,
+  6.13 c entschieden), CLAUDE.md und Backlog.
+- **E3 festgelegt, nicht gebaut:** Backlog-Eintrag R3-Q-011 (Regel zu fremden
+  Inhalten im Harness, Skill zur Einschleusungsprüfung, versionierter
+  Prüfsatz, Kontrollversuch zu SK-02; sechs Abnahmekriterien, Prüfaufwand
+  6 h, ready mit ausdrücklichem Vorbehalt nach R1), Einordnung als ADR 0002,
+  6.14, Zerlegung in E3.1 bis E3.3. Der Merge des Produkt-Pull-Requests ist
+  die Freigabe des Umfangs, des Schnitts und der Reihenfolge.
+
+### Was methodisch bemerkenswert ist
+
+- **Ein Kriterium für die eigene Prämisse:** Der Entscheid, die Regel ohne
+  Pfadbindung zu bauen, stützt sich darauf, dass eine solche Regel die
+  Hauptsitzung erreicht — im Repository nicht belegt. Statt einer Annahme
+  steht jetzt ein Kriterium mit Versuch und Gegenprobe; fällt es negativ aus,
+  wird der Entscheid neu getroffen, nicht die Messung.
+- **Der Prüfsatz entsteht nach der Skill,** damit ihr Verfasser die Prüffälle
+  nicht kennt — derselbe Grundsatz wie bei der Fremdmutationsrunde des
+  DoD-Gates. Der Modellnachweis je Prüfbericht läuft über Rollen und
+  `model`-Feld, ohne Modellnamen in Repository-Dateien.
+- **Ein Modellwechsel mitten in der Einheit verschiebt die Prüfbesetzung:**
+  Nach dem Wechsel durch den Auftraggeber lief die Hauptsitzung auf dem
+  `model`-Feld des Static Software Testers; ihre danach entstandene Arbeit
+  prüfte deshalb eine abweichend besetzte Prüfrolle.
+
+### Offen
+
+- Freigabe von Umfang, Schnitt und Reihenfolge von E3 durch den Merge des
+  Produkt-Pull-Requests (dort Backlog, offener Punkt 22); die Einordnung der
+  drei Posten unter R3-Q-010 liegt beim Auftraggeber (offener Punkt 21).
+- Restbefunde nach der Übergabe des Produkt-Repositories: Rollendatei des
+  SecDevOps Engineers, veralteter Kopfkommentar im Prüfmittel der
+  PreToolUse-Gates, Homonym "Freigabe" im Glossar. Ob das Verbot von
+  Modellnamen auch Commit-Nachrichten erfasst, entscheidet der Auftraggeber.
+- Nächste Einheit nach dem Merge: E3.1 (Regel), zu Beginn der Sitzung danach
+  der Versuch zur Regel, dann E3.2, E3.3 und das Grundgerüst.
+
+---
+
 ## 2026-09-23 (3) — E4.3: Ränder der beiden PreToolUse-Gates — ST-09, ST-13, benannte Grenzen und P-10 (R3-Q-010)
 
 Dritte Einheit des Tages. Hauptteil im Produkt-Repository
