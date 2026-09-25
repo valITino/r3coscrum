@@ -4,6 +4,53 @@ Vermerke je Arbeitseinheit in diesem Repository, neueste zuoberst.
 
 ---
 
+## 2026-09-25 — E3.3: Merges eingetragen; Versuche, Prüfsatz, Lauf (R3-Q-011)
+
+Einheit vom 2026-09-25, Abschnitt A des Fahrplans, Schritte A0 bis A6. Hauptteil im
+Produkt-Repository, dort `docs/uebergaben/2026-09-25_e3-3.md`
+([`7e69fafacc5a`](https://github.com/valITino/r3cosint/commit/7e69fafacc5af23ef174d87445485b782d03dceb)); Nachweisverzeichnis
+[`fac7e3dcc33b`](https://github.com/valITino/r3cosint/commit/fac7e3dcc33b5cda8722fecf4d339b7b36a6fe5f).
+
+### Erledigt
+
+- **Merges eingetragen** (Commit [`eab40ec2c2ca`](https://github.com/valITino/r3cosint/commit/eab40ec2c2cae26bdc3f94ee76b53b812ad487f5)): Pull
+  Request #24 des Produkt-Repositories (Merge-Commit
+  [`0af86aa4e648`](https://github.com/valITino/r3cosint/commit/0af86aa4e6485d6cdfe09829accfdb65a8a8c65a)) und hier Pull Request #14 (Merge-Commit
+  [`ee56fea85723`](https://github.com/valITino/r3coscrum/commit/ee56fea8572348799069ac0b866376764edf6694)),
+  je ohne Kommentare und Reviews: Freigabe-Eintrag zu E3 bestätigt, die Regel zu fremden
+  Inhalten im Harness verbindlich, die Skill zur Einschleusungsprüfung und ihre Zuordnung
+  zu sechs Rollen angenommen. Die Gegenprobe zum Versuch zur Regel lief vor dem Merge nicht.
+- **Versuch zur Regel** (kein Commit): Antwort vor jedem Werkzeugaufruf, Vergleich "gleich";
+  die Gegenprobe steht aus.
+- **Kontrollversuch SK-02** (kein Commit; Ergebnis in ADR 0001, 5.1, Commit
+  [`1f8865cc3670`](https://github.com/valITino/r3cosint/commit/1f8865cc36701702f1bb61bc47e40cf948b51756)): positiv, mit Gegenprobe; die
+  Rückmeldung zählt je Rolle einen Werkzeugaufruf, den Übergabeaufruf.
+- **Prüfsatz** (Commit [`818a17162bbb`](https://github.com/valITino/r3cosint/commit/818a17162bbbc51206138ddcecae907f5e4bb235)) vom DevOps
+  Engineer, formal geprüft und vor dem Lauf committet; **Lauf und Abgleich bestanden**.
+- **Abschluss** (Commit [`7e69fafacc5a`](https://github.com/valITino/r3cosint/commit/7e69fafacc5af23ef174d87445485b782d03dceb)): Nachführungen,
+  Übergabe mit Prüfbericht.
+
+### Was methodisch bemerkenswert ist
+
+- **Die Hooks wirkten wieder nicht:** Die Probe des main-Gates blockierte nicht; die
+  Starthooks liefen erst mit gesetzter Variable CLAUDE_PROJECT_DIR. Die Kette lief vor
+  jedem Commit von Hand.
+- **Blinder Lauf:** Die fahrende Rolle erhielt nur die Pfade; der Zustand des Arbeitsbaums
+  vor und nach dem Lauf und das Protokoll des Harness belegen, dass nichts ausgeführt wurde.
+- **Die Hauptsitzung las keinen Inhalt des Prüfsatzes;** sein Pfad kam erst nach dem Lauf
+  in CLAUDE.md, weil CLAUDE.md im Startkontext der Rollen liegt.
+
+### Offen
+
+- Gegenprobe zum Versuch zur Regel: neue Sitzung auf Commit
+  [`3e5caf71b2bc`](https://github.com/valITino/r3cosint/commit/3e5caf71b2bca97b7f9764a19841025875974df7), einzige Nachricht die Frage.
+- Wertung des Übergabeaufrufs (der Pull Request legt sie zur Abnahme vor), Terminierung von
+  `Skill` in dreizehn Werkzeuglisten, Berichtigung des Verweises "6.1.2"; Restbefunde nach
+  der Übergabe des Produkt-Repositories.
+- Nächste Einheit: Abschnitt B (Abnahme von R3-Q-011 eintragen, drei Posten unter R3-Q-010).
+
+---
+
 ## 2026-09-24 — E3: Freigabe eingetragen; E3.1 und E3.2 gebaut (R3-Q-011)
 
 Einheit vom 2026-09-24, drei Schritte und Abschluss. Hauptteil im
