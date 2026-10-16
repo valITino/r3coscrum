@@ -4,6 +4,65 @@ Vermerke je Arbeitseinheit in diesem Repository, neueste zuoberst.
 
 ---
 
+## 2026-10-14/15 — Abschnitt B: Abnahme von R3-Q-011 eingetragen, Posten 1 unter R3-Q-010 gebaut
+
+Sitzung vom 2026-10-14 (Sitzungsauftrag Abschnitt B, Schritte B1 bis B6; zwei
+Unterbrüche durch das Nutzungslimit, Abschluss am 2026-10-15). Hauptteil im
+Produkt-Repository, dort `docs/uebergaben/2026-10-14_abnahme-r3-q-011-posten-1.md`
+([`445efc9751e3`](https://github.com/valITino/r3cosint/commit/445efc9751e3e37773b11cb29922b52d92b4d374)); Nachweisverzeichnis
+[`7abbcd4c3ee6`](https://github.com/valITino/r3cosint/commit/7abbcd4c3ee69c3f1c9cafb04b63f177a1a7f09f).
+
+### Erledigt
+
+- **B1 — Abnahme von R3-Q-011 eingetragen** (Commit
+  [`721c0f23a902`](https://github.com/valITino/r3cosint/commit/721c0f23a9024c516c3ca0760e2d27b12553d985)):
+  Merge des Pull Requests #25 des Produkt-Repositories (Merge-Commit
+  [`0b6d59625423`](https://github.com/valITino/r3cosint/commit/0b6d59625423f53fcd0e8b3f22150d97ef2a17f4))
+  und hier Pull Request #15 (Merge-Commit
+  [`d349f3ce4bba`](https://github.com/valITino/r3coscrum/commit/d349f3ce4bba8db8f919c188849acc452190ac44)),
+  je ohne Kommentare und Reviews; fünf der sechs Kriterien; nicht umfasst
+  `R3-Q-011_regel_im_startkontext` (Gegenprobe nicht durchgeführt) und die
+  Terminierung von `Skill` (nicht entschieden).
+- **B2 — Posten 1 unter R3-Q-010 gebaut und verifiziert** (Commit
+  [`5b3f3181b04a`](https://github.com/valITino/r3cosint/commit/5b3f3181b04a7575930f876d0682079d9262ad88)):
+  main-Gate vergleicht Ziele und den Namen hinter -b/-B nach vier lexikalischen
+  Schritten; L01 bis L04 geschlossen; Grenzen GM-5 bis GM-8 benannt; Prüfmittel
+  318 Fälle, 26 Mutationen, 28 Fallklassen; drei Baurunden, je verifiziert durch
+  Static und Dynamic Software Tester auf dem anderen model-Feld. Neu erfasst, nicht
+  gebaut: Posten 4 (main-Gate) und Posten 5 (beide Gates, Umgehung bei grosser
+  Eingabe).
+- **B5/B6** (Commit [`445efc9751e3`](https://github.com/valITino/r3cosint/commit/445efc9751e3e37773b11cb29922b52d92b4d374)):
+  Backlog-Sammelposten, CLAUDE.md, Nachweise, Übergabe.
+
+### Nicht begonnen
+
+- **B3 und B4 (Posten 2 und 3)**, nach Projektauftrag 3.3: Posten 2 wäre die nächste
+  Änderung am Prototyp-Gate und zöge den Prototyp-Teil von Posten 5 nach sich; die
+  Einordnung von Posten 4 und 5 legt der Auftraggeber fest (Empfehlung des Software
+  Architects: Posten 5, dann Posten 2, Posten 3).
+
+### Was methodisch bemerkenswert ist
+
+- **Ruhender Arbeitsbaum:** Prüfmittel-Mutationsläufe und D19 melden jede Änderung einer
+  versionierten Datei während des Laufs; zwei Läufe fielen, weil eine andere Rolle
+  parallel im ADR schrieb. Schreibende Rollen und Läufe werden seither getrennt.
+- **Vorgaben als Fehlerquelle:** Mehrere blockierende Befunde der statischen Prüfung
+  gingen auf Vorgaben des Koordinators zurück (falsche Zuordnung zu einem ADR-Punkt,
+  behauptete Prüfung des Prüfmittels, mehrdeutige Zuordnung von Einheiten).
+- **Zählung nach 3.4:** Der Static Software Tester zählte drei Kriterien bis zum
+  zweiten Scheitern; die dritte Baurunde war die letzte und bestand.
+- **Die Hooks wirkten wieder nicht;** Starthooks und `make dod` liefen von Hand. Der
+  Harness gab den Zweignamen vor (ccr-0cbb4387-oe1i3c statt claude/<Name>).
+
+### Offen (Auftraggeber)
+
+Gegenprobe `R3-Q-011_regel_im_startkontext`; Terminierung von `Skill`; Berichtigung
+"6.1.2"; Einordnung von Posten 4 und 5, CVSS-Bewertung von Posten 5 durch den
+Vulnerability Manager, Anlage eines Schwachstellenregisters; Abnahme von Posten 1 durch
+Merge der Pull Requests (nicht umfasst Posten 2 bis 5).
+
+---
+
 ## 2026-09-25 — E3.3: Merges eingetragen; Versuche, Prüfsatz, Lauf (R3-Q-011)
 
 Einheit vom 2026-09-25, Abschnitt A des Fahrplans, Schritte A0 bis A6. Hauptteil im
