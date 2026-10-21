@@ -4,6 +4,17 @@ Vermerke je Arbeitseinheit in diesem Repository, neueste zuoberst.
 
 ---
 
+## 2026-10-21 — Abschnitt C: Abnahme von Posten 1 eingetragen, Posten 4 und 5 unter R3-Q-010 gebaut, Schwachstellenregister angelegt
+
+Produkt-Repository, Zweig ccr-0cbb4387-oe1i3c. Übergabe: [docs/uebergaben/2026-10-21_abschnitt-c-posten-4-5.md](https://github.com/valITino/r3cosint/blob/dd654f0a8d22254926e52bce6a3be98f9ad7c98a/docs/uebergaben/2026-10-21_abschnitt-c-posten-4-5.md). Commits: [`0c8f149f235afffa1f85df21352d9fa09d283a5e`](https://github.com/valITino/r3cosint/commit/0c8f149f235afffa1f85df21352d9fa09d283a5e) (C1), [`dd654f0a8d22254926e52bce6a3be98f9ad7c98a`](https://github.com/valITino/r3cosint/commit/dd654f0a8d22254926e52bce6a3be98f9ad7c98a) (C2 mit Übergabe), [`c84e2a36b22cd328e1887d6fc317a023ddccb639`](https://github.com/valITino/r3cosint/commit/c84e2a36b22cd328e1887d6fc317a023ddccb639) (Nachweisverzeichnis).
+- Merge des Pull Requests #26 (2026-10-16) als Abnahme von Posten 1 in ADR 0002, Abschnitt 10 eingetragen; Merge des Pull Requests #16 dieses Repositories (2026-10-21) vermerkt.
+- Weisung vom 2026-10-21 (zweiter Formweg) mit delegierten Entscheiden in ADR 0002, 6.13 festgehalten.
+- Posten 5 (beide PreToolUse-Gates) und Posten 4 (main-Gate) gebaut; Prüfmittel 447 Fälle, 49 Mutationen, 36 Fallklassen; Verifikation in einer Erstprüfung und vier Delta-Runden durch Static und Dynamic Software Tester auf einem anderen Modell.
+- Schwachstellenregister angelegt (SR-001 bis SR-004); Posten 6 und 7 neu erfasst, nicht gebaut; C3 und C4 nach Projektauftrag 3.3 nicht begonnen.
+- Abnahme von Posten 4 und 5 durch Merge des Pull Requests im Produkt-Repository; dieser Vermerk wird mit dem Merge des zugehörigen Pull Requests hier bestätigt.
+
+---
+
 ## 2026-10-14/15 — Abschnitt B: Abnahme von R3-Q-011 eingetragen, Posten 1 unter R3-Q-010 gebaut
 
 Sitzung vom 2026-10-14 (Sitzungsauftrag Abschnitt B, Schritte B1 bis B6; zwei
