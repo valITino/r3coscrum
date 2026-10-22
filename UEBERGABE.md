@@ -4,6 +4,17 @@ Vermerke je Arbeitseinheit in diesem Repository, neueste zuoberst.
 
 ---
 
+## 2026-10-22 — D1 und C3: Abnahme von Posten 4 und 5 eingetragen; Posten 2, 6 und Teil von Posten 7 am Prototyp-Gate gebaut (R3-Q-010); Weisungen vom 2026-10-22
+
+Produkt-Repository, Zweig ccr-0cbb4387-oe1i3c. Übergabe: [docs/uebergaben/2026-10-22_c3-prototyp-gate.md](https://github.com/valITino/r3cosint/blob/b19c7b0cb2b701be3dbe646d2cf6c892e4fb3810/docs/uebergaben/2026-10-22_c3-prototyp-gate.md). Commits: [`529ce5a568be573cd36c853967f9739893328cd2`](https://github.com/valITino/r3cosint/commit/529ce5a568be573cd36c853967f9739893328cd2) (D1), [`b19c7b0cb2b701be3dbe646d2cf6c892e4fb3810`](https://github.com/valITino/r3cosint/commit/b19c7b0cb2b701be3dbe646d2cf6c892e4fb3810) (C3), [`4a27245973ecbbc5d29b02d0bdfb4d8fa38935a7`](https://github.com/valITino/r3cosint/commit/4a27245973ecbbc5d29b02d0bdfb4d8fa38935a7) (Nachweisverzeichnis).
+- Merge des Pull Requests #27 (2026-10-21) als Abnahme von Posten 4 und 5 in ADR 0002, Abschnitt 10 eingetragen; Merge des Pull Requests #17 dieses Repositories (2026-10-21) vermerkt; Weisung vom 2026-10-21 ("Weiter mit Abschnitt D, D1 und dann C3") und Festlegung für C3 in ADR 0002, 6.13 festgehalten.
+- Posten 2 (L05 bis L08), Posten 6 (L23, L24) und der Teil von Posten 7 am Prototyp-Gate gebaut; Prüfmittel 479 Fälle, 66 Mutationen, 39 Fallklassen, beide Modi Rückgabewert 0; Verifikation durch Static und Dynamic Software Tester auf einem anderen Modell ohne blockierenden Befund.
+- Register: SR-004 bewertet (CVSS 3.1 Basiswert 4.7), SR-003 Teilstand (Prototyp-Teil in Behebung, main-Gate-Teil offen), neu SR-005 und SR-006 (vorbestehende Lücken, Posten 8 und 9); Posten 8 bis 10 mit C4 terminiert.
+- Weisungen vom 2026-10-22 (zweiter Formweg, Wortlaut in ADR 0002, 6.13, Status-Block): Prozess-Schnitt als nächste Einheit; dieses Repository wird eingefaltet, nur lesbar archiviert und nach einer Übergangsfrist vom Auftraggeber gelöscht.
+- Abnahme von Posten 2, 6 und des Teils von Posten 7 am Prototyp-Gate durch Merge des Pull Requests im Produkt-Repository; dieser Vermerk wird mit dem Merge des zugehörigen Pull Requests hier bestätigt.
+
+---
+
 ## 2026-10-21 — Abschnitt C: Abnahme von Posten 1 eingetragen, Posten 4 und 5 unter R3-Q-010 gebaut, Schwachstellenregister angelegt
 
 Produkt-Repository, Zweig ccr-0cbb4387-oe1i3c. Übergabe: [docs/uebergaben/2026-10-21_abschnitt-c-posten-4-5.md](https://github.com/valITino/r3cosint/blob/dd654f0a8d22254926e52bce6a3be98f9ad7c98a/docs/uebergaben/2026-10-21_abschnitt-c-posten-4-5.md). Commits: [`0c8f149f235afffa1f85df21352d9fa09d283a5e`](https://github.com/valITino/r3cosint/commit/0c8f149f235afffa1f85df21352d9fa09d283a5e) (C1), [`dd654f0a8d22254926e52bce6a3be98f9ad7c98a`](https://github.com/valITino/r3cosint/commit/dd654f0a8d22254926e52bce6a3be98f9ad7c98a) (C2 mit Übergabe), [`c84e2a36b22cd328e1887d6fc317a023ddccb639`](https://github.com/valITino/r3cosint/commit/c84e2a36b22cd328e1887d6fc317a023ddccb639) (Nachweisverzeichnis).
